@@ -1,0 +1,534 @@
+<title>Paris Manif Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#eef0ee">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: full-bleed street map, a floating route card on top, a pull-up sheet below. Paris street-sign blue as the one accent; protest severity as semantic colours. */
+:root{
+  --paper:#eef0ee; --block:#e3e6e2; --road:#ffffff; --road-edge:#cfd3cf; --major:#fbfbf7; --water:#b9d3e6; --rail:#9aa3ad;
+  --ink:#1d2329; --ink-2:#55606b; --ink-3:#86909a; --line:#d7dbd8; --panel:#fbfcfb; --panel-2:#f2f4f2;
+  --accent:#1f4e8c; --accent-ink:#ffffff;
+  --sev-confirmed:#d4362c; --sev-likely:#e8731a; --sev-possible:#c99a06; --sev-banned:#7d3aa8; --sev-traffic:#2f7fb8;
+  --route:#1f4e8c; --route-risk:#d4362c; --ok:#2d8a4e;
+  --shadow:0 6px 24px rgba(20,30,40,.14),0 1px 3px rgba(20,30,40,.12);
+  --f-display:"Archivo Narrow","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#161b20; --block:#1c2228; --road:#2c343c; --road-edge:#20272e; --major:#3a434c; --water:#1d3a52; --rail:#56606b;
+  --ink:#e8ecef; --ink-2:#a9b3bc; --ink-3:#7c8792; --line:#2c343b; --panel:#1b2127; --panel-2:#232a31;
+  --accent:#6c9ee0; --accent-ink:#0d1620; --route:#7fb0f0; --route-risk:#ff6b5e; --ok:#58c07f;
+  --sev-confirmed:#ff5a4e; --sev-likely:#ff9440; --sev-possible:#e9c140; --sev-banned:#b47ae0; --sev-traffic:#5aa9e0;
+  --shadow:0 6px 24px rgba(0,0,0,.45),0 1px 3px rgba(0,0,0,.4); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#161b20; --block:#1c2228; --road:#2c343c; --road-edge:#20272e; --major:#3a434c; --water:#1d3a52; --rail:#56606b;
+  --ink:#e8ecef; --ink-2:#a9b3bc; --ink-3:#7c8792; --line:#2c343b; --panel:#1b2127; --panel-2:#232a31;
+  --accent:#6c9ee0; --accent-ink:#0d1620; --route:#7fb0f0; --route-risk:#ff6b5e; --ok:#58c07f;
+  --sev-confirmed:#ff5a4e; --sev-likely:#ff9440; --sev-possible:#e9c140; --sev-banned:#b47ae0; --sev-traffic:#5aa9e0;
+  --shadow:0 6px 24px rgba(0,0,0,.45),0 1px 3px rgba(0,0,0,.4); color-scheme:dark}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;overflow:hidden;-webkit-tap-highlight-color:transparent}
+#app{position:relative;height:100%;overflow:hidden}
+#map{position:absolute;inset:0}
+.maplibregl-map{overflow:hidden;position:relative;-webkit-tap-highlight-color:transparent}
+.maplibregl-canvas{position:absolute;left:0;top:0}
+.maplibregl-canvas-container.maplibregl-interactive{cursor:grab}
+.maplibregl-canvas-container.maplibregl-interactive:active{cursor:grabbing}
+.maplibregl-canvas-container.maplibregl-touch-zoom-rotate,.maplibregl-canvas-container.maplibregl-touch-drag-pan{touch-action:pan-x pan-y}
+.maplibregl-canvas-container.maplibregl-touch-zoom-rotate.maplibregl-touch-drag-pan{touch-action:none}
+.maplibregl-control-container{display:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.top{position:absolute;top:10px;left:0;right:0;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));pointer-events:none;display:flex;justify-content:center;z-index:5}
+.card{pointer-events:auto;width:100%;max-width:520px;background:var(--panel);border-radius:14px;box-shadow:var(--shadow);padding:10px;display:grid;gap:8px}
+.brand{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.brand h1{font-family:var(--f-display);font-weight:700;font-size:19px;letter-spacing:.01em;margin:0;display:flex;align-items:center;gap:8px}
+.plate{display:inline-grid;place-items:center;background:var(--accent);color:var(--accent-ink);border-radius:4px;padding:1px 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid color-mix(in srgb,var(--accent-ink) 60%,transparent)}
+.fresh{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);text-align:right;line-height:1.3}
+.fields{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:stretch}
+.inputs{display:grid;gap:6px;min-width:0}
+.field{position:relative;display:flex;align-items:center;gap:8px;background:var(--panel-2);border-radius:9px;padding:0 6px 0 10px;min-width:0}
+.field .dot{width:10px;height:10px;border-radius:50%;flex:none}
+.field input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;padding:9px 0;outline:none}
+.field input::placeholder{color:var(--ink-3)}
+.pin{border:0;background:transparent;color:var(--ink-2);padding:6px;border-radius:7px;cursor:pointer;font-size:12px;white-space:nowrap}
+.pin[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.swap{border:0;background:var(--panel-2);border-radius:9px;width:38px;cursor:pointer;color:var(--ink-2);font-size:18px}
+.sugg{position:absolute;left:0;right:0;top:calc(100% + 4px);background:var(--panel);border-radius:10px;box-shadow:var(--shadow);z-index:20;max-height:260px;overflow:auto;padding:4px}
+.sugg button{display:flex;width:100%;text-align:left;border:0;background:transparent;padding:8px 10px;border-radius:7px;gap:8px;align-items:baseline;cursor:pointer}
+.sugg button:hover,.sugg button.on{background:var(--panel-2)}
+.sugg small{color:var(--ink-3);font-size:12px;margin-left:auto;white-space:nowrap}
+
+.times{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}
+.times::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 11px;font-size:13px;cursor:pointer;font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.chip.lbl{border:0;padding-left:0;padding-right:2px;color:var(--ink-3);cursor:default;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+
+.ctl{position:absolute;right:max(12px,env(safe-area-inset-right,0px));display:grid;gap:6px;z-index:4}
+.ctl button{width:40px;height:40px;border-radius:10px;border:0;background:var(--panel);box-shadow:var(--shadow);cursor:pointer;font-size:20px;line-height:1}
+
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:6;display:flex;justify-content:center;pointer-events:none;padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
+.sheet-in{pointer-events:auto;width:100%;max-width:560px;background:var(--panel);border-radius:16px 16px 0 0;box-shadow:var(--shadow);display:flex;flex-direction:column;max-height:46vh;transition:max-height .25s ease}
+.sheet.min .sheet-in{max-height:118px}
+.grab{border:0;background:transparent;padding:8px 0 2px;cursor:pointer;display:grid;place-items:center}
+.grab span{width:40px;height:4px;border-radius:2px;background:var(--line)}
+.tabs{display:flex;gap:2px;padding:0 max(16px,env(safe-area-inset-left,0px)) 0;border-bottom:1px solid var(--line)}
+.tab{border:0;background:transparent;padding:8px 10px 9px;cursor:pointer;color:var(--ink-2);font-weight:600;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab .n{font-family:var(--f-mono);font-size:11px;background:var(--panel-2);border-radius:5px;padding:1px 5px;margin-left:4px;color:var(--ink-2)}
+.body{overflow:auto;padding:12px max(16px,env(safe-area-inset-left,0px)) calc(14px + env(safe-area-inset-bottom,0px));display:grid;gap:12px;align-content:start}
+.head{font-family:var(--f-display);font-size:17px;font-weight:600;line-height:1.25;margin:0;text-wrap:balance}
+.muted{color:var(--ink-2)}
+.small{font-size:13px}
+.sev{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-radius:5px;padding:2px 6px;white-space:nowrap}
+.sev i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.sev.confirmed{color:var(--sev-confirmed);background:color-mix(in srgb,var(--sev-confirmed) 13%,transparent)}
+.sev.likely{color:var(--sev-likely);background:color-mix(in srgb,var(--sev-likely) 13%,transparent)}
+.sev.possible{color:var(--sev-possible);background:color-mix(in srgb,var(--sev-possible) 15%,transparent)}
+.sev.banned{color:var(--sev-banned);background:color-mix(in srgb,var(--sev-banned) 13%,transparent)}
+.sev.traffic{color:var(--sev-traffic);background:color-mix(in srgb,var(--sev-traffic) 13%,transparent)}
+.zl{display:grid;gap:2px}
+.zone{display:grid;grid-template-columns:4px 1fr;gap:10px;border:0;background:transparent;text-align:left;padding:8px 6px 8px 0;border-radius:8px;cursor:pointer;width:100%}
+.zone:hover{background:var(--panel-2)}
+.zone .bar{border-radius:2px}
+.zone .t{font-weight:600;line-height:1.25}
+.zone .m{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:3px}
+.zone.off{opacity:.5}
+.mono{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums}
+.res{display:grid;gap:10px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{border:1.5px solid var(--line);background:var(--panel);border-radius:11px;padding:9px 10px;text-align:left;cursor:pointer;display:grid;gap:3px;min-width:0}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--panel))}
+.opt .k{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:700}
+.opt .v{font-family:var(--f-display);font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.opt .w{font-size:13px;font-weight:600}
+.w.bad{color:var(--route-risk)} .w.good{color:var(--ok)}
+.hits{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.hits li{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+.go{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:9px 13px;font-weight:600;text-decoration:none;border:0;cursor:pointer}
+.btn.pri{background:var(--accent);color:var(--accent-ink)}
+.btn.sec{background:var(--panel-2);color:var(--ink)}
+.note{font-size:13px;color:var(--ink-2);line-height:1.45;margin:0}
+.note a{color:var(--accent)}
+.box{background:var(--panel-2);border-radius:10px;padding:10px 12px;display:grid;gap:6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px}
+.stations{display:flex;flex-wrap:wrap;gap:6px}
+.st{font-size:13px;background:var(--panel-2);border-radius:6px;padding:3px 7px}
+.st b{font-family:var(--f-mono);font-weight:500;font-size:11px;color:var(--ink-3);margin-left:4px}
+.here{position:absolute;left:50%;transform:translateX(-50%);z-index:7;max-width:min(92vw,420px);border:0;border-radius:12px;padding:9px 13px;font-weight:600;font-size:14px;box-shadow:var(--shadow);text-align:left;cursor:pointer;background:var(--panel);color:var(--ink);display:flex;gap:8px;align-items:center}
+.here .sev{flex:none}
+.ctl button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.toast{position:absolute;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:8px 14px;border-radius:999px;font-size:13px;z-index:30;box-shadow:var(--shadow);white-space:nowrap}
+.pop{position:absolute;z-index:8;max-width:280px;background:var(--panel);border-radius:12px;box-shadow:var(--shadow);padding:10px 12px;display:grid;gap:6px;font-size:14px}
+.pop h3{margin:0;font-family:var(--f-display);font-size:16px;line-height:1.2}
+.pop .x{position:absolute;top:4px;right:6px;border:0;background:transparent;font-size:18px;cursor:pointer;color:var(--ink-3)}
+.loading{position:absolute;inset:0;background:var(--paper);display:grid;place-items:center;color:var(--ink-2);z-index:2;font-family:var(--f-mono);font-size:12px}
+@media (prefers-reduced-motion:reduce){.sheet-in{transition:none}}
+@media (min-width:900px){
+  .sheet{justify-content:flex-start;left:max(12px,env(safe-area-inset-left,0px));right:auto;bottom:12px;top:auto;width:400px}
+  .sheet-in{border-radius:16px;max-height:calc(100vh - 220px)}
+  .top{justify-content:flex-start}
+  .card{max-width:400px}
+}
+</style>
+
+<div id="app">
+  <div id="map" aria-label="Map of Paris with protest zones"></div>
+  <div class="loading" id="loading">Loading Paris streets…</div>
+
+  <div class="top">
+    <div class="card" id="card">
+      <div class="brand">
+        <h1><span class="plate">Paris</span> Manif Map</h1>
+        <div class="fresh" id="fresh">Sat 17 Oct</div>
+      </div>
+      <div class="fields">
+        <div class="inputs">
+          <div class="field"><span class="dot" style="background:var(--ok)"></span>
+            <input id="from" placeholder="From: street, station, place" autocomplete="off" aria-label="Start">
+            <button class="pin" id="pinFrom" aria-pressed="false" title="Tap the map to set the start">Tap map</button>
+            <div class="sugg" id="sFrom" hidden></div></div>
+          <div class="field"><span class="dot" style="background:var(--route-risk)"></span>
+            <input id="to" placeholder="To: street, station, place" autocomplete="off" aria-label="Destination">
+            <button class="pin" id="pinTo" aria-pressed="false" title="Tap the map to set the destination">Tap map</button>
+            <div class="sugg" id="sTo" hidden></div></div>
+        </div>
+        <button class="swap" id="swap" title="Swap start and destination" aria-label="Swap">⇅</button>
+      </div>
+      <div class="times" id="times" role="group" aria-label="Show the situation at"></div>
+    </div>
+  </div>
+
+  <div class="ctl" id="ctl">
+    <button id="zin" aria-label="Zoom in">+</button>
+    <button id="zout" aria-label="Zoom out">−</button>
+    <button id="zfit" aria-label="Show protest area" title="Show protest area">◎</button>
+    <button id="loc" aria-label="Show my location" title="My location" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button>
+  </div>
+
+  <div class="sheet" id="sheet">
+    <div class="sheet-in">
+      <button class="grab" id="grab" aria-label="Expand or collapse panel"><span></span></button>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="route" aria-selected="true">Route</button>
+        <button class="tab" role="tab" data-tab="zones" aria-selected="false">Zones<span class="n" id="nz">0</span></button>
+        <button class="tab" role="tab" data-tab="info" aria-selected="false">Transport &amp; sources</button>
+      </div>
+      <div class="body" id="body"></div>
+    </div>
+  </div>
+  <button class="here" id="here" hidden></button>
+  <div class="pop" id="pop" hidden></div>
+  <div class="toast" id="toast" hidden></div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(()=>{
+'use strict';
+const $=s=>document.querySelector(s);
+let D=null, Z=null, map=null, mapReady=false;
+let lastFetch=null;
+const DAY='2026-10-17';
+const TZ_OFFSET='+02:00';
+const SEV_ORDER={confirmed:0,likely:1,banned:2,possible:3,traffic:4};
+const SEV_LABEL={confirmed:'Confirmed',likely:'Likely',possible:'Possible',banned:'Banned route',traffic:'Traffic'};
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const C={};
+const COLOR_KEYS=['--paper','--block','--road','--road-edge','--major','--water','--rail','--ink','--ink-2','--ink-3','--panel','--route','--route-risk','--ok','--accent','--sev-confirmed','--sev-likely','--sev-possible','--sev-banned','--sev-traffic'];
+function readColors(){COLOR_KEYS.forEach(k=>C[k]=css(k))}
+readColors();
+
+// ---------- time ----------
+let tSel=null;
+function nowMin(){return Math.round((new Date()-new Date(DAY+'T00:00:00'+TZ_OFFSET))/60000)}
+function effMin(){return tSel==null?nowMin():tSel}
+const hm=s=>{const [h,m]=s.split(':').map(Number);return h*60+m};
+function zoneActive(z,t=effMin()){return t>=hm(z.start)&&t<=hm(z.end)}
+function timeLabel(){return tSel!=null?'Sat '+String(Math.floor(tSel/60)).padStart(2,'0')+':'+String(tSel%60).padStart(2,'0'):'now'}
+function buildTimes(){
+  const el=$('#times');el.innerHTML='';
+  const l=document.createElement('span');l.className='chip lbl';l.textContent='Show';el.appendChild(l);
+  for(const [v,t] of [[null,'Now'],[12*60,'12:00'],[14*60,'14:00'],[15*60+30,'15:30'],[17*60,'17:00'],[18*60+30,'18:30'],[20*60,'20:00']]){
+    const b=document.createElement('button');b.className='chip';b.textContent=t;b.setAttribute('aria-pressed',String(v===tSel));
+    b.onclick=()=>{tSel=v;buildTimes();computeRoute();updateZoneLayers()};el.appendChild(b);
+  }
+}
+// Before Saturday, "now" shows nothing active, so open on the afternoon peak.
+(function(){const n=nowMin();tSel=(n<10*60||n>23*60)?15*60+30:null})();
+
+// ---------- geometry (local metres) ----------
+function segDist2(px,py,ax,ay,bx,by){const dx=bx-ax,dy=by-ay;const l=dx*dx+dy*dy;let t=l?((px-ax)*dx+(py-ay)*dy)/l:0;t=t<0?0:t>1?1:t;const x=ax+t*dx-px,y=ay+t*dy-py;return x*x+y*y}
+function distToZone(z,x,y){if(z.center)return Math.hypot(x-z.center[0],y-z.center[1]);let b=1e18;const p=z.path;for(let i=0;i<p.length-1;i++){const d=segDist2(x,y,p[i][0],p[i][1],p[i+1][0],p[i+1][1]);if(d<b)b=d}return Math.sqrt(b)}
+function zoneBBox(z){const pts=z.center?[z.center]:z.path;let a=1e9,b=1e9,c=-1e9,d=-1e9;for(const [x,y] of pts){a=Math.min(a,x);b=Math.min(b,y);c=Math.max(c,x);d=Math.max(d,y)}const r=z.radius;return [a-r,b-r,c+r,d+r]}
+let O=[2.3488,48.8534,73305,110574];
+const LL=(x,y)=>[+(O[0]+x/O[2]).toFixed(6),+(O[1]+y/O[3]).toFixed(6)];
+const XY=(lon,lat)=>[(lon-O[0])*O[2],(lat-O[1])*O[3]];
+
+// ---------- street graph ----------
+let NX,NY,EA,EB,EC,EN,GEO,GOFF,ELEN,ADJ,AOFF,nameCenters=new Map(),edgeZones=null;
+function edgePts(i){const a=EA[i],b=EB[i];const out=[[NX[a],NY[a]]];for(let k=GOFF[i];k<GOFF[i+1];k++)out.push([GEO[2*k],GEO[2*k+1]]);out.push([NX[b],NY[b]]);return out}
+function prepStreets(){
+  O=D.origin;
+  const n=D.nodes.length/2;NX=new Float32Array(n);NY=new Float32Array(n);
+  for(let i=0;i<n;i++){NX[i]=D.nodes[2*i];NY[i]=D.nodes[2*i+1]}
+  const m=D.edges.length/4;EA=new Int32Array(m);EB=new Int32Array(m);EC=new Uint8Array(m);EN=new Int32Array(m);ELEN=new Float32Array(m);
+  for(let i=0;i<m;i++){EA[i]=D.edges[4*i];EB[i]=D.edges[4*i+1];EC[i]=D.edges[4*i+2];EN[i]=D.edges[4*i+3]}
+  GEO=D.geo;GOFF=D.geoOff;
+  const deg=new Int32Array(n+1);
+  for(let i=0;i<m;i++){deg[EA[i]+1]++;deg[EB[i]+1]++;const p=edgePts(i);let l=0;for(let k=0;k<p.length-1;k++)l+=Math.hypot(p[k+1][0]-p[k][0],p[k+1][1]-p[k][1]);ELEN[i]=l}
+  for(let i=0;i<n;i++)deg[i+1]+=deg[i];AOFF=deg.slice();ADJ=new Int32Array(2*m);const fill=deg.slice(0,n);
+  for(let i=0;i<m;i++){ADJ[fill[EA[i]]++]=i;ADJ[fill[EB[i]]++]=i}
+  const acc=new Map();
+  for(let i=0;i<m;i++)if(EN[i]>=0){const a=acc.get(EN[i])||{x:0,y:0,n:0,e:[]};a.x+=NX[EA[i]];a.y+=NY[EA[i]];a.n++;a.e.push(EA[i]);acc.set(EN[i],a)}
+  for(const [k,a] of acc){const cx=a.x/a.n,cy=a.y/a.n;let best=a.e[0],bd=1e18;for(const v of a.e){const d=(NX[v]-cx)**2+(NY[v]-cy)**2;if(d<bd){bd=d;best=v}}nameCenters.set(k,best)}
+}
+function computeEdgeZones(){
+  const m=EA.length;edgeZones=new Array(m);const boxes=Z.zones.map(zoneBBox);
+  for(let i=0;i<m;i++){let hit=null;const ax=NX[EA[i]],ay=NY[EA[i]],bx=NX[EB[i]],by=NY[EB[i]],mx=(ax+bx)/2,my=(ay+by)/2;
+    for(let z=0;z<Z.zones.length;z++){const b=boxes[z];if(mx<b[0]-60||mx>b[2]+60||my<b[1]-60||my>b[3]+60)continue;const zz=Z.zones[z];
+      if(Math.min(distToZone(zz,ax,ay),distToZone(zz,bx,by),distToZone(zz,mx,my))<=zz.radius)(hit||(hit=[])).push(z)}
+    edgeZones[i]=hit}
+}
+
+// ---------- map features ----------
+const CLS={1:'primary',2:'secondary',3:'tertiary',4:'minor',5:'pedestrian'};
+function roadsGeoJSON(){
+  // Merge edges by class and street name: fewer features, one label per street piece.
+  const groups=new Map();
+  for(let i=0;i<EA.length;i++){const k=EC[i]+'|'+EN[i];let g=groups.get(k);if(!g){g=[];groups.set(k,g)}g.push(edgePts(i).map(p=>LL(p[0],p[1])))}
+  const f=[];for(const [k,lines] of groups){const [c,n]=k.split('|');f.push({type:'Feature',properties:{c:CLS[c],r:+c,name:+n>=0?D.names[+n]:''},geometry:{type:'MultiLineString',coordinates:lines}})}
+  for(const [pts,name] of D.hw)f.push({type:'Feature',properties:{c:'motorway',r:0,name},geometry:{type:'LineString',coordinates:pts.map(p=>LL(...p))}});
+  return {type:'FeatureCollection',features:f};
+}
+function waterGeoJSON(){const f=[];for(const w of D.water){if(Array.isArray(w))f.push({type:'Feature',properties:{},geometry:{type:'Polygon',coordinates:[w.map(p=>LL(...p))]}});else f.push({type:'Feature',properties:{},geometry:{type:'LineString',coordinates:w.l.map(p=>LL(...p))}})}return {type:'FeatureCollection',features:f}}
+function railGeoJSON(){return {type:'FeatureCollection',features:D.rail.map(([k,pts])=>({type:'Feature',properties:{k:k===1?'metro':'train'},geometry:{type:'LineString',coordinates:pts.map(p=>LL(...p))}}))}}
+function placesGeoJSON(){return {type:'FeatureCollection',features:D.places.filter(p=>p[1]!=='s').map(([n,k,x,y])=>({type:'Feature',properties:{name:n,k},geometry:{type:'Point',coordinates:LL(x,y)}}))}}
+function circlePoly(c,r){const pts=[];for(let i=0;i<=48;i++){const a=i/48*2*Math.PI;pts.push(LL(c[0]+r*Math.cos(a),c[1]+r*Math.sin(a)))}return pts}
+function zonesGeoJSON(){
+  const t=effMin();const areas=[],lines=[],labels=[];
+  Z.zones.forEach((z,i)=>{const p={i,status:z.status,on:zoneActive(z,t)?1:0,radius:z.radius,label:z.short||z.title.split(':').pop().split('(')[0].replace('→','to').trim()};
+    if(z.center){areas.push({type:'Feature',properties:p,geometry:{type:'Polygon',coordinates:[circlePoly(z.center,z.radius)]}});labels.push({type:'Feature',properties:p,geometry:{type:'Point',coordinates:LL(...z.center)}})}
+    else{lines.push({type:'Feature',properties:p,geometry:{type:'LineString',coordinates:z.path.map(q=>LL(...q))}});labels.push({type:'Feature',properties:p,geometry:{type:'Point',coordinates:LL(...z.path[Math.floor(z.path.length/2)])}})}});
+  const st=Z.stations.map(s=>({type:'Feature',properties:{name:s.name},geometry:{type:'Point',coordinates:LL(...s.pos)}}));
+  return {areas:{type:'FeatureCollection',features:areas},lines:{type:'FeatureCollection',features:lines},labels:{type:'FeatureCollection',features:labels},stations:{type:'FeatureCollection',features:st}};
+}
+// metres -> pixels at Paris latitude, for corridor widths
+const MPP0=156543.03*Math.cos(48.86*Math.PI/180);
+const metersWidth=(prop,mult=2)=>['interpolate',['exponential',2],['zoom'],10,['*',['get',prop],mult/(MPP0/2048)],20,['*',['get',prop],mult/(MPP0/2097152)]];
+const SEV_COLOR=()=>['match',['get','status'],'confirmed',C['--sev-confirmed'],'likely',C['--sev-likely'],'possible',C['--sev-possible'],'banned',C['--sev-banned'],C['--sev-traffic']];
+
+// Label glyphs ship as one JSON file, served through a custom protocol.
+let glyphsP=null;
+window.maplibregl&&maplibregl.addProtocol('glyphs',async params=>{
+  glyphsP=glyphsP||fetch('glyphs.json').then(r=>r.json());
+  const g=await glyphsP;const key=params.url.replace('glyphs://','');const b=g[key];
+  if(!b)throw new Error('no glyphs '+key);
+  const bin=atob(b);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return {data:u.buffer};
+});
+function buildStyle(){
+  return {version:8,glyphs:'glyphs://{fontstack}/{range}',sources:{},layers:[{id:'bg',type:'background',paint:{'background-color':C['--paper']}}]};
+}
+function addLayers(){
+  const add=(id,data)=>map.addSource(id,{type:'geojson',data,tolerance:0.5,buffer:64});
+  add('water',waterGeoJSON());add('roads',roadsGeoJSON());add('rail',railGeoJSON());add('places',placesGeoJSON());
+  const zg=zonesGeoJSON();add('zone-areas',zg.areas);add('zone-lines',zg.lines);add('zone-labels',zg.labels);add('stations',zg.stations);
+  add('route-alt',empty());add('route-main',empty());add('ends',empty());
+  const L=l=>map.addLayer(l);
+  L({id:'water-fill',type:'fill',source:'water',filter:['==',['geometry-type'],'Polygon'],paint:{'fill-color':C['--water']}});
+  L({id:'water-line',type:'line',source:'water',filter:['==',['geometry-type'],'LineString'],paint:{'line-color':C['--water'],'line-width':['interpolate',['exponential',2],['zoom'],11,2,17,40]}});
+  L({id:'rail',type:'line',source:'rail',filter:['==',['get','k'],'train'],minzoom:12,paint:{'line-color':C['--rail'],'line-width':1,'line-opacity':.55,'line-dasharray':[3,2]}});
+  L({id:'minor',type:'line',source:'roads',filter:['in',['get','c'],['literal',['minor','pedestrian']]],minzoom:12.5,layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':C['--road'],'line-width':['interpolate',['exponential',1.6],['zoom'],12.5,.5,15,3,18,14]}});
+  L({id:'major-case',type:'line',source:'roads',filter:['in',['get','c'],['literal',['primary','secondary','tertiary','motorway']]],layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':C['--road-edge'],'line-width':['interpolate',['exponential',1.6],['zoom'],11,1.5,15,8,18,26]}});
+  L({id:'major',type:'line',source:'roads',filter:['in',['get','c'],['literal',['primary','secondary','tertiary']]],layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':C['--major'],'line-width':['interpolate',['exponential',1.6],['zoom'],11,.8,15,5.5,18,22]}});
+  L({id:'motorway',type:'line',source:'roads',filter:['==',['get','c'],'motorway'],layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':C['--rail'],'line-opacity':.6,'line-width':['interpolate',['exponential',1.6],['zoom'],11,1.2,15,6,18,20]}});
+  // zones
+  L({id:'zone-corridor',type:'line',source:'zone-lines',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':SEV_COLOR(),'line-opacity':['case',['==',['get','on'],1],['case',['==',['get','status'],'possible'],.2,.27],.07],'line-width':metersWidth('radius')}});
+  L({id:'zone-area',type:'fill',source:'zone-areas',paint:{'fill-color':SEV_COLOR(),'fill-opacity':['case',['==',['get','on'],1],.27,.07]}});
+  L({id:'zone-axis',type:'line',source:'zone-lines',filter:['!',['in',['get','status'],['literal',['possible','banned']]]],layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':SEV_COLOR(),'line-width':2.5,'line-opacity':['case',['==',['get','on'],1],.95,.3]}});
+  L({id:'zone-axis-dash',type:'line',source:'zone-lines',filter:['in',['get','status'],['literal',['possible','banned']]],paint:{'line-color':SEV_COLOR(),'line-width':2,'line-dasharray':[3,2],'line-opacity':['case',['==',['get','on'],1],.95,.3]}});
+  L({id:'zone-edge',type:'line',source:'zone-areas',paint:{'line-color':SEV_COLOR(),'line-width':2,'line-opacity':['case',['==',['get','on'],1],.95,.3]}});
+  // route
+  L({id:'route-alt',type:'line',source:'route-alt',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':C['--ink-3'],'line-width':4,'line-opacity':.7,'line-dasharray':[.5,2]}});
+  L({id:'route-case',type:'line',source:'route-main',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':C['--panel'],'line-width':['interpolate',['linear'],['zoom'],11,5,16,11]}});
+  L({id:'route',type:'line',source:'route-main',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':C['--route'],'line-width':['interpolate',['linear'],['zoom'],11,3,16,7]}});
+  // labels
+  L({id:'road-label',type:'symbol',source:'roads',filter:['all',['!=',['get','name'],''],['>',['get','r'],0]],minzoom:14,
+    layout:{'symbol-placement':'line','text-field':['get','name'],'text-font':['NotoRegular'],'text-size':['interpolate',['linear'],['zoom'],14,10,18,14],'symbol-sort-key':['get','r'],'text-max-angle':30,'text-padding':4},
+    paint:{'text-color':C['--ink-2'],'text-halo-color':C['--paper'],'text-halo-width':1.4}});
+  L({id:'place-label',type:'symbol',source:'places',minzoom:13,layout:{'text-field':['get','name'],'text-font':['NotoMedium'],'text-size':12,'text-max-width':8,'text-padding':6},paint:{'text-color':C['--ink'],'text-halo-color':C['--paper'],'text-halo-width':1.6}});
+  L({id:'stations',type:'circle',source:'stations',minzoom:12,paint:{'circle-radius':['interpolate',['linear'],['zoom'],12,3.5,16,7],'circle-color':C['--panel'],'circle-stroke-color':C['--sev-confirmed'],'circle-stroke-width':2}});
+  L({id:'station-label',type:'symbol',source:'stations',minzoom:14,layout:{'text-field':['concat','M ',['get','name']],'text-font':['NotoMedium'],'text-size':11,'text-anchor':'left','text-offset':[0.9,0],'text-optional':true},paint:{'text-color':C['--sev-confirmed'],'text-halo-color':C['--paper'],'text-halo-width':1.6}});
+  L({id:'zone-label',type:'symbol',source:'zone-labels',filter:['==',['get','on'],1],minzoom:11.5,layout:{'text-field':['get','label'],'text-font':['NotoMedium'],'text-size':12.5,'text-max-width':10,'text-padding':2,'symbol-sort-key':['get','i']},paint:{'text-color':SEV_COLOR(),'text-halo-color':C['--paper'],'text-halo-width':2}});
+  L({id:'ends',type:'circle',source:'ends',paint:{'circle-radius':8,'circle-color':['match',['get','w'],'from',C['--ok'],C['--route-risk']],'circle-stroke-color':C['--panel'],'circle-stroke-width':3}});
+}
+const empty=()=>({type:'FeatureCollection',features:[]});
+// Re-colour when the theme changes, without rebuilding sources.
+const PAINT=[['bg','background-color','--paper'],['water-fill','fill-color','--water'],['water-line','line-color','--water'],['rail','line-color','--rail'],['minor','line-color','--road'],['major-case','line-color','--road-edge'],['major','line-color','--major'],['motorway','line-color','--rail'],
+  ['route-alt','line-color','--ink-3'],['route-case','line-color','--panel'],['route','line-color','--route'],['road-label','text-color','--ink-2'],['road-label','text-halo-color','--paper'],['place-label','text-color','--ink'],['place-label','text-halo-color','--paper'],
+  ['stations','circle-color','--panel'],['stations','circle-stroke-color','--sev-confirmed'],['station-label','text-color','--sev-confirmed'],['station-label','text-halo-color','--paper'],['zone-label','text-halo-color','--paper'],['ends','circle-stroke-color','--panel']];
+function retheme(){readColors();if(!mapReady)return;for(const [l,p,k] of PAINT)map.setPaintProperty(l,p,C[k]);for(const l of ['zone-corridor','zone-area','zone-axis','zone-axis-dash','zone-edge'])map.setPaintProperty(l,l==='zone-area'?'fill-color':'line-color',SEV_COLOR());map.setPaintProperty('zone-label','text-color',SEV_COLOR());for(const l of ['me-acc','me'])if(map.getLayer(l))map.setPaintProperty(l,'circle-color',C['--accent']);map.setPaintProperty('ends','circle-color',['match',['get','w'],'from',C['--ok'],C['--route-risk']])}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',retheme);
+new MutationObserver(retheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+function updateZoneLayers(){if(!mapReady||!Z)return;updateHere();const zg=zonesGeoJSON();map.getSource('zone-areas').setData(zg.areas);map.getSource('zone-lines').setData(zg.lines);map.getSource('zone-labels').setData(zg.labels);map.getSource('stations').setData(zg.stations);render()}
+function updateRouteLayers(){if(!mapReady)return;
+  const f=(r)=>r?{type:'FeatureCollection',features:[{type:'Feature',properties:{},geometry:{type:'LineString',coordinates:r.pts.map(p=>LL(...p))}}]}:empty();
+  const main=S.res?(S.choice==='safe'?S.res.safe:S.res.fast):null,other=S.res?(S.choice==='safe'?S.res.fast:S.res.safe):null;
+  map.getSource('route-main').setData(f(main));map.getSource('route-alt').setData(other&&main&&Math.abs(other.len-main.len)>5?f(other):empty());
+  map.getSource('ends').setData({type:'FeatureCollection',features:['from','to'].filter(w=>S[w]).map(w=>({type:'Feature',properties:{w},geometry:{type:'Point',coordinates:LL(S[w].x,S[w].y)}}))});
+}
+
+// ---------- routing (A*) ----------
+function nearestNode(x,y){let best=0,bd=1e18;for(let i=0;i<NX.length;i++){const d=(NX[i]-x)**2+(NY[i]-y)**2;if(d<bd){bd=d;best=i}}return best}
+class Heap{constructor(){this.k=[];this.v=[]}push(k,v){const K=this.k,Vv=this.v;let i=K.length;K.push(k);Vv.push(v);while(i>0){const p=(i-1)>>1;if(K[p]<=k)break;K[i]=K[p];Vv[i]=Vv[p];i=p}K[i]=k;Vv[i]=v}
+pop(){const K=this.k,Vv=this.v;const top=Vv[0];const lk=K.pop(),lv=Vv.pop();if(K.length){let i=0;const n=K.length;while(true){let l=2*i+1,r=l+1,s=i;let sk=lk;if(l<n&&K[l]<sk){s=l;sk=K[l]}if(r<n&&K[r]<sk){s=r}if(s===i)break;K[i]=K[s];Vv[i]=Vv[s];i=s}K[i]=lk;Vv[i]=lv}return top}get size(){return this.k.length}}
+const PEN={confirmed:25,likely:15,banned:8,possible:4,traffic:1};
+function route(a,b,avoid){
+  const n=NX.length;const g=new Float64Array(n).fill(Infinity);const pe=new Int32Array(n).fill(-1);const done=new Uint8Array(n);
+  const t=effMin();const act=Z.zones.map(z=>zoneActive(z,t)?PEN[z.status]:1);
+  g[a]=0;const h=new Heap();h.push(0,a);const tx=NX[b],ty=NY[b];
+  while(h.size){const u=h.pop();if(done[u])continue;done[u]=1;if(u===b)break;
+    for(let k=AOFF[u];k<AOFF[u+1];k++){const e=ADJ[k];const v=EA[e]===u?EB[e]:EA[e];if(done[v])continue;
+      let w=ELEN[e];if(avoid&&edgeZones[e]){let f=1;for(const z of edgeZones[e])f=Math.max(f,act[z]);w*=f}
+      const ng=g[u]+w;if(ng<g[v]){g[v]=ng;pe[v]=e;h.push(ng+Math.hypot(NX[v]-tx,NY[v]-ty),v)}}}
+  if(pe[b]<0&&a!==b)return null;
+  const edges=[];let u=b;while(u!==a){const e=pe[u];edges.push(e);u=EA[e]===u?EB[e]:EA[e]}edges.reverse();
+  const pts=[[NX[a],NY[a]]];let len=0,cur=a;const hits=new Map(),via=new Map();
+  for(const e of edges){let p=edgePts(e);if(EA[e]!==cur)p=p.reverse();for(let k=1;k<p.length;k++)pts.push(p[k]);cur=EA[e]===cur?EB[e]:EA[e];len+=ELEN[e];
+    if(edgeZones[e])for(const z of edgeZones[e])hits.set(z,(hits.get(z)||0)+ELEN[e]);
+    if(EN[e]>=0)via.set(EN[e],(via.get(EN[e])||0)+ELEN[e])}
+  return {pts,len,hits,via};
+}
+
+// ---------- search ----------
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[’']/g,' ').replace(/\s+/g,' ').trim();
+const ABBR={bd:'boulevard',bld:'boulevard',av:'avenue',ave:'avenue',pl:'place',r:'rue',st:'saint',ste:'sainte',fbg:'faubourg',qu:'quai',sq:'square',pte:'porte'};
+let IDX=[];
+function buildIndex(){
+  IDX=[];const kinds={s:'Station',m:'Landmark',q:'Square / area',p:'Park'};
+  for(const [n,k,x,y] of D.places)IDX.push({n,k:kinds[k],x,y,w:k==='s'?3:k==='q'?2:1.5,s:norm(n)});
+  for(const st of Z.stations)IDX.push({n:'Métro '+st.name,k:'Métro '+st.lines,x:st.pos[0],y:st.pos[1],w:2.5,s:norm('metro '+st.name+' '+st.name)});
+  for(const [k,node] of nameCenters){const n=D.names[k];IDX.push({n,k:'Street',x:NX[node],y:NY[node],w:1,s:norm(n)})}
+}
+function search(q){
+  q=norm(q).split(' ').map(w=>ABBR[w]||w).join(' ');if(q.length<2)return [];const words=q.split(' ');const out=[];
+  for(const it of IDX){let sc=0;if(it.s.startsWith(q))sc=10;else if(it.s.includes(' '+q))sc=7;else if(words.every(w=>it.s.includes(w)))sc=4;else continue;out.push([sc+it.w-it.s.length/200,it])}
+  out.sort((a,b)=>b[0]-a[0]);const seen=new Set(),res=[];for(const [,it] of out){if(seen.has(it.s))continue;seen.add(it.s);res.push(it);if(res.length>=8)break}return res;
+}
+
+// ---------- state ----------
+const S={from:null,to:null,pick:null,res:null,choice:'safe',tab:'route',sel:null};
+function setEnd(which,pt){S[which]=pt;$('#'+which).value=pt.n;computeRoute()}
+function computeRoute(){
+  S.res=null;
+  if(S.from&&S.to&&D&&Z&&edgeZones){
+    const a=nearestNode(S.from.x,S.from.y),b=nearestNode(S.to.x,S.to.y);
+    const fast=route(a,b,false),safe=route(a,b,true);S.res={fast,safe};const t=effMin();
+    const risky=fast?[...fast.hits.keys()].some(z=>zoneActive(Z.zones[z],t)&&Z.zones[z].status!=='traffic'):false;
+    S.choice=risky?'safe':'fast';
+  }
+  render();updateRouteLayers();
+}
+
+// ---------- view helpers ----------
+function pad(){const wide=innerWidth>=900;const top=$('#card').getBoundingClientRect().bottom+12;const sh=$('#sheet .sheet-in').getBoundingClientRect().height;
+  return wide?{top:20,bottom:20,left:430,right:60}:{top,bottom:sh+12,left:20,right:56}}
+function fitXY(a,b,c,d,anim=true){if(!map)return;map.fitBounds([LL(a,b),LL(c,d)],{padding:pad(),duration:anim?600:0,maxZoom:16.5})}
+function fitZones(anim){fitXY(-900,-400,5200,3900,anim)}
+function focusRoute(anim=true){if(!S.res)return;const r=S.res[S.choice]||S.res.fast;if(!r)return;let a=1e9,b=1e9,c=-1e9,d=-1e9;for(const [x,y] of r.pts){a=Math.min(a,x);b=Math.min(b,y);c=Math.max(c,x);d=Math.max(d,y)}fitXY(a-150,b-150,c+150,d+150,anim)}
+function placeCtl(){const cb=$('#card').getBoundingClientRect();$('#ctl').style.top=(innerWidth<900?cb.bottom+10:12)+'px'}
+addEventListener('resize',()=>{placeCtl();placePop()});
+
+// ---------- popup ----------
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function openPop(i){S.sel=i;const z=Z.zones[i];const p=$('#pop');
+  p.innerHTML=`<button class="x" aria-label="Close">×</button><div><span class="sev ${z.status}"><i></i>${SEV_LABEL[z.status]}</span> <span class="mono muted">${z.start}–${z.end}</span></div><h3></h3><p class="note"></p><p class="note small">${z.src.map(k=>`<a href="${Z.sources[k].url}" target="_blank" rel="noopener">${esc(Z.sources[k].name)}</a>`).join(' · ')}</p>`;
+  p.querySelector('h3').textContent=z.title;p.querySelector('.note').textContent=z.note;p.querySelector('.x').onclick=closePop;p.hidden=false;placePop()}
+function closePop(){S.sel=null;$('#pop').hidden=true}
+function placePop(){const p=$('#pop');if(p.hidden||S.sel==null||!map)return;const z=Z.zones[S.sel];const c=z.center||z.path[Math.floor(z.path.length/2)];const pt=map.project(LL(...c));
+  const w=p.offsetWidth,h=p.offsetHeight;const x=Math.min(innerWidth-w-12,Math.max(12,pt.x-w/2));let y=pt.y-h-18;const top=$('#card').getBoundingClientRect().bottom+8;if(y<top)y=Math.min(pt.y+18,innerHeight-h-12);p.style.left=x+'px';p.style.top=Math.max(top,y)+'px'}
+
+// ---------- inputs ----------
+function wireInput(which){
+  const inp=$('#'+which),box=$('#s'+which[0].toUpperCase()+which.slice(1));let items=[],on=-1;
+  const show=()=>{if(!D)return;items=search(inp.value);if(ME.pos&&which==='from'&&norm(inp.value).length<3)items=[{n:'My location',k:'GPS',x:ME.pos.xy[0],y:ME.pos.xy[1]}].concat(items);on=-1;if(!items.length){box.hidden=true;return}box.innerHTML='';items.forEach((it,i)=>{const b=document.createElement('button');b.innerHTML='<span></span><small></small>';b.firstChild.textContent=it.n;b.lastChild.textContent=it.k;b.onmousedown=ev=>ev.preventDefault();b.onclick=()=>pick(i);box.appendChild(b)});box.hidden=false};
+  const pick=i=>{const it=items[i];box.hidden=true;inp.blur();setEnd(which,{n:it.n,x:it.x,y:it.y});focusRoute()};
+  inp.addEventListener('input',show);inp.addEventListener('focus',()=>{if(inp.value)inp.select();show()});inp.addEventListener('blur',()=>setTimeout(()=>box.hidden=true,150));
+  inp.addEventListener('keydown',e=>{if(box.hidden)return;if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();on=(on+(e.key==='ArrowDown'?1:-1)+items.length)%items.length;[...box.children].forEach((c,i)=>c.classList.toggle('on',i===on))}else if(e.key==='Enter'){e.preventDefault();pick(on<0?0:on)}else if(e.key==='Escape')box.hidden=true});
+}
+function updatePins(){$('#pinFrom').setAttribute('aria-pressed',String(S.pick==='from'));$('#pinTo').setAttribute('aria-pressed',String(S.pick==='to'));if(map)map.getCanvas().style.cursor=S.pick?'crosshair':''}
+$('#pinFrom').onclick=()=>{S.pick=S.pick==='from'?null:'from';updatePins();if(S.pick)toast('Tap the map where you start')};
+$('#pinTo').onclick=()=>{S.pick=S.pick==='to'?null:'to';updatePins();if(S.pick)toast('Tap the map where you are going')};
+$('#swap').onclick=()=>{[S.from,S.to]=[S.to,S.from];$('#from').value=S.from?.n||'';$('#to').value=S.to?.n||'';computeRoute()};
+$('#zin').onclick=()=>map&&map.zoomIn();$('#zout').onclick=()=>map&&map.zoomOut();$('#zfit').onclick=()=>fitZones(true);
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;t.style.top=($('#card').getBoundingClientRect().bottom+10)+'px';clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2600)}
+function nearbyName(node){for(let k=AOFF[node];k<AOFF[node+1];k++){const e=ADJ[k];if(EN[e]>=0)return D.names[EN[e]]}return null}
+function onMapClick(e){
+  const [x,y]=XY(e.lngLat.lng,e.lngLat.lat);
+  if(S.pick){const which=S.pick;S.pick=null;updatePins();const node=nearestNode(x,y);setEnd(which,{n:nearbyName(node)||'Dropped pin',x:NX[node],y:NY[node]});return}
+  if(!Z)return;const t=effMin();const tol=12*156543.03*Math.cos(48.86*Math.PI/180)/2**map.getZoom();let best=-1,bd=1e9;
+  Z.zones.forEach((z,i)=>{const d=distToZone(z,x,y)-z.radius;const sc=d+(zoneActive(z,t)?0:200);if(d<tol&&sc<bd){bd=sc;best=i}});
+  if(best>=0)openPop(best);else closePop();
+}
+
+// ---------- sheet ----------
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',String(x===b)));$('#sheet').classList.remove('min');render()});
+$('#grab').onclick=()=>$('#sheet').classList.toggle('min');
+const fmtLen=m=>m<1000?Math.round(m/10)*10+' m':(m/1000).toFixed(1)+' km';
+const fmtMin=m=>{const t=Math.max(1,Math.round(m/1000/4.8*60));return t<60?t+' min':Math.floor(t/60)+' h '+String(t%60).padStart(2,'0')};
+function gmapsUrl(r,mode){
+  const o=LL(...r.pts[0]).reverse(),d=LL(...r.pts[r.pts.length-1]).reverse();
+  let u=`https://www.google.com/maps/dir/?api=1&origin=${o.join(',')}&destination=${d.join(',')}&travelmode=${mode}`;
+  if(mode==='walking'&&r.pts.length>10){const w=[];for(let i=1;i<=4;i++)w.push(LL(...r.pts[Math.floor(i*(r.pts.length-1)/5)]).reverse().join(','));u+='&waypoints='+encodeURIComponent(w.join('|'))}
+  return u;
+}
+function hitList(r){const t=effMin();return [...r.hits.entries()].map(([z,l])=>({z:Z.zones[z],l,on:zoneActive(Z.zones[z],t)})).filter(h=>h.on&&h.z.status!=='traffic').sort((a,b)=>SEV_ORDER[a.z.status]-SEV_ORDER[b.z.status])}
+function viaText(r){return [...r.via.entries()].sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k])=>D.names[k]).join(', ')}
+function render(){
+  const b=$('#body');if(!Z){b.innerHTML='<p class="note">Loading zones…</p>';return}
+  const t=effMin();const active=Z.zones.filter(z=>zoneActive(z,t)).length;$('#nz').textContent=active;
+  if(S.tab==='route'){
+    if(!S.res){b.innerHTML=`<p class="head">${esc(Z.headline)}</p><p class="note">Pick a start and destination above, or press <b>Tap map</b> and tap a spot. The app compares the direct walking route with one that steers around active zones at <b>${timeLabel()}</b>.</p><div class="legend">${['confirmed','likely','possible','banned','traffic'].map(k=>`<span class="sev ${k}"><i></i>${SEV_LABEL[k]}</span>`).join('')}</div>`;return}
+    const {fast,safe}=S.res;if(!fast){b.innerHTML='<p class="note">No walking route found between these points. Try a nearby street.</p>';return}
+    const fh=hitList(fast),sh=safe?hitList(safe):[];const same=!safe||Math.abs(safe.len-fast.len)<5;
+    const opt=(k,r,h,label)=>`<button class="opt" data-c="${k}" aria-pressed="${S.choice===k||same}"><span class="k">${label}</span><span class="v">${fmtMin(r.len)}</span><span class="mono muted">${fmtLen(r.len)}</span><span class="w ${h.length?'bad':'good'}">${h.length?`Crosses ${h.length} zone${h.length>1?'s':''}`:'Clear of zones'}</span></button>`;
+    const cur=S.choice==='safe'&&!same?safe:fast,ch=S.choice==='safe'&&!same?sh:fh;
+    b.innerHTML=`<div class="res">
+      ${same?`<div class="opts" style="grid-template-columns:1fr">${opt('fast',fast,fh,fh.length?'Walking route (no detour possible)':'Walking route')}</div>`:`<div class="opts">${opt('fast',fast,fh,'Direct')}${opt('safe',safe,sh,'Avoids zones')}</div>`}
+      <p class="note">Via ${esc(viaText(cur))||'local streets'}. Situation at <b>${timeLabel()}</b>.</p>
+      ${ch.length?`<ul class="hits">${ch.map(h=>`<li><span class="sev ${h.z.status}"><i></i>${SEV_LABEL[h.z.status]}</span><span>${esc(h.z.title)} <span class="mono muted">${h.z.start}–${h.z.end}</span></span></li>`).join('')}</ul>`:''}
+      <div class="go"><a class="btn pri" target="_blank" rel="noopener" href="${gmapsUrl(cur,'walking')}">Open walk in Google Maps</a><a class="btn sec" target="_blank" rel="noopener" href="${gmapsUrl(cur,'transit')}">Metro &amp; bus options</a></div>
+      <p class="note small">Google Maps gets a few points along this route so it follows the same path. For the metro, check the closures in the Transport tab first.</p></div>`;
+    b.querySelectorAll('.opt').forEach(o=>o.onclick=()=>{S.choice=o.dataset.c;render();updateRouteLayers()});
+  } else if(S.tab==='zones'){
+    const zs=Z.zones.map((z,i)=>({z,i,on:zoneActive(z,t)})).sort((a,b)=>(b.on-a.on)||SEV_ORDER[a.z.status]-SEV_ORDER[b.z.status]||hm(a.z.start)-hm(b.z.start));
+    b.innerHTML=`<p class="note">${active} active at <b>${timeLabel()}</b>. Tap a zone to see it on the map.</p><div class="zl">${zs.map(({z,i,on})=>`<button class="zone ${on?'':'off'}" data-i="${i}"><span class="bar" style="background:var(--sev-${z.status})"></span><span><span class="t"></span><span class="m"><span class="sev ${z.status}"><i></i>${SEV_LABEL[z.status]}</span><span class="mono muted">${z.start}–${z.end}</span></span></span></button>`).join('')}</div>`;
+    b.querySelectorAll('.zone').forEach(el=>{const i=+el.dataset.i,z=Z.zones[i];el.querySelector('.t').textContent=z.title;el.onclick=()=>{const bx=zoneBBox(z);fitXY(bx[0]-150,bx[1]-150,bx[2]+150,bx[3]+150);map.once('moveend',()=>openPop(i))}});
+  } else {
+    b.innerHTML=`<div class="box"><p class="head" style="font-size:15px">Métro stations that may close</p><div class="stations">${Z.stations.map(s=>`<span class="st">${esc(s.name)}<b>${esc(s.lines)}</b></span>`).join('')}</div><p class="note">${esc(Z.stationNote)}</p></div>
+    <p class="note">${esc(Z.traffic)}</p>
+    <div class="box"><p class="head" style="font-size:15px">How to read this map</p><p class="note"><b>Confirmed</b> and <b>likely</b> come from organisers' calls and press reports. <b>Possible</b> marks routes the prefecture proposed or organisers asked for that were not agreed. <b>Banned</b> routes are where police expect to block gatherings. Lines are drawn along the most plausible streets; the official route had not been published when this was last updated.</p></div>
+    <p class="note">Check before leaving: <a href="https://www.prefecturedepolice.interieur.gouv.fr/" target="_blank" rel="noopener">Préfecture de police</a> (official route), <a href="https://www.ratp.fr/infos-trafic" target="_blank" rel="noopener">RATP traffic info</a>, <a href="https://www.sytadin.fr/" target="_blank" rel="noopener">Sytadin</a> (roads).</p>
+    <p class="note small">Sources: ${Object.values(Z.sources).map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join(' · ')}. Map: MapLibre, street data © OpenStreetMap contributors via Overture Maps.</p>`;
+  }
+}
+function freshText(){if(!Z)return;const f=d=>d.toLocaleString('en-GB',{weekday:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'});$('#fresh').innerHTML=`Updated ${f(new Date(Z.updated))}<br>checked ${lastFetch?lastFetch.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'}):'—'}`}
+
+// ---------- my location (only where the browser allows it, i.e. the installed app) ----------
+const ME={pos:null,watch:null,follow:false};
+function meGeoJSON(){if(!ME.pos)return empty();const [x,y]=ME.pos.xy;return {type:'FeatureCollection',features:[{type:'Feature',properties:{acc:ME.pos.acc},geometry:{type:'Point',coordinates:LL(x,y)}}]}}
+function addMeLayers(){map.addSource('me',{type:'geojson',data:empty()});
+  map.addLayer({id:'me-acc',type:'circle',source:'me',paint:{'circle-radius':['interpolate',['exponential',2],['zoom'],10,['/',['get','acc'],MPP0/2048],20,['/',['get','acc'],MPP0/2097152]],'circle-color':C['--accent'],'circle-opacity':.14,'circle-pitch-alignment':'map'}});
+  map.addLayer({id:'me',type:'circle',source:'me',paint:{'circle-radius':8,'circle-color':C['--accent'],'circle-stroke-color':'#ffffff','circle-stroke-width':3}})}
+function nearestActiveZone(x,y){if(!Z)return null;const t=effMin();let best=null;
+  Z.zones.forEach((z,i)=>{if(z.status==='traffic'||!zoneActive(z,t))return;const d=distToZone(z,x,y)-z.radius;if(!best||d<best.d)best={z,i,d}});return best}
+function updateHere(){const el=$('#here');if(!ME.pos){el.hidden=true;return}
+  const n=nearestActiveZone(...ME.pos.xy);if(!n||n.d>400){el.hidden=true;return}
+  const inside=n.d<=0;el.innerHTML=`<span class="sev ${n.z.status}"><i></i>${inside?'You are in':'Nearby'}</span><span></span>`;
+  el.lastChild.textContent=inside?n.z.title:`${n.z.title}, ${Math.max(10,Math.round(n.d/10)*10)} m away`;
+  el.style.top=($('#card').getBoundingClientRect().bottom+10)+'px';el.hidden=false;el.onclick=()=>openPop(n.i)}
+function onFix(p){const xy=XY(p.coords.longitude,p.coords.latitude);ME.pos={xy,acc:Math.max(8,p.coords.accuracy||30)};
+  if(mapReady)map.getSource('me').setData(meGeoJSON());updateHere();
+  if(ME.follow&&mapReady)map.easeTo({center:LL(...xy),duration:500})}
+function startLocate(){
+  if(!('geolocation' in navigator)){toast('Location is not available here. Open the installed app.');return}
+  if(ME.watch!=null){ME.follow=true;$('#loc').setAttribute('aria-pressed','true');if(ME.pos&&mapReady)map.easeTo({center:LL(...ME.pos.xy),zoom:Math.max(map.getZoom(),15.5),duration:600});return}
+  try{ME.watch=navigator.geolocation.watchPosition(p=>{const first=!ME.pos;onFix(p);if(first&&mapReady&&ME.follow)map.easeTo({center:LL(...ME.pos.xy),zoom:Math.max(map.getZoom(),15.5),duration:600})},
+    e=>{ME.watch=null;ME.follow=false;$('#loc').setAttribute('aria-pressed','false');toast(e.code===1?'Location is blocked. Allow it in your browser settings.':'Location is not available here. Open the installed app.')},
+    {enableHighAccuracy:true,maximumAge:5000,timeout:20000});ME.follow=true;$('#loc').setAttribute('aria-pressed','true')}
+  catch(e){toast('Location is not available here. Open the installed app.')}}
+$('#loc').onclick=startLocate;
+
+// ---------- loading & refresh ----------
+async function loadZones(){
+  try{const r=await fetch('zones.json',{cache:'no-store'});if(!r.ok)throw 0;const z=await r.json();const changed=!Z||z.updated!==Z.updated;Z=z;lastFetch=new Date();
+    if(changed&&D){computeEdgeZones();buildIndex();updateZoneLayers();computeRoute()}freshText();render()}
+  catch(e){toast(navigator.onLine?'Could not refresh zones. Showing the last version.':'Offline. Showing the zones saved at '+(lastFetch?lastFetch.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'}):'last visit'))}
+}
+setInterval(loadZones,30*60*1000);setInterval(()=>{updateHere();updateZoneLayers()},5*60*1000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&lastFetch&&Date.now()-lastFetch>10*60*1000)loadZones()});
+async function boot(){
+  buildTimes();placeCtl();render();
+  map=new maplibregl.Map({container:'map',style:buildStyle(),center:[2.362,48.862],zoom:12.6,minZoom:10.5,maxZoom:18.5,maxBounds:[[2.15,48.76],[2.55,48.95]],attributionControl:false,dragRotate:false,pitchWithRotate:false,fadeDuration:150});
+  map.touchZoomRotate.disableRotation();
+  map.on('click',onMapClick);map.on('dragstart',()=>{ME.follow=false;$('#loc').setAttribute('aria-pressed','false')});map.on('move',placePop);
+  const styleLoaded=new Promise(r=>map.once('load',r));
+  const [d]=await Promise.all([fetch('paris.json').then(r=>r.json()),loadZones(),styleLoaded]);
+  D=d;prepStreets();computeEdgeZones();buildIndex();addLayers();addMeLayers();mapReady=true;if(ME.pos)map.getSource('me').setData(meGeoJSON());
+  const ex=n=>IDX.find(i=>i.n===n);const a=ex('Gare de Lyon'),b=ex("Gare de l'Est");
+  if(a&&b&&!S.from&&!S.to){S.from={n:a.n,x:a.x,y:a.y};S.to={n:b.n,x:b.x,y:b.y};$('#from').value=a.n+' (example)';$('#to').value=b.n}
+  computeRoute();if(S.res)focusRoute(false);else fitZones(false);
+  map.once('idle',()=>$('#loading').hidden=true);
+}
+wireInput('from');wireInput('to');
+if('serviceWorker' in navigator&&window.isSecureContext&&document.querySelector('link[rel=manifest]')){try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}}
+if(!window.maplibregl){$('#loading').textContent='The map library did not load. Check your connection and reload.'}
+else boot().catch(e=>{$('#loading').textContent='Could not load the map data. Reload the page.';console.error(e)});
+})();
+</script>
