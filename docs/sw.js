@@ -1,5 +1,5 @@
 // Offline cache for Paris Manif Map. Zones are fetched fresh when online, and the last copy is used offline.
-const V='manif-5ddcd8bad2';
+const V='manif-b52010ec01';
 const SHELL=["./", "index.html", "ml.js", "paris.json", "glyphs.json", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V&&k.startsWith('manif-')).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
