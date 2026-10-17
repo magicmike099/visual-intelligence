@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-17T16:25:00+02:00",
+"updated": "2026-10-17T17:20:00+02:00",
 "day": "2026-10-17",
-"headline": "The march left République late, after clashes: a car was set on fire and police used a water cannon at the square. 133 arrests in Paris by 14:00, and unauthorised processions are reported. Authorised route: Boulevard Magenta, Barbès, Boulevard de Clichy to Place de Clichy. Bastille rally banned; 25 métro stations closed; central Paris gatherings banned until 22:00.",
+"headline": "The march has reached Place de Clichy (franceinfo live). An unauthorised procession was pushed back near the Élysée around 15:48. Earlier: clashes and a car fire at République, and 133 arrests in Paris by 14:00. Bastille rally banned; 25 métro stations closed; central Paris gatherings banned until 22:00.",
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -324,6 +324,14 @@
 "titres2": {
 "name": "Titres de presse feed: Humanité live, BFMTV, actu.fr, HuffPost (about 14:20 to 14:45)",
 "url": "https://www.titrespresse.com/25533552603/pierre-antoine-valade"
+},
+"europe1": {
+"name": "Europe 1: prefecture says a wild procession near the Élysée was pushed back (17 Oct 16:35)",
+"url": "https://europe1.fr/police-justice/mobilisation-du-17-octobre-un-cortege-sauvage-aux-abords-de-lelysee-a-ete-refoule-selon-la-prefecture-de-police-1157427"
+},
+"morandini_live": {
+"name": "Jean-Marc Morandini live blog, citing BFMTV (item 15:48)",
+"url": "https://www.jeanmarcmorandini.com/article-654980-en-direct-17-oct-des-manifestants-en-cortege-sauvage-se-sont-approches-a-150-metres-de-l-elysee-l-office-du-tourisme-de-lyon-a-ete-brule-les-casseurs-sont-entres-a-la-mairie-de-marseille.html"
 },
 "sap_fr": {
 "name": "Sortiraparis, route update (17 Oct 07:34)",
@@ -1021,10 +1029,10 @@
 ]
 ],
 "radius": 150,
-"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. franceinfo says the procession started from République despite tensions with police, and BFMTV says it left late (Titres de presse feed, about 14:20). I found no crowd figure or progress report along the route.",
+"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. franceinfo says the procession started from République despite tensions with police and later that the protesters arrived at Place de Clichy; BFMTV says it left late (Titres de presse feed, about 14:20). I found no crowd figure or progress report along the route.",
 "src": [
-"titres2",
 "franceinfo",
+"titres2",
 "sap_fr",
 "sap_fr2",
 "aff17",
@@ -1528,6 +1536,25 @@
 "src": [
 "titres2",
 "tribunal"
+]
+},
+{
+"id": "wildelysee",
+"title": "Unauthorised procession pushed back near the Élysée",
+"short": "Pushed back: Élysée",
+"kind": "incident",
+"status": "confirmed",
+"start": "15:30",
+"end": "18:30",
+"center": [
+-2051,
+1581
+],
+"radius": 230,
+"note": "Around 15:48 a wild procession got within about 150 m of the Élysée (BFMTV, via Morandini). The prefecture says police pushed it back at the corner of Rue Boissy d'Anglas and Avenue Gabriel, next to Place de la Concorde (Europe 1, 16:35). A tweet embedded in Morandini's live blog puts about 10,000 people in the 2nd arrondissement, which I could not verify. The area is under the gathering ban and Concorde métro is closed.",
+"src": [
+"europe1",
+"morandini_live"
 ]
 },
 {
