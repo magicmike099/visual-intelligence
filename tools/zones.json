@@ -2,6 +2,65 @@
 "updated": "2026-10-17T20:20:00+02:00",
 "day": "2026-10-17",
 "headline": "Clashes were reported in central Paris into the early evening: a crowd was dispersed at Concorde around 17:48 and a barricade was set on fire near Réaumur-Sébastopol. AFP at 19:07 says thousands marched calmly to Place de Clichy despite tear gas, vehicle fires, clashes and looting in Paris (no locations given). 191 arrests in Paris at 18:00 (CNews headline). 25 métro stations are closed and no reopening time has been announced. Central Paris gatherings are banned until 22:00. I found no incident report after about 19:00.",
+"days": [
+{
+"day": "2026-10-17",
+"label": "Sat 17",
+"chips": [
+"12:00",
+"14:00",
+"15:30",
+"17:00",
+"18:30",
+"20:00"
+],
+"focus": "15:30"
+},
+{
+"day": "2026-10-18",
+"label": "Sun 18",
+"chips": [
+"08:00",
+"10:00",
+"12:00",
+"14:00",
+"18:00"
+],
+"focus": "10:00",
+"src": [
+"gj_site"
+],
+"headline": "No protest is announced in Paris for Sunday 18 October: I found no call on the Gilets Jaunes calendar, in the Lyon and Paris reports, or in the prefecture orders I could read. What is planned is transport and road disruption. Métro line 6 is closed all day, the Vincennes half marathon closes forest roads from 08:30 to noon, and the République stop of line 8 and the Saint-Michel stop of line 4 are not served because of long works. Saturday's closed stations and gathering bans were set for Saturday, and I found no announcement extending them. Any new call will be added here.",
+"traffic": "No protest, strike or gathering ban is announced for Sunday. Check RATP before leaving: line 6 has no service on the whole line, with replacement buses.",
+"transit": [
+{
+"t": "Métro line 6: no service on the whole line all day, with replacement buses. Line 1 serves Charles de Gaulle-Étoile and Nation directly.",
+"src": [
+"ratp_bull",
+"plan6"
+]
+},
+{
+"t": "Métro line 4: Saint-Michel is not served all day, until 19 December. Métro line 8: République is not served all day, until 22 April 2027. The bulletin lists only these two stops, not the other lines at République.",
+"src": [
+"ratp_bull"
+]
+},
+{
+"t": "RER C: Ivry-sur-Seine, Vitry-sur-Seine and the stations between Choisy-le-Roi and Massy-Palaiseau are not served all day. RER D: no service between Stade de France-Saint-Denis and Creil all day. RER E: no service between Villiers-sur-Marne and Tournan all day, and between Nanterre-La Folie and Villiers-sur-Marne from 22:15. RER A: no service between Boissy-Saint-Léger and La Varenne-Chennevières from 21:45. Tram T14: closed from 05:00 to 23:59.",
+"src": [
+"ratp_bull"
+]
+},
+{
+"t": "Transilien P: no service between Gare de l'Est and Coulommiers or Provins all day. Transilien N: no service between Montparnasse and Versailles-Chantiers until 15:45.",
+"src": [
+"ratp_bull"
+]
+}
+]
+}
+],
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -348,6 +407,22 @@
 "afp_bours": {
 "name": "AFP via Boursorama, 19:07 (only the summary was readable)",
 "url": "https://www.boursorama.com/actualite-economique/actualites/a-paris-malgre-le-chaos-des-manifestants-determines-a-se-faire-entendre-9eeedea99a1d5dfdcb6604998efbcc9e"
+},
+"ratp_bull": {
+"name": "RATP works bulletin, 17 to 23 October",
+"url": "https://www.bonjour-ratp.fr/actualites/articles/bulletin-travaux-17-octobre/"
+},
+"plan6": {
+"name": "Plan Métro Paris, line 6 closure dates (independent guide)",
+"url": "https://www.plan-metro-paris.com/ligne-6-fermetures-octobre-novembre-2026/"
+},
+"sap_semi": {
+"name": "Sortiraparis, Bois de Vincennes half marathon road closures (police order 2026-01276)",
+"url": "https://www.sortiraparis.com/en/news/in-paris/articles/353501-bois-de-vincennes-half-marathon-2026-roads-closed-on-october-18"
+},
+"gj_site": {
+"name": "Gilets Jaunes Paris calendar (no call for 18 Oct)",
+"url": "https://manifestationgiletsjaunesparis.fr/"
 },
 "ici": {
 "name": "ICI (France Bleu) headline: more than 160 arrests in Paris (17 Oct)",
@@ -3564,6 +3639,26 @@
 "src": [
 "sap2",
 "local"
+]
+},
+{
+"id": "semi_vincennes",
+"day": "2026-10-18",
+"outcome": "official",
+"title": "Bois de Vincennes half marathon: forest roads closed to vehicles",
+"short": "Half marathon: Vincennes",
+"kind": "traffic",
+"status": "traffic",
+"start": "08:30",
+"end": "12:00",
+"center": [
+6680,
+-2090
+],
+"radius": 1800,
+"note": "A police order closes forest roads to all vehicles. From 08:30 to 12:00: Avenue de Nogent (Route des Sabotiers to Avenue de la Pépinière, and Avenue de Fontenay to Route de la Belle Gabrielle), Avenue de Tremblay (Route de Mortemart to Route du Champ de Manœuvre), Route du Champ de Manœuvre, Route de la Ferme (Beauté junction to Route de la Tourelle) and the Beauté junction. From 08:30 to 11:00: Route de la Tourelle (Route de la Ferme to Route du Pesage), the Ferme de la Faisanderie junction, Avenue Daumesnil (Route de la Tourelle to Avenue de Saint-Maurice) and Avenue de Saint-Maurice (Avenue Daumesnil to Avenue de Gravelle). Nogent-sur-Marne has its own municipal order, which I could not read. The 21.1 km course stays inside the forest, two laps (north, then south), with about 6,000 runners last year. Sortiraparis reports no bus or métro change; line 1 serves Château de Vincennes. The circle only marks the forest sector and is approximate; the roads above are the exact list. Parked cars on closed roads can be towed.",
+"src": [
+"sap_semi"
 ]
 }
 ]

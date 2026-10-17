@@ -16,3 +16,7 @@ Each zone in `zones.py` carries an `outcome`:
 - `unconfirmed`: start time passed and no report found. Not drawn; listed under "Not on the map".
 - `cancelled`: reported cancelled (add `moved='to <place>'` if it moved, and add the new place as its own `observed` zone). Not drawn.
 Zones without `outcome` are treated as `official`. `kml.py` leaves out `unconfirmed` and `cancelled` zones.
+
+## Several days
+
+`zones.py` ends with a `days=[...]` list. Each entry has `day`, `label` (shown on the day chip), `chips` (time chips), `focus` (time the day opens on when it is not today) and, for days after the first, its own `headline`, `traffic`, `src` and `transit` notes (métro, RER and tram works shown on the Today tab). The first day (Saturday) keeps using the top-level `headline` and `traffic`. A zone belongs to the first day unless it has `day='YYYY-MM-DD'`. The app opens on today's day when it is in the list. Stations (`STATIONS`) belong to the first day only. `kml.py` writes the first day in its usual folders and every later day in one folder.
