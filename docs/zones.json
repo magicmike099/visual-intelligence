@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-17T10:20:00+02:00",
+"updated": "2026-10-17T12:25:00+02:00",
 "day": "2026-10-17",
-"headline": "Reported route: from République at 14:00 along Boulevard Magenta, Barbès and Boulevard de Clichy to Place de Clichy. A student march towards Nation is also reported but not confirmed. The Bastille rally is banned. 25 métro stations are closed, and undeclared gatherings are banned in central Paris until 22:00.",
+"headline": "Route authorised by the prefecture: from République at 14:00 along Boulevard Magenta, Barbès and Boulevard de Clichy to Place de Clichy. A student march towards Nation is also reported but not confirmed. The Bastille rally is banned. 25 métro stations are closed, and undeclared gatherings are banned in central Paris until 22:00.",
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -281,6 +281,14 @@
 "name": "Public Sénat, 15 Oct",
 "url": "https://www.publicsenat.fr/actualites/societe/17-octobre-le-mouvement-sorganise-peu-a-peu-entre-250-et-1000-actions-prevues-dans-toute-la-france"
 },
+"parisrouge": {
+"name": "Paris Rouge, route authorised (16 Oct 22:37)",
+"url": "https://parisrouge.fr/2026/10/16/mobilisation-du-17-octobre-un-parcours-de-manifestation-parisienne-finalement-autorise-entre-republique-et-place-de-clichy/"
+},
+"aladom": {
+"name": "Aladom, gathering calls (updated 16 Oct 10:56)",
+"url": "https://www.aladom.fr/actualites/secteur-service/11364/manifestations-du-17-octobre-2026-ou-sont-prevus-les-rassemblements-a-paris-rennes-lille-grenoble-et-bordeaux/"
+},
 "sap_fr": {
 "name": "Sortiraparis, route update (17 Oct 07:34)",
 "url": "https://www.sortiraparis.com/actualites/a-paris/articles/353967-mobilisation-du-17-octobre-a-paris-quel-parcours-pour-la-manifestation-prevue-ce-samedi"
@@ -318,7 +326,7 @@
 "title": "Rally at Place de la République, 14:00",
 "short": "République rally",
 "kind": "rally",
-"status": "likely",
+"status": "confirmed",
 "start": "13:00",
 "end": "20:00",
 "center": [
@@ -326,20 +334,22 @@
 1570
 ],
 "radius": 300,
-"note": "Sortiraparis (citing Le Parisien) and Affiches Parisiennes (09:53) both report the Gilets Jaunes and union march leaving République at 14:00. Student and high-school groups also gather here. Authorities expected 20,000 to 40,000 people in Paris (Public Sénat, 15 Oct).",
+"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Authorities expected 20,000 to 40,000 people in Paris (Public Sénat, 15 Oct).",
 "src": [
 "sap_fr",
 "sap_fr2",
 "aff17",
+"parisrouge",
+"aladom",
 "psenat"
 ]
 },
 {
 "id": "r2clichy",
-"title": "March République → Place de Clichy (route set by the prefecture)",
+"title": "March République → Place de Clichy (route authorised by the prefecture)",
 "short": "République to Clichy",
 "kind": "march",
-"status": "likely",
+"status": "confirmed",
 "start": "14:00",
 "end": "20:00",
 "path": [
@@ -969,11 +979,12 @@
 ]
 ],
 "radius": 150,
-"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis says the prefecture imposed it after talks failed, and Affiches Parisiennes (09:53) gives the same route; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00.",
+"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00.",
 "src": [
 "sap_fr",
 "sap_fr2",
 "aff17",
+"parisrouge",
 "mesinfos"
 ]
 },
