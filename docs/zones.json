@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-17T17:20:00+02:00",
+"updated": "2026-10-17T18:20:00+02:00",
 "day": "2026-10-17",
-"headline": "The march has reached Place de Clichy (franceinfo live). An unauthorised procession was pushed back near the Élysée around 15:48. Earlier: clashes and a car fire at République, and 133 arrests in Paris by 14:00. Bastille rally banned; 25 métro stations closed; central Paris gatherings banned until 22:00.",
+"headline": "Clashes continue in central Paris: a crowd was dispersed at Concorde around 17:48 despite the ban, and a barricade was set on fire near Réaumur-Sébastopol. The march to Place de Clichy went ahead. More than 160 arrests in Paris. Bastille rally banned; 25 métro stations closed; central Paris gatherings banned until 22:00.",
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -330,8 +330,20 @@
 "url": "https://europe1.fr/police-justice/mobilisation-du-17-octobre-un-cortege-sauvage-aux-abords-de-lelysee-a-ete-refoule-selon-la-prefecture-de-police-1157427"
 },
 "morandini_live": {
-"name": "Jean-Marc Morandini live blog, citing BFMTV (item 15:48)",
+"name": "Jean-Marc Morandini live blog, citing BFMTV and CNews (items 15:48 and 17:48)",
 "url": "https://www.jeanmarcmorandini.com/article-654980-en-direct-17-oct-des-manifestants-en-cortege-sauvage-se-sont-approches-a-150-metres-de-l-elysee-l-office-du-tourisme-de-lyon-a-ete-brule-les-casseurs-sont-entres-a-la-mairie-de-marseille.html"
+},
+"aroundprague": {
+"name": "Around Prague, clashes in Réaumur-Sébastopol and Saint-Denis (17 Oct 17:19)",
+"url": "https://aroundprague.cz/en/news/world/protests-in-france-turn-into-street-battles-tear-gas-water-cannon-and-arson"
+},
+"ici": {
+"name": "ICI (France Bleu) headline: more than 160 arrests in Paris (17 Oct)",
+"url": "https://www.ici.fr/ile-de-france/paris-75/paris/mobilisation-du-17-octobre-des-tensions-avant-le-depart-de-la-manifestation-place-de-la-republique-a-paris-8202537"
+},
+"aljaz": {
+"name": "Al Jazeera, scuffles and stun grenades at République (17 Oct)",
+"url": "https://www.aljazeera.com/news/2026/10/17/france-wave-of-nationwide-protests"
 },
 "sap_fr": {
 "name": "Sortiraparis, route update (17 Oct 07:34)",
@@ -378,12 +390,14 @@
 1570
 ],
 "radius": 300,
-"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). The prefecture counted 133 arrests in Paris at 14:00, mostly for groups gathering to commit violence or damage (Humanité). Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read.",
+"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). The prefecture counted 133 arrests in Paris at 14:00 (Humanité), and ICI later put it above 160. Al Jazeera reports police using stun grenades and tear gas here and trapping protesters between police lines. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read.",
 "src": [
 "tribunal",
 "titrespresse",
 "franceinfo",
 "epoch",
+"ici",
+"aljaz",
 "britbrief",
 "cnn",
 "anadolu",
@@ -1540,21 +1554,39 @@
 },
 {
 "id": "wildelysee",
-"title": "Unauthorised procession pushed back near the Élysée",
-"short": "Pushed back: Élysée",
+"title": "Concorde and Élysée approaches: crowds pushed back despite the ban",
+"short": "Clashes: Concorde",
 "kind": "incident",
 "status": "confirmed",
 "start": "15:30",
-"end": "18:30",
+"end": "20:30",
 "center": [
--2051,
-1581
+-2036,
+1482
 ],
-"radius": 230,
-"note": "Around 15:48 a wild procession got within about 150 m of the Élysée (BFMTV, via Morandini). The prefecture says police pushed it back at the corner of Rue Boissy d'Anglas and Avenue Gabriel, next to Place de la Concorde (Europe 1, 16:35). A tweet embedded in Morandini's live blog puts about 10,000 people in the 2nd arrondissement, which I could not verify. The area is under the gathering ban and Concorde métro is closed.",
+"radius": 300,
+"note": "Around 15:48 a wild procession got within about 150 m of the Élysée (BFMTV, via Morandini). The prefecture says police pushed it back at the corner of Rue Boissy d'Anglas and Avenue Gabriel, next to Concorde (Europe 1, 16:35). At 17:48 dozens of rioters took over Place de la Concorde despite the ban, and CNews says hundreds of people were dispersed there (Morandini live). A tweet in that blog puts about 10,000 people in the 2nd arrondissement, which I could not verify. The area is under the gathering ban and Concorde métro is closed.",
 "src": [
 "europe1",
 "morandini_live"
+]
+},
+{
+"id": "sebastopol",
+"title": "Barricade fire and clashes near Réaumur-Sébastopol and Rue Saint-Denis",
+"short": "Clashes: Sébastopol",
+"kind": "incident",
+"status": "confirmed",
+"start": "15:00",
+"end": "20:00",
+"center": [
+344,
+1449
+],
+"radius": 320,
+"note": "About fifty people were dispersed after building a barricade from wooden barriers, setting it on fire and throwing objects at police in the Réaumur-Sébastopol and Saint-Denis districts, and hundreds clashed with police in the city centre (Around Prague, 17:19). The time of day was not given and the circle is approximate.",
+"src": [
+"aroundprague"
 ]
 },
 {
