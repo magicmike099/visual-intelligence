@@ -1,71 +1,61 @@
 {
-"updated": "2026-10-17T07:15:00+02:00",
+"updated": "2026-10-17T08:20:00+02:00",
 "day": "2026-10-17",
-"headline": "No agreed route yet. Undeclared gatherings are banned 07:00–22:00 across central Paris, from the Champs-Élysées to Bastille. The 14:00 rally at Bastille is still announced.",
+"headline": "No agreed route yet. RATP closes 25 métro stations at the prefecture's request: 16 from 08:00 (Étoile to Opéra) and 9 from 12:00 (including Bastille and Barbès). Undeclared gatherings are banned in central Paris until 22:00.",
 "stations": [
 {
-"name": "Bastille",
-"lines": "1, 5, 8",
+"name": "Charles de Gaulle–Étoile",
+"lines": "1, 2, 6, RER A",
 "pos": [
-1494,
--22
-]
+-3941,
+2267
+],
+"from": "08:00"
 },
 {
-"name": "Bréguet-Sabin",
-"lines": "5",
+"name": "Argentine",
+"lines": "1",
 "pos": [
-1575,
-310
-]
+-4336,
+2455
+],
+"from": "08:00"
 },
 {
-"name": "Richard-Lenoir",
-"lines": "5",
+"name": "George V",
+"lines": "1",
 "pos": [
-1685,
-708
-]
+-3531,
+2046
+],
+"from": "08:00"
 },
 {
-"name": "Saint-Sébastien–Froissart",
-"lines": "8",
+"name": "Tuileries",
+"lines": "1",
 "pos": [
-1355,
-840
-]
+-1406,
+1227
+],
+"from": "08:00"
 },
 {
-"name": "Filles du Calvaire",
-"lines": "8",
+"name": "Franklin D. Roosevelt",
+"lines": "1, 9",
 "pos": [
-1296,
-1084
-]
+-2849,
+1692
+],
+"from": "08:00"
 },
 {
-"name": "Oberkampf",
-"lines": "5, 9",
+"name": "Champs-Élysées–Clemenceau",
+"lines": "1, 13",
 "pos": [
-1472,
-1249
-]
-},
-{
-"name": "République",
-"lines": "3, 5, 8, 9, 11",
-"pos": [
-1091,
-1570
-]
-},
-{
-"name": "Opéra",
-"lines": "3, 7, 8",
-"pos": [
--1253,
-1913
-]
+-2520,
+1559
+],
+"from": "08:00"
 },
 {
 "name": "Concorde",
@@ -73,10 +63,174 @@
 "pos": [
 -2022,
 1349
-]
+],
+"from": "08:00"
+},
+{
+"name": "Opéra",
+"lines": "3, 7, 8",
+"pos": [
+-1253,
+1913
+],
+"from": "08:00"
+},
+{
+"name": "Chaussée d'Antin–La Fayette",
+"lines": "7, 9",
+"pos": [
+-1113,
+2167
+],
+"from": "08:00"
+},
+{
+"name": "Pyramides",
+"lines": "7, 14",
+"pos": [
+-1055,
+1404
+],
+"from": "08:00"
+},
+{
+"name": "Madeleine",
+"lines": "8, 12, 14",
+"pos": [
+-1751,
+1836
+],
+"from": "08:00"
+},
+{
+"name": "Miromesnil",
+"lines": "9, 13",
+"pos": [
+-2476,
+2178
+],
+"from": "08:00"
+},
+{
+"name": "Assemblée nationale",
+"lines": "12",
+"pos": [
+-2110,
+829
+],
+"from": "08:00"
+},
+{
+"name": "Solférino",
+"lines": "12",
+"pos": [
+-1904,
+575
+],
+"from": "08:00"
+},
+{
+"name": "Rue du Bac",
+"lines": "12",
+"pos": [
+-1692,
+276
+],
+"from": "08:00"
+},
+{
+"name": "Varenne",
+"lines": "13",
+"pos": [
+-2483,
+409
+],
+"from": "08:00"
+},
+{
+"name": "Bastille",
+"lines": "1, 5, 8",
+"pos": [
+1494,
+-22
+],
+"from": "12:00"
+},
+{
+"name": "Anvers",
+"lines": "2",
+"pos": [
+-344,
+3251
+],
+"from": "12:00"
+},
+{
+"name": "Blanche",
+"lines": "2",
+"pos": [
+-1157,
+3361
+],
+"from": "12:00"
+},
+{
+"name": "Barbès–Rochechouart",
+"lines": "2, 4",
+"pos": [
+81,
+3361
+],
+"from": "12:00"
+},
+{
+"name": "Pigalle",
+"lines": "2, 12",
+"pos": [
+-798,
+3162
+],
+"from": "12:00"
+},
+{
+"name": "Bourse",
+"lines": "3",
+"pos": [
+-564,
+1681
+],
+"from": "12:00"
+},
+{
+"name": "Chemin Vert",
+"lines": "8",
+"pos": [
+1428,
+409
+],
+"from": "12:00"
+},
+{
+"name": "Saint-Sébastien–Froissart",
+"lines": "8",
+"pos": [
+1355,
+840
+],
+"from": "12:00"
+},
+{
+"name": "Filles du Calvaire",
+"lines": "8",
+"pos": [
+1296,
+1084
+],
+"from": "12:00"
 }
 ],
-"stationNote": "The Préfecture de police decides closures on the day, with little warning. Stations near Opéra, République, Bastille and Concorde are the most exposed. The ones marked are those named for a Bastille → République march, plus Opéra and Concorde. No official list has been published, and the ban sectors also cover Paris train stations.",
+"stationTitle": "Métro stations closed on Saturday",
+"stationNote": "RATP announced these closures at the request of the Préfecture de police: trains pass through without stopping and there are no connections. The stations closed from 12:00 reopen only when the prefecture allows it. République, Oberkampf and Richard-Lenoir are not on the list, but the prefecture can add closures at short notice. Station positions on the map are approximate. Several bus routes will be diverted.",
 "traffic": "No public transport strike is announced. Slow-roll road protests are possible on the Périphérique and airport motorways, and the interior ministry says blockades of key roads and facilities will not be tolerated. School holidays start, so expect heavy road traffic out of Paris.",
 "sources": {
 "sap": {
@@ -106,6 +260,14 @@
 "morandini": {
 "name": "Jean-Marc Morandini, banned sectors, 16 Oct",
 "url": "https://www.jeanmarcmorandini.com/article-655004-inquietude-pour-le-17-octobre-la-prefecture-interdit-ce-soir-de-manifester-dans-plusieurs-secteurs-de-paris-mais-surtout-autour-de-l-elysee-et-matignon-mais-aussi-la-place-de-la-concorde.html"
+},
+"ratp": {
+"name": "Sortiraparis, 25 closed métro stations (RATP list)",
+"url": "https://www.sortiraparis.com/en/news/in-paris/articles/353970-protests-on-saturday-october-17-25-paris-metro-stations-closed"
+},
+"ratp_x": {
+"name": "AlertesInfos on X, closed stations from 8:00",
+"url": "https://x.com/AlertesInfos/status/2111160993007165603"
 },
 "mesinfos": {
 "name": "Affiches Parisiennes, 16 Oct",

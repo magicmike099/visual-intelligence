@@ -370,10 +370,11 @@ function zonesGeoJSON(){
     if(z.center){const ring=circlePoly(z.center,z.radius);areas.push({type:'Feature',properties:p,geometry:{type:'Polygon',coordinates:[ring]}});fills.push({type:'Feature',properties:fp,geometry:{type:'Polygon',coordinates:[ring]}});labels.push({type:'Feature',properties:p,geometry:{type:'Point',coordinates:LL(...z.center)}})}
     else{for(let k=0;k<z.path.length-1;k++){const a=z.path[k],b=z.path[k+1];if(Math.hypot(b[0]-a[0],b[1]-a[1])>1)fills.push({type:'Feature',properties:fp,geometry:{type:'Polygon',coordinates:[capsule(a,b,z.radius)]}})}
       lines.push({type:'Feature',properties:p,geometry:{type:'LineString',coordinates:z.path.map(q=>LL(...q))}});labels.push({type:'Feature',properties:p,geometry:{type:'Point',coordinates:LL(...z.path[Math.floor(z.path.length/2)])}})}});
-  const st=Z.stations.map(s=>({type:'Feature',properties:{name:s.name},geometry:{type:'Point',coordinates:LL(...s.pos)}}));
+  const st=Z.stations.map(s=>({type:'Feature',properties:{name:s.name,on:(!s.from||t>=hm(s.from))?1:0},geometry:{type:'Point',coordinates:LL(...s.pos)}}));
   return {fill:{type:'FeatureCollection',features:fills},areas:{type:'FeatureCollection',features:areas},lines:{type:'FeatureCollection',features:lines},labels:{type:'FeatureCollection',features:labels},stations:{type:'FeatureCollection',features:st}};
 }
 const SEV_COLOR=()=>['match',['get','status'],'confirmed',C['--sev-confirmed'],'likely',C['--sev-likely'],'possible',C['--sev-possible'],'banned',C['--sev-banned'],C['--sev-traffic']];
+const STN_COLOR=()=>['case',['==',['get','on'],1],C['--sev-confirmed'],C['--ink-3']];
 const SAVED_COLOR=()=>['match',['get','st'],'in',C['--sev-confirmed'],'near',C['--sev-possible'],C['--ok']];
 
 // Label glyphs ship as one JSON file, served through a custom protocol.
@@ -405,8 +406,8 @@ function addLayers(){
   L({id:'route',type:'line',source:'route-main',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':C['--route'],'line-width':['interpolate',['linear'],['zoom'],11,3,16,7]}});
   L({id:'road-label',type:'symbol',source:'roads',filter:['all',['!=',['get','name'],''],['>',['get','r'],0]],minzoom:14,layout:{'symbol-placement':'line','text-field':['get','name'],'text-font':['NotoRegular'],'text-size':['interpolate',['linear'],['zoom'],14,10,18,14],'symbol-sort-key':['get','r'],'text-max-angle':30,'text-padding':4},paint:{'text-color':C['--ink-2'],'text-halo-color':C['--paper'],'text-halo-width':1.4}});
   L({id:'place-label',type:'symbol',source:'places',minzoom:13,layout:{'text-field':['get','name'],'text-font':['NotoMedium'],'text-size':12,'text-max-width':8,'text-padding':6},paint:{'text-color':C['--ink'],'text-halo-color':C['--paper'],'text-halo-width':1.6}});
-  L({id:'stations',type:'circle',source:'stations',minzoom:12,paint:{'circle-radius':['interpolate',['linear'],['zoom'],12,3.5,16,7],'circle-color':C['--panel'],'circle-stroke-color':C['--sev-confirmed'],'circle-stroke-width':2}});
-  L({id:'station-label',type:'symbol',source:'stations',minzoom:14,layout:{'text-field':['concat','M ',['get','name']],'text-font':['NotoMedium'],'text-size':11,'text-anchor':'left','text-offset':[0.9,0],'text-optional':true},paint:{'text-color':C['--sev-confirmed'],'text-halo-color':C['--paper'],'text-halo-width':1.6}});
+  L({id:'stations',type:'circle',source:'stations',minzoom:11,paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,2.5,16,7],'circle-color':C['--panel'],'circle-stroke-color':STN_COLOR(),'circle-stroke-width':2,'circle-stroke-opacity':['case',['==',['get','on'],1],1,.6]}});
+  L({id:'station-label',type:'symbol',source:'stations',minzoom:14,layout:{'text-field':['concat','M ',['get','name']],'text-font':['NotoMedium'],'text-size':11,'text-anchor':'left','text-offset':[0.9,0],'text-optional':true},paint:{'text-color':STN_COLOR(),'text-halo-color':C['--paper'],'text-halo-width':1.6}});
   L({id:'zone-label',type:'symbol',source:'zone-labels',filter:['==',['get','on'],1],minzoom:11.5,layout:{'text-field':['get','label'],'text-font':['NotoMedium'],'text-size':13,'text-max-width':10,'text-padding':2,'symbol-sort-key':['get','i']},paint:{'text-color':SEV_COLOR(),'text-halo-color':C['--paper'],'text-halo-width':2}});
   L({id:'saved-halo',type:'circle',source:'saved',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,6,16,12],'circle-color':C['--panel']}});
   L({id:'saved',type:'circle',source:'saved',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,3.8,16,8],'circle-color':SAVED_COLOR()}});
@@ -417,11 +418,11 @@ function addLayers(){
 }
 const PAINT=[['bg','background-color','--paper'],['water-fill','fill-color','--water'],['water-line','line-color','--water'],['rail','line-color','--rail'],['minor','line-color','--road'],['major-case','line-color','--road-edge'],['major','line-color','--major'],['motorway','line-color','--rail'],
   ['route-alt','line-color','--ink-3'],['route-case','line-color','--panel'],['route','line-color','--route'],['road-label','text-color','--ink-2'],['road-label','text-halo-color','--paper'],['place-label','text-color','--ink'],['place-label','text-halo-color','--paper'],
-  ['stations','circle-color','--panel'],['stations','circle-stroke-color','--sev-confirmed'],['station-label','text-color','--sev-confirmed'],['station-label','text-halo-color','--paper'],['zone-label','text-halo-color','--paper'],
+  ['stations','circle-color','--panel'],['station-label','text-halo-color','--paper'],['zone-label','text-halo-color','--paper'],
   ['saved-halo','circle-color','--panel'],['saved-label','text-color','--ink'],['saved-label','text-halo-color','--paper'],['ends','circle-stroke-color','--panel'],['me-acc','circle-color','--accent'],['me','circle-color','--accent']];
 function retheme(){readColors();if(!mapReady)return;for(const [l,p,k] of PAINT)map.setPaintProperty(l,p,C[k]);
   for(const l of ['zone-axis','zone-axis-dash','zone-edge'])map.setPaintProperty(l,'line-color',SEV_COLOR());
-  map.setPaintProperty('zone-label','text-color',SEV_COLOR());updateZoneLayers();map.setPaintProperty('saved','circle-color',SAVED_COLOR());
+  map.setPaintProperty('zone-label','text-color',SEV_COLOR());map.setPaintProperty('stations','circle-stroke-color',STN_COLOR());map.setPaintProperty('station-label','text-color',STN_COLOR());updateZoneLayers();map.setPaintProperty('saved','circle-color',SAVED_COLOR());
   map.setPaintProperty('ends','circle-color',['match',['get','w'],'from',C['--ok'],C['--route-risk']])}
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',retheme);
 new MutationObserver(retheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
@@ -660,13 +661,16 @@ function zoneRow(zi){const {z,i,on}=zi;return `<button class="zone ${on?'':'off'
 function renderToday(){
   const el=$('#pane-today');const zs=activeZones();const on=zs.filter(x=>x.on),off=zs.filter(x=>!x.on);
   const aff=[...PL.st.values()].filter(s=>s.st!=='clear').length,total=PL.list.filter(p=>!p.far).length;
+  const stns=Z.stations.filter(s=>s.from),stOn=stns.filter(s=>effMin()>=hm(s.from)).length;
   el.innerHTML=`<p class="head">${esc(Z.headline)}</p>
     ${total?`<button class="strip ${aff?'':'ok'}" id="goPlaces"><span>${aff?`${aff} of your ${total} saved places ${aff===1?'is':'are'} affected at ${timeLabel()}`:`None of your ${total} saved places are affected at ${timeLabel()}`}</span><span class="go">›</span></button>`:`<button class="strip plain" id="goPlaces"><span>Check your saved Google Maps places against the zones</span><span class="go">›</span></button>`}
+    ${stns.length?`<button class="strip plain" id="goInfo"><span>Métro: ${stOn} of ${stns.length} announced closures in effect ${tSel==null?'now':'at '+clock(tSel)}</span><span class="go">›</span></button>`:''}
     <h3 class="sec">${tSel==null?'Active now':'Active at '+clock(tSel)} · ${on.length}</h3>
     <div class="zl">${on.length?on.map(zoneRow).join(''):'<p class="note">No zones are active at this time. Pick another time above.</p>'}</div>
     ${off.length?`<details class="more"><summary>Not active at this time (${off.length})</summary><div class="zl">${off.map(zoneRow).join('')}</div></details>`:''}
     <div class="legend">${['confirmed','likely','possible','banned','traffic'].map(k=>`<span class="sev ${k}"><i></i>${SEV_LABEL[k]}</span>`).join('')}</div>`;
   el.querySelector('#goPlaces').onclick=()=>tabTo('places');
+  const gi=el.querySelector('#goInfo');if(gi)gi.onclick=()=>tabTo('info');
   el.querySelectorAll('.zone').forEach(b=>b.onclick=()=>focusZone(+b.dataset.i))}
 function renderRoute(){
   const el=$('#routeOut');if(!Z)return;
@@ -706,8 +710,10 @@ function renderPlaces(){
   $('#placesList').innerHTML=rows.map(({p,s})=>`<div class="place ${s.st}" data-id="${esc(p.id)}"><button class="main"><span class="st"></span><span><span class="pn">${esc(p.n)}</span><span class="pm">${placeBadgeHTML(s)}</span></span></button><button class="rm" aria-label="Remove ${esc(p.n)}">×</button></div>`).join('')+(farN?`<p class="note">${farN} saved place${farN===1?'':'s'} outside Paris ${farN===1?'is':'are'} hidden.</p>`:'');
   $('#placesList').querySelectorAll('.place').forEach(el=>{const id=el.dataset.id;el.querySelector('.main').onclick=()=>{const p=PL.list.find(x=>x.id===id);if(snap==='full')setSnap('half');stopFollow();map.flyTo({center:[p.lon,p.lat],zoom:Math.max(map.getZoom(),15),offset:visOff(),duration:600});map.once('moveend',()=>openPlacePop(id))};el.querySelector('.rm').onclick=()=>removePlace(id)});
   if(!$('#howTo').dataset.touched)$('#howTo').open=!here.length}
+function stationGroups(){const g={};for(const s of Z.stations)(g[s.from||'']||(g[s.from||'']=[])).push(s);
+  return Object.keys(g).sort().map(k=>`${k?`<h3 class="sec">From ${k} · ${g[k].length} stations</h3>`:''}<div class="stations">${g[k].map(s=>`<span class="st-chip">${esc(s.name)}<b>${esc(s.lines)}</b></span>`).join('')}</div>`).join('')}
 function renderInfo(){
-  $('#pane-info').innerHTML=`<div class="box"><h3 class="sec">Métro stations that may close</h3><div class="stations">${Z.stations.map(s=>`<span class="st-chip">${esc(s.name)}<b>${esc(s.lines)}</b></span>`).join('')}</div><p class="note">${esc(Z.stationNote)}</p></div>
+  $('#pane-info').innerHTML=`<div class="box"><h3 class="sec">${esc(Z.stationTitle||'Métro stations that may close')}</h3>${stationGroups()}<p class="note">${esc(Z.stationNote)}</p></div>
     <p class="note">${esc(Z.traffic)}</p>
     <div class="box"><h3 class="sec">How to read the map</h3><p class="note"><b>Confirmed</b> and <b>likely</b> come from organisers' calls and press reports. <b>Possible</b> marks routes the prefecture proposed or organisers asked for that were not agreed. <b>Banned</b> marks routes and sectors where the prefecture has forbidden gatherings; police presence is likely and unauthorised groups may still turn up. Lines are drawn along the most plausible streets; the official route had not been published when this was last updated.</p></div>
     <p class="note links">Check before you leave: <a href="https://www.prefecturedepolice.interieur.gouv.fr/" target="_blank" rel="noopener">Préfecture de police</a> (official route), <a href="https://www.ratp.fr/infos-trafic" target="_blank" rel="noopener">RATP traffic info</a>, <a href="https://www.sytadin.fr/" target="_blank" rel="noopener">Sytadin</a> (roads).</p>
