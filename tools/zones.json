@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-17T13:25:00+02:00",
+"updated": "2026-10-17T14:25:00+02:00",
 "day": "2026-10-17",
-"headline": "Tension and tear gas reported at République before the 14:00 march, with about 40 arrests in Paris. Authorised route: République, Boulevard Magenta, Barbès, Boulevard de Clichy, Place de Clichy. A student march towards Nation is not confirmed. Bastille rally banned; 25 métro stations closed; gatherings banned in central Paris until 22:00.",
+"headline": "Tear gas at République and a police charge on Rue du Faubourg-Saint-Denis were reported before the 14:00 march, with about 100 arrests in Paris by 12:36. Authorised route: République, Boulevard Magenta, Barbès, Boulevard de Clichy, Place de Clichy. Bastille rally banned; 25 métro stations closed; gatherings banned in central Paris until 22:00.",
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -301,6 +301,22 @@
 "name": "CNN live, dozens detained in Paris (17 Oct, headline)",
 "url": "https://www.cnn.com/2026/10/17/world/live-news/france-protests-paris-intl"
 },
+"tribunal": {
+"name": "Le Tribunal du Net, live blog with BFMTV items (17 Oct 13:01)",
+"url": "https://www.letribunaldunet.fr/actualites/manifestation-17-octobre-incidents-avant-le-depart.html"
+},
+"titrespresse": {
+"name": "Titres de presse, BFMTV item: tear gas at République (17 Oct 12:38)",
+"url": "https://www.titrespresse.com/25523422603/paris-manifestations-octobre"
+},
+"dawn": {
+"name": "Dawn / AFP, about 60 detained, ID checks at Saint-Lazare (17 Oct)",
+"url": "https://www.dawn.com/news/2037825/france-faces-day-of-cost-of-living-protests"
+},
+"anadolu": {
+"name": "Anadolu Agency (17 Oct 14:46)",
+"url": "https://www.anews.com.tr/europe/2026/10/17/yellow-vest-protesters-rally-in-france-with-support-from-students-farmers"
+},
 "sap_fr": {
 "name": "Sortiraparis, route update (17 Oct 07:34)",
 "url": "https://www.sortiraparis.com/actualites/a-paris/articles/353967-mobilisation-du-17-octobre-a-paris-quel-parcours-pour-la-manifestation-prevue-ce-samedi"
@@ -346,17 +362,19 @@
 1570
 ],
 "radius": 300,
-"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Tension and tear gas are reported at République before the march left (franceinfo live headline), and around 40 arrests in Paris by about 11:45 (Brit Brief, CNN: dozens detained); exact locations were not given. Authorities expected 20,000 to 40,000 people in Paris (Public Sénat, 15 Oct).",
+"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). About 100 arrests in Paris by 12:36. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). I could not confirm whether the march has left yet.",
 "src": [
+"tribunal",
+"titrespresse",
 "franceinfo",
 "britbrief",
 "cnn",
+"anadolu",
 "sap_fr",
 "sap_fr2",
 "aff17",
 "parisrouge",
-"aladom",
-"psenat"
+"aladom"
 ]
 },
 {
@@ -1474,11 +1492,50 @@
 ]
 ],
 "radius": 130,
-"note": "Affiches Parisiennes (09:53) says the student and high-school march (Interfac) goes from République to Nation along Boulevard Voltaire, with no start time given. The prefecture offered this route after banning République to Concorde (Public Sénat, 15 Oct). Sortiraparis instead says Interfac follows the Clichy route, so treat this as unconfirmed.",
+"note": "Affiches Parisiennes (09:53) says the student and high-school march (Interfac) goes from République to Nation along Boulevard Voltaire, with no start time given. The prefecture offered this route after banning République to Concorde (Public Sénat, 15 Oct). Sortiraparis instead says Interfac follows the Clichy route, and Le Tribunal du Net (13:01) says the student procession was cancelled without saying which one, so treat this as unconfirmed.",
 "src": [
 "aff17",
 "psenat",
-"sap_fr"
+"sap_fr",
+"tribunal"
+]
+},
+{
+"id": "fsd",
+"title": "Police charge and tear gas on Rue du Faubourg-Saint-Denis (10th)",
+"short": "Clashes: Fbg St-Denis",
+"kind": "incident",
+"status": "confirmed",
+"start": "11:30",
+"end": "16:00",
+"center": [
+601,
+2521
+],
+"radius": 380,
+"note": "At 11:45 police charged a kettled group and used tear gas on Rue du Faubourg-Saint-Denis (Le Tribunal du Net, 13:01). A group of about 300 students, pupils and rail unionists was also reported forming in the 10th arrondissement, with clashes with police (L'Humanité, via Titres de presse). The exact spot was not given, so the circle is approximate.",
+"src": [
+"tribunal",
+"titrespresse"
+]
+},
+{
+"id": "stlazare",
+"title": "Police checks at Gare Saint-Lazare forecourt",
+"short": "Police: Saint-Lazare",
+"kind": "incident",
+"status": "likely",
+"start": "10:00",
+"end": "13:30",
+"center": [
+-1699,
+2532
+],
+"radius": 220,
+"note": "Around 10:30 the BRAV-M police unit intervened at the Saint-Lazare forecourt to check protesters gathering, and officers asked passers-by for ID (Le Tribunal du Net, Dawn / AFP). A group of several dozen then moved off through the city. Train station surroundings are covered by the gathering ban.",
+"src": [
+"tribunal",
+"dawn"
 ]
 },
 {
@@ -2821,7 +2878,7 @@
 ]
 ],
 "radius": 200,
-"note": "The prefecture banned undeclared gatherings on the Champs-Élysées and Place de la Concorde from 07:00 to 22:00 (fine of 135 euros). A Gilets Jaunes march had been requested here. Expect heavy police presence.",
+"note": "The prefecture banned undeclared gatherings on the Champs-Élysées and Place de la Concorde from 07:00 to 22:00 (fine of 135 euros). A Gilets Jaunes march had been requested here, and the Concorde rally was reported cancelled (Le Tribunal du Net, 13:01). Expect heavy police presence.",
 "src": [
 "yahoo",
 "ban_ap",
