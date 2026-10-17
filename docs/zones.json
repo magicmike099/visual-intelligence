@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-17T15:20:00+02:00",
+"updated": "2026-10-17T16:25:00+02:00",
 "day": "2026-10-17",
-"headline": "The march has left République despite tensions with police. Earlier: tear gas at République and on Rue du Faubourg-Saint-Denis, and about 100 arrests in Paris by 12:36. Authorised route: Boulevard Magenta, Barbès, Boulevard de Clichy to Place de Clichy. Bastille rally banned; 25 métro stations closed; gatherings banned in central Paris until 22:00.",
+"headline": "The march left République late, after clashes: a car was set on fire and police used a water cannon at the square. 133 arrests in Paris by 14:00, and unauthorised processions are reported. Authorised route: Boulevard Magenta, Barbès, Boulevard de Clichy to Place de Clichy. Bastille rally banned; 25 métro stations closed; central Paris gatherings banned until 22:00.",
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -321,6 +321,10 @@
 "name": "Epoch Times FR, headline: clashes in Paris and wild processions (17 Oct)",
 "url": "https://www.epochtimes.fr/manifestations-du-17-octobre-des-affrontements-a-paris-la-mairie-de-marseille-investie-et-des-corteges-sauvages-3372149.html"
 },
+"titres2": {
+"name": "Titres de presse feed: Humanité live, BFMTV, actu.fr, HuffPost (about 14:20 to 14:45)",
+"url": "https://www.titrespresse.com/25533552603/pierre-antoine-valade"
+},
 "sap_fr": {
 "name": "Sortiraparis, route update (17 Oct 07:34)",
 "url": "https://www.sortiraparis.com/actualites/a-paris/articles/353967-mobilisation-du-17-octobre-a-paris-quel-parcours-pour-la-manifestation-prevue-ce-samedi"
@@ -366,7 +370,7 @@
 1570
 ],
 "radius": 300,
-"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). About 100 arrests in Paris by 12:36. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read.",
+"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). The prefecture counted 133 arrests in Paris at 14:00, mostly for groups gathering to commit violence or damage (Humanité). Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read.",
 "src": [
 "tribunal",
 "titrespresse",
@@ -1017,8 +1021,9 @@
 ]
 ],
 "radius": 150,
-"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. A franceinfo live headline says the procession started from République despite tensions with police; I found no crowd figure or progress report along the route.",
+"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. franceinfo says the procession started from République despite tensions with police, and BFMTV says it left late (Titres de presse feed, about 14:20). I found no crowd figure or progress report along the route.",
 "src": [
+"titres2",
 "franceinfo",
 "sap_fr",
 "sap_fr2",
@@ -1503,6 +1508,25 @@
 "aff17",
 "psenat",
 "sap_fr",
+"tribunal"
+]
+},
+{
+"id": "repclash",
+"title": "Clashes at Place de la République: car on fire, water cannon",
+"short": "Clashes: République",
+"kind": "incident",
+"status": "confirmed",
+"start": "12:00",
+"end": "19:00",
+"center": [
+1033,
+1570
+],
+"radius": 260,
+"note": "Before the march left, clashes were reported at République: a car was set on fire around 14:15 and police used a water cannon (BFMTV, Morandini, actu.fr, via Titres de presse). Humanité said the square was kettled by police and that protesters were being directed to join the procession by the grands boulevards instead of crossing it. The Interior Ministry blamed the ultra-left. Avoid the square.",
+"src": [
+"titres2",
 "tribunal"
 ]
 },
