@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-17T19:20:00+02:00",
+"updated": "2026-10-17T20:20:00+02:00",
 "day": "2026-10-17",
-"headline": "Clashes continue in central Paris: a crowd was dispersed at Concorde around 17:48 despite the ban, and a barricade was set on fire near Réaumur-Sébastopol. The march to Place de Clichy went ahead. 191 arrests in Paris at 18:00 (CNews headline). Bastille rally banned; 25 métro stations closed; central Paris gatherings banned until 22:00.",
+"headline": "Clashes were reported in central Paris into the early evening: a crowd was dispersed at Concorde around 17:48 and a barricade was set on fire near Réaumur-Sébastopol. AFP at 19:07 says thousands marched calmly to Place de Clichy despite tear gas, vehicle fires, clashes and looting in Paris (no locations given). 191 arrests in Paris at 18:00 (CNews headline). 25 métro stations are closed and no reopening time has been announced. Central Paris gatherings are banned until 22:00. I found no incident report after about 19:00.",
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -344,6 +344,10 @@
 "cnews_arr": {
 "name": "CNews live headline: 191 people arrested in Paris at 18:00, 90% adults (17 Oct)",
 "url": "https://www.cnews.fr/"
+},
+"afp_bours": {
+"name": "AFP via Boursorama, 19:07 (only the summary was readable)",
+"url": "https://www.boursorama.com/actualite-economique/actualites/a-paris-malgre-le-chaos-des-manifestants-determines-a-se-faire-entendre-9eeedea99a1d5dfdcb6604998efbcc9e"
 },
 "ici": {
 "name": "ICI (France Bleu) headline: more than 160 arrests in Paris (17 Oct)",
@@ -1057,9 +1061,11 @@
 ]
 ],
 "radius": 150,
-"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. franceinfo says the procession started from République despite tensions with police and later that the protesters arrived at Place de Clichy; BFMTV says it left late (Titres de presse feed, about 14:20). I found no crowd figure or progress report along the route. Shown until about an hour after the latest report I found, a reaction quoted at 18:48 saying Place de Clichy could not hold the crowd (Morandini live).",
+"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. franceinfo says the procession started from République despite tensions with police and later that the protesters arrived at Place de Clichy; BFMTV says it left late (Titres de presse feed, about 14:20). I found no crowd figure or progress report along the route. AFP at 19:07 says thousands of people marched calmly despite the violence elsewhere in Paris (summary only; the article body was not readable). A reaction quoted at 18:48 said Place de Clichy could not hold the crowd (Morandini live). Shown until about 19:45, an hour after that, since I found no report of where the crowd was later.",
 "src": [
 "franceinfo",
+"afp_bours",
+"morandini_live",
 "titres2",
 "sap_fr",
 "sap_fr2",
