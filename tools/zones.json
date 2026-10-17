@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-17T14:25:00+02:00",
+"updated": "2026-10-17T15:20:00+02:00",
 "day": "2026-10-17",
-"headline": "Tear gas at République and a police charge on Rue du Faubourg-Saint-Denis were reported before the 14:00 march, with about 100 arrests in Paris by 12:36. Authorised route: République, Boulevard Magenta, Barbès, Boulevard de Clichy, Place de Clichy. Bastille rally banned; 25 métro stations closed; gatherings banned in central Paris until 22:00.",
+"headline": "The march has left République despite tensions with police. Earlier: tear gas at République and on Rue du Faubourg-Saint-Denis, and about 100 arrests in Paris by 12:36. Authorised route: Boulevard Magenta, Barbès, Boulevard de Clichy to Place de Clichy. Bastille rally banned; 25 métro stations closed; gatherings banned in central Paris until 22:00.",
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -290,7 +290,7 @@
 "url": "https://www.aladom.fr/actualites/secteur-service/11364/manifestations-du-17-octobre-2026-ou-sont-prevus-les-rassemblements-a-paris-rennes-lille-grenoble-et-bordeaux/"
 },
 "franceinfo": {
-"name": "franceinfo live, headline: tension and tear gas before the march at République (17 Oct)",
+"name": "franceinfo live, headlines: tear gas before the march; march leaves République despite tensions (17 Oct)",
 "url": "https://www.franceinfo.fr/economie/greve/direct-mobilisation-du-17-octobre-lyceens-etudiants-gilets-jaunes-des-milliers-de-manifestants-attendus-dans-toute-la-france_8241022.html"
 },
 "britbrief": {
@@ -316,6 +316,10 @@
 "anadolu": {
 "name": "Anadolu Agency (17 Oct 14:46)",
 "url": "https://www.anews.com.tr/europe/2026/10/17/yellow-vest-protesters-rally-in-france-with-support-from-students-farmers"
+},
+"epoch": {
+"name": "Epoch Times FR, headline: clashes in Paris and wild processions (17 Oct)",
+"url": "https://www.epochtimes.fr/manifestations-du-17-octobre-des-affrontements-a-paris-la-mairie-de-marseille-investie-et-des-corteges-sauvages-3372149.html"
 },
 "sap_fr": {
 "name": "Sortiraparis, route update (17 Oct 07:34)",
@@ -362,11 +366,12 @@
 1570
 ],
 "radius": 300,
-"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). About 100 arrests in Paris by 12:36. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). I could not confirm whether the march has left yet.",
+"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). About 100 arrests in Paris by 12:36. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read.",
 "src": [
 "tribunal",
 "titrespresse",
 "franceinfo",
+"epoch",
 "britbrief",
 "cnn",
 "anadolu",
@@ -1012,8 +1017,9 @@
 ]
 ],
 "radius": 150,
-"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00.",
+"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. A franceinfo live headline says the procession started from République despite tensions with police; I found no crowd figure or progress report along the route.",
 "src": [
+"franceinfo",
 "sap_fr",
 "sap_fr2",
 "aff17",
