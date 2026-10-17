@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-17T18:20:00+02:00",
+"updated": "2026-10-17T19:20:00+02:00",
 "day": "2026-10-17",
-"headline": "Clashes continue in central Paris: a crowd was dispersed at Concorde around 17:48 despite the ban, and a barricade was set on fire near Réaumur-Sébastopol. The march to Place de Clichy went ahead. More than 160 arrests in Paris. Bastille rally banned; 25 métro stations closed; central Paris gatherings banned until 22:00.",
+"headline": "Clashes continue in central Paris: a crowd was dispersed at Concorde around 17:48 despite the ban, and a barricade was set on fire near Réaumur-Sébastopol. The march to Place de Clichy went ahead. 191 arrests in Paris at 18:00 (CNews headline). Bastille rally banned; 25 métro stations closed; central Paris gatherings banned until 22:00.",
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -337,6 +337,14 @@
 "name": "Around Prague, clashes in Réaumur-Sébastopol and Saint-Denis (17 Oct 17:19)",
 "url": "https://aroundprague.cz/en/news/world/protests-in-france-turn-into-street-battles-tear-gas-water-cannon-and-arson"
 },
+"ap_kpbs": {
+"name": "AP report, published about 17:57 Paris time (via KPBS)",
+"url": "https://www.kpbs.org/news/international/2026/10/17/scuffles-and-fires-break-out-as-protesters-rally-across-france-joining-students"
+},
+"cnews_arr": {
+"name": "CNews live headline: 191 people arrested in Paris at 18:00, 90% adults (17 Oct)",
+"url": "https://www.cnews.fr/"
+},
 "ici": {
 "name": "ICI (France Bleu) headline: more than 160 arrests in Paris (17 Oct)",
 "url": "https://www.ici.fr/ile-de-france/paris-75/paris/mobilisation-du-17-octobre-des-tensions-avant-le-depart-de-la-manifestation-place-de-la-republique-a-paris-8202537"
@@ -390,13 +398,14 @@
 1570
 ],
 "radius": 300,
-"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). The prefecture counted 133 arrests in Paris at 14:00 (Humanité), and ICI later put it above 160. Al Jazeera reports police using stun grenades and tear gas here and trapping protesters between police lines. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read.",
+"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). The prefecture counted 133 arrests in Paris at 14:00 (Humanité), and ICI later put it above 160. A CNews live headline gives 191 arrests in Paris at 18:00, 90% of them adults (I could not open the article). Al Jazeera reports police using stun grenades and tear gas here and trapping protesters between police lines. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read.",
 "src": [
 "tribunal",
 "titrespresse",
 "franceinfo",
 "epoch",
 "ici",
+"cnews_arr",
 "aljaz",
 "britbrief",
 "cnn",
@@ -1546,10 +1555,11 @@
 1570
 ],
 "radius": 260,
-"note": "Before the march left, clashes were reported at République: a car was set on fire around 14:15 and police used a water cannon (BFMTV, Morandini, actu.fr, via Titres de presse). Humanité said the square was kettled by police and that protesters were being directed to join the procession by the grands boulevards instead of crossing it. The Interior Ministry blamed the ultra-left. Avoid the square.",
+"note": "Before the march left, clashes were reported at République: a car was set on fire around 14:15 and police used a water cannon (BFMTV, Morandini, actu.fr, via Titres de presse). Humanité said the square was kettled by police and that protesters were being directed to join the procession by the grands boulevards instead of crossing it. The Interior Ministry blamed the ultra-left. AP, in a report from around 18:00, adds that a car and a newspaper kiosk were set on fire there and that police used tear gas and water cannon on hooded groups throwing fireworks. Avoid the square.",
 "src": [
 "titres2",
-"tribunal"
+"tribunal",
+"ap_kpbs"
 ]
 },
 {
