@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-16T20:30:00+02:00",
+"updated": "2026-10-17T07:15:00+02:00",
 "day": "2026-10-17",
-"headline": "Route not agreed yet. The rally at Bastille at 14:00 is the only fixed point; the march will most likely head north towards République.",
+"headline": "No agreed route yet. Undeclared gatherings are banned 07:00–22:00 across central Paris, from the Champs-Élysées to Bastille. The 14:00 rally at Bastille is still announced.",
 "stations": [
 {
 "name": "Bastille",
@@ -58,10 +58,26 @@
 1091,
 1570
 ]
+},
+{
+"name": "Opéra",
+"lines": "3, 7, 8",
+"pos": [
+-1253,
+1913
+]
+},
+{
+"name": "Concorde",
+"lines": "1, 8, 12",
+"pos": [
+-2022,
+1349
+]
 }
 ],
-"stationNote": "RATP decides closures on the day. These stations are the ones named as likely to close if the march goes Bastille → République.",
-"traffic": "No public transport strike is announced. Slow-roll road protests are possible on the Périphérique and airport motorways. School holidays start, so expect heavy road traffic out of Paris.",
+"stationNote": "The Préfecture de police decides closures on the day, with little warning. Stations near Opéra, République, Bastille and Concorde are the most exposed. The ones marked are those named for a Bastille → République march, plus Opéra and Concorde. No official list has been published, and the ban sectors also cover Paris train stations.",
+"traffic": "No public transport strike is announced. Slow-roll road protests are possible on the Périphérique and airport motorways, and the interior ministry says blockades of key roads and facilities will not be tolerated. School holidays start, so expect heavy road traffic out of Paris.",
 "sources": {
 "sap": {
 "name": "Sortiraparis, updated 16 Oct",
@@ -74,6 +90,22 @@
 "local": {
 "name": "The Local, 16 Oct",
 "url": "https://www.thelocal.fr/20261016/map-what-are-the-routes-for-saturdays-paris-protest"
+},
+"yahoo": {
+"name": "Yahoo Actualités, banned sectors (night of 16 Oct)",
+"url": "https://fr.news.yahoo.com/sport/mobilisation-17-octobre-interdiction-manifester-205841271.html"
+},
+"yahoo2": {
+"name": "Yahoo Actualités, why the route is stuck (16 Oct)",
+"url": "https://fr.news.yahoo.com/sport/17-octobre-pourquoi-l-organisation-121828151.html"
+},
+"ban_ap": {
+"name": "Affiches Parisiennes (AFP), banned sectors, 16 Oct 19:31",
+"url": "https://mesinfos.fr/75000-paris/manifestation-du-17-octobre-a-paris-plusieurs-secteurs-interdits-par-la-prefecture-341317.html"
+},
+"morandini": {
+"name": "Jean-Marc Morandini, banned sectors, 16 Oct",
+"url": "https://www.jeanmarcmorandini.com/article-655004-inquietude-pour-le-17-octobre-la-prefecture-interdit-ce-soir-de-manifester-dans-plusieurs-secteurs-de-paris-mais-surtout-autour-de-l-elysee-et-matignon-mais-aussi-la-place-de-la-concorde.html"
 },
 "mesinfos": {
 "name": "Affiches Parisiennes, 16 Oct",
@@ -93,10 +125,12 @@
 -22
 ],
 "radius": 380,
-"note": "All organisers (Gilets Jaunes, Interfac IDF students, unions with CGT support) call for a rally here from 14:00. Expect crowds from early afternoon.",
+"note": "All organisers (Gilets Jaunes, Interfac IDF students, unions with CGT support) call for a rally here from 14:00. Expect crowds from early afternoon. The prefecture also lists Place de la Bastille among sectors where undeclared gatherings are banned from 07:00 to 22:00 (fine of 135 euros); the declared 14:00 rally is not reported as banned. One report says the departure may move to République.",
 "src": [
 "sap",
-"mesinfos"
+"mesinfos",
+"yahoo",
+"yahoo2"
 ]
 },
 {
@@ -2809,12 +2843,61 @@
 },
 {
 "id": "champs",
-"title": "Requested Gilets Jaunes march on the Champs-Élysées",
-"kind": "march",
-"status": "possible",
-"start": "12:00",
-"end": "20:00",
+"title": "Gatherings banned: Champs-Élysées and Concorde",
+"short": "Banned: Champs-Élysées",
+"kind": "banned",
+"status": "banned",
+"start": "07:00",
+"end": "22:00",
 "path": [
+[
+-3950,
+2260
+],
+[
+-3999,
+2283
+],
+[
+-4005,
+2268
+],
+[
+-4005,
+2249
+],
+[
+-4004,
+2236
+],
+[
+-3996,
+2218
+],
+[
+-3985,
+2204
+],
+[
+-3967,
+2192
+],
+[
+-3950,
+2187
+],
+[
+-3929,
+2186
+],
+[
+-3899,
+2196
+],
+[
+-3883,
+2211
+],
 [
 -3876,
 2223
@@ -2932,22 +3015,655 @@
 1757
 ],
 [
--2907,
-1745
+-2863,
+1738
 ],
 [
--2908,
-1737
+-2859,
+1736
 ],
 [
--2910,
+-2849,
+1731
+],
+[
+-2843,
+1738
+],
+[
+-2833,
+1741
+],
+[
+-2819,
+1733
+],
+[
+-2815,
+1722
+],
+[
+-2817,
 1715
+],
+[
+-2808,
+1710
+],
+[
+-2804,
+1709
+],
+[
+-2770,
+1692
+],
+[
+-2681,
+1649
+],
+[
+-2669,
+1644
+],
+[
+-2593,
+1607
+],
+[
+-2552,
+1587
+],
+[
+-2509,
+1567
+],
+[
+-2483,
+1555
+],
+[
+-2397,
+1513
+],
+[
+-2377,
+1503
+],
+[
+-2182,
+1410
+],
+[
+-2177,
+1407
+],
+[
+-2132,
+1386
+],
+[
+-2127,
+1383
+],
+[
+-2116,
+1378
+],
+[
+-2103,
+1379
+],
+[
+-2080,
+1369
+],
+[
+-2065,
+1362
+],
+[
+-2047,
+1353
 ]
 ],
-"radius": 170,
-"note": "Requested from Étoile to the Rond-point des Champs-Élysées. The prefecture rejected a similar request last week, so a ban and a large police presence are likely.",
+"radius": 200,
+"note": "The prefecture banned undeclared gatherings on the Champs-Élysées and Place de la Concorde from 07:00 to 22:00 (fine of 135 euros). A Gilets Jaunes march had been requested here. Expect heavy police presence.",
 "src": [
-"sap2"
+"yahoo",
+"ban_ap",
+"morandini"
+]
+},
+{
+"id": "ban_elysee",
+"title": "Gatherings banned: around the Élysée and Interior Ministry",
+"short": "Banned: Élysée",
+"kind": "banned",
+"status": "banned",
+"start": "07:00",
+"end": "22:00",
+"center": [
+-2285,
+1924
+],
+"radius": 300,
+"note": "Undeclared gatherings are banned around the Élysée, the Interior Ministry and nearby sites from 07:00 to 22:00. The exact perimeter was not published; the circle is an approximation.",
+"src": [
+"yahoo",
+"ban_ap",
+"morandini"
+]
+},
+{
+"id": "ban_gov",
+"title": "Gatherings banned: Assemblée nationale, Matignon, Sénat",
+"short": "Banned: government quarter",
+"kind": "banned",
+"status": "banned",
+"start": "07:00",
+"end": "22:00",
+"path": [
+[
+-2184,
+843
+],
+[
+-2178,
+840
+],
+[
+-2117,
+805
+],
+[
+-2110,
+802
+],
+[
+-2098,
+795
+],
+[
+-2004,
+741
+],
+[
+-1993,
+735
+],
+[
+-1984,
+729
+],
+[
+-1963,
+697
+],
+[
+-1922,
+633
+],
+[
+-1915,
+622
+],
+[
+-1909,
+612
+],
+[
+-1883,
+570
+],
+[
+-1880,
+565
+],
+[
+-1876,
+558
+],
+[
+-1854,
+523
+],
+[
+-1845,
+508
+],
+[
+-1824,
+475
+],
+[
+-1773,
+395
+],
+[
+-1716,
+331
+],
+[
+-1714,
+322
+],
+[
+-1710,
+295
+],
+[
+-1706,
+277
+],
+[
+-1705,
+255
+],
+[
+-1683,
+141
+],
+[
+-1681,
+132
+],
+[
+-1679,
+115
+],
+[
+-1674,
+92
+],
+[
+-1674,
+90
+],
+[
+-1658,
+13
+],
+[
+-1656,
+2
+],
+[
+-1654,
+-9
+],
+[
+-1637,
+-102
+],
+[
+-1635,
+-111
+],
+[
+-1632,
+-121
+],
+[
+-1626,
+-149
+],
+[
+-1620,
+-176
+],
+[
+-1618,
+-188
+],
+[
+-1612,
+-220
+],
+[
+-1626,
+-237
+],
+[
+-1706,
+-287
+],
+[
+-1722,
+-298
+],
+[
+-1729,
+-302
+],
+[
+-1764,
+-324
+],
+[
+-1772,
+-328
+],
+[
+-1795,
+-343
+],
+[
+-1806,
+-350
+],
+[
+-1814,
+-356
+],
+[
+-1869,
+-395
+],
+[
+-1874,
+-399
+],
+[
+-1959,
+-464
+],
+[
+-1999,
+-495
+],
+[
+-2018,
+-510
+],
+[
+-2062,
+-544
+],
+[
+-2070,
+-551
+],
+[
+-2072,
+-541
+],
+[
+-2070,
+-551
+],
+[
+-2062,
+-544
+],
+[
+-2018,
+-510
+],
+[
+-1999,
+-495
+],
+[
+-1959,
+-464
+],
+[
+-1874,
+-399
+],
+[
+-1869,
+-395
+],
+[
+-1814,
+-356
+],
+[
+-1806,
+-350
+],
+[
+-1795,
+-343
+],
+[
+-1772,
+-328
+],
+[
+-1764,
+-324
+],
+[
+-1729,
+-302
+],
+[
+-1722,
+-298
+],
+[
+-1706,
+-287
+],
+[
+-1626,
+-237
+],
+[
+-1612,
+-220
+],
+[
+-1609,
+-240
+],
+[
+-1599,
+-296
+],
+[
+-1587,
+-294
+],
+[
+-1575,
+-352
+],
+[
+-1573,
+-360
+],
+[
+-1571,
+-370
+],
+[
+-1532,
+-571
+],
+[
+-1528,
+-587
+],
+[
+-1526,
+-601
+],
+[
+-1516,
+-655
+],
+[
+-1515,
+-663
+],
+[
+-1508,
+-660
+],
+[
+-1415,
+-620
+],
+[
+-1409,
+-617
+],
+[
+-1402,
+-614
+],
+[
+-1313,
+-576
+],
+[
+-1301,
+-570
+],
+[
+-1295,
+-568
+],
+[
+-1263,
+-553
+],
+[
+-1256,
+-550
+],
+[
+-1247,
+-547
+],
+[
+-1202,
+-529
+],
+[
+-1188,
+-524
+],
+[
+-1175,
+-519
+],
+[
+-1155,
+-512
+],
+[
+-1087,
+-492
+],
+[
+-1077,
+-489
+],
+[
+-1021,
+-474
+],
+[
+-1010,
+-470
+],
+[
+-978,
+-460
+],
+[
+-945,
+-457
+],
+[
+-939,
+-457
+],
+[
+-932,
+-457
+],
+[
+-903,
+-456
+],
+[
+-886,
+-454
+],
+[
+-852,
+-454
+]
+],
+"radius": 250,
+"note": "Undeclared gatherings are banned around the National Assembly, Matignon and the Senate from 07:00 to 22:00. The exact perimeters were not published; the corridor is an approximation.",
+"src": [
+"yahoo",
+"ban_ap",
+"morandini"
+]
+},
+{
+"id": "ban_chatelet",
+"title": "Gatherings banned: Châtelet, Les Halles, Hôtel de Ville",
+"short": "Banned: Châtelet",
+"kind": "banned",
+"status": "banned",
+"start": "07:00",
+"end": "22:00",
+"center": [
+-132,
+553
+],
+"radius": 500,
+"note": "Undeclared gatherings are banned at Place du Châtelet, the Les Halles area, the Hôtel de Ville, the Palais de Justice and the Préfecture de Police from 07:00 to 22:00. The exact perimeter was not published; the circle is an approximation.",
+"src": [
+"yahoo",
+"morandini"
+]
+},
+{
+"id": "ban_bourse",
+"title": "Gatherings banned: Place de la Bourse",
+"short": "Banned: Bourse",
+"kind": "banned",
+"status": "banned",
+"start": "07:00",
+"end": "22:00",
+"center": [
+-557,
+1736
+],
+"radius": 220,
+"note": "Undeclared gatherings are banned around Place de la Bourse from 07:00 to 22:00. The exact perimeter was not published.",
+"src": [
+"yahoo",
+"morandini"
+]
+},
+{
+"id": "ban_italie",
+"title": "Gatherings banned: Place d'Italie",
+"short": "Banned: Place d'Italie",
+"kind": "banned",
+"status": "banned",
+"start": "07:00",
+"end": "22:00",
+"center": [
+491,
+-2455
+],
+"radius": 300,
+"note": "Undeclared gatherings are banned around Place d'Italie from 07:00 to 22:00. The exact perimeter was not published.",
+"src": [
+"yahoo",
+"morandini"
 ]
 },
 {

@@ -283,7 +283,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 let D=null,Z=null,map=null,mapReady=false,lastFetch=null;
 const DAY='2026-10-17',TZ_OFFSET='+02:00';
 const SEV_ORDER={confirmed:0,likely:1,banned:2,possible:3,traffic:4};
-const SEV_LABEL={confirmed:'Confirmed',likely:'Likely',possible:'Possible',banned:'Banned route',traffic:'Traffic'};
+const SEV_LABEL={confirmed:'Confirmed',likely:'Likely',possible:'Possible',banned:'Banned',traffic:'Traffic'};
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const C={};
 const COLOR_KEYS=['--paper','--road','--road-edge','--major','--water','--rail','--ink','--ink-2','--ink-3','--panel','--route','--route-risk','--ok','--accent','--sev-confirmed','--sev-likely','--sev-possible','--sev-banned','--sev-traffic'];
@@ -709,7 +709,7 @@ function renderPlaces(){
 function renderInfo(){
   $('#pane-info').innerHTML=`<div class="box"><h3 class="sec">Métro stations that may close</h3><div class="stations">${Z.stations.map(s=>`<span class="st-chip">${esc(s.name)}<b>${esc(s.lines)}</b></span>`).join('')}</div><p class="note">${esc(Z.stationNote)}</p></div>
     <p class="note">${esc(Z.traffic)}</p>
-    <div class="box"><h3 class="sec">How to read the map</h3><p class="note"><b>Confirmed</b> and <b>likely</b> come from organisers' calls and press reports. <b>Possible</b> marks routes the prefecture proposed or organisers asked for that were not agreed. <b>Banned</b> routes are where police expect to block gatherings. Lines are drawn along the most plausible streets; the official route had not been published when this was last updated.</p></div>
+    <div class="box"><h3 class="sec">How to read the map</h3><p class="note"><b>Confirmed</b> and <b>likely</b> come from organisers' calls and press reports. <b>Possible</b> marks routes the prefecture proposed or organisers asked for that were not agreed. <b>Banned</b> marks routes and sectors where the prefecture has forbidden gatherings; police presence is likely and unauthorised groups may still turn up. Lines are drawn along the most plausible streets; the official route had not been published when this was last updated.</p></div>
     <p class="note links">Check before you leave: <a href="https://www.prefecturedepolice.interieur.gouv.fr/" target="_blank" rel="noopener">Préfecture de police</a> (official route), <a href="https://www.ratp.fr/infos-trafic" target="_blank" rel="noopener">RATP traffic info</a>, <a href="https://www.sytadin.fr/" target="_blank" rel="noopener">Sytadin</a> (roads).</p>
     <p class="note links">Sources: ${Object.values(Z.sources).map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join(' · ')}. Map: MapLibre, street data © OpenStreetMap contributors via Overture Maps.</p>`}
 function freshText(){if(!Z)return;const f=d=>d.toLocaleString('en-GB',{weekday:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'});$('#fresh').innerHTML=`Zones updated ${f(new Date(Z.updated))}<br>app checked ${lastFetch?lastFetch.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'}):'—'}`}
