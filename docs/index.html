@@ -56,6 +56,19 @@ button{font:inherit;color:inherit;cursor:pointer}
 .times::-webkit-scrollbar{display:none}
 .chip{flex:none;border:0;background:var(--panel);box-shadow:0 1px 5px rgba(20,30,40,.22);border-radius:999px;padding:0 14px;height:38px;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--panel)}
+.tslider{pointer-events:auto;display:flex;align-items:center;gap:8px;background:var(--panel);border-radius:999px;box-shadow:var(--shadow);padding:4px 14px 4px 5px;max-width:640px}
+.tplay{flex:none;width:38px;height:38px;border-radius:50%;border:0;background:var(--ink);color:var(--panel);display:grid;place-items:center}
+.tplay svg{width:16px;height:16px;fill:currentColor}
+.trange{position:relative;flex:1;height:38px;min-width:0}
+.tbar{position:absolute;left:13px;right:13px;top:50%;height:12px;margin-top:-6px;border-radius:6px;background-color:var(--line);overflow:hidden}
+.tnow{position:absolute;top:50%;width:2px;height:22px;margin:-11px 0 0 -1px;background:var(--ink);opacity:.5;border-radius:1px;pointer-events:none}
+.trange input{position:absolute;left:0;top:0;width:100%;height:100%;margin:0;background:transparent;-webkit-appearance:none;appearance:none}
+.trange input::-webkit-slider-runnable-track{height:38px;background:transparent}
+.trange input::-moz-range-track{height:38px;background:transparent}
+.trange input::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:6px;border-radius:50%;background:var(--panel);border:3px solid var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.trange input::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--panel);border:3px solid var(--ink)}
+.tout{flex:none;font-family:var(--f-mono);font-weight:700;font-size:16px;min-width:3.4em;text-align:right;font-variant-numeric:tabular-nums;line-height:1.1}
+.tout small{display:block;font-size:10px;color:var(--ink-3);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
 .chip.lbl{background:transparent;box-shadow:none;padding:0 2px 0 4px;color:var(--ink-2);font-size:12px;text-transform:uppercase;letter-spacing:.07em;display:grid;place-items:center;text-shadow:0 0 4px var(--paper),0 0 4px var(--paper)}
 
 /* map buttons */
@@ -194,6 +207,11 @@ textarea{width:100%;min-height:96px;border:1px solid var(--line);border-radius:1
       <div class="fresh" id="fresh">Sat 17 Oct</div>
     </div>
     <div class="times" id="times" role="group" aria-label="Show the situation at"></div>
+    <div class="tslider" id="tslider">
+      <button class="tplay" id="tplay" aria-label="Replay the day" title="Replay the day"></button>
+      <div class="trange"><div class="tbar" id="tbar"></div><div class="tnow" id="tnow" hidden title="Now"></div><input type="range" id="trange" min="360" max="1380" step="5" aria-label="Time of day on Saturday 17 October"></div>
+      <output class="tout" id="tout" for="trange"></output>
+    </div>
   </header>
 
   <div class="ctl" id="ctl">
@@ -297,16 +315,49 @@ let tSel=null;
 function nowMin(){return Math.round((new Date()-new Date(DAY+'T00:00:00'+TZ_OFFSET))/60000)}
 const effMin=()=>tSel==null?nowMin():tSel;
 const hm=s=>{const [h,m]=s.split(':').map(Number);return h*60+m};
-const zoneActive=(z,t=effMin())=>t>=hm(z.start)&&t<=hm(z.end);
+// Each zone has an outcome: official (an order), observed (reported), planned (announced, not started when the data was updated),
+// unconfirmed (start time passed, no report found) or cancelled. Only official, observed and still-to-come planned zones are drawn.
+const updMin=()=>Z&&Z.updated?Math.round((new Date(Z.updated)-new Date(DAY+'T00:00:00'+TZ_OFFSET))/60000):0;
+const zoneShown=z=>{const o=z.outcome||'official';return o==='official'||o==='observed'||(o==='planned'&&hm(z.start)>updMin())};
+const zoneActive=(z,t=effMin())=>zoneShown(z)&&t>=hm(z.start)&&t<=hm(z.end);
+const zoneWhy=(z,t)=>{const o=z.outcome||'official';
+  if(o==='cancelled')return z.moved?'Moved '+z.moved:'Cancelled';
+  if(o==='unconfirmed'||o==='planned')return 'No report that it happened';
+  return t<hm(z.start)?'Starts '+z.start:'Ended '+z.end};
+const sevChip=z=>(z.outcome==='unconfirmed'||z.outcome==='cancelled')?`<span class="sev clear" style="color:var(--ink-2);background:var(--panel)"><i style="background:var(--ink-3)"></i>${OUT_LABEL[z.outcome]}</span>`:`<span class="sev ${z.status}"><i></i>${SEV_LABEL[z.status]}</span>`;
+const OUT_LABEL={official:'Official order',observed:'Reported',planned:'Announced',unconfirmed:'Not confirmed',cancelled:'Cancelled'};
 const clock=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
 const timeLabel=()=>tSel!=null?clock(tSel):'now';
+function markChips(){document.querySelectorAll('#times .chip[data-v]').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.v==='now'?null:+b.dataset.v)===tSel)))}
 function buildTimes(){
   const el=$('#times');el.innerHTML='';
   const l=document.createElement('span');l.className='chip lbl';l.textContent='Saturday';el.appendChild(l);
   for(const [v,t] of [[null,'Now'],[12*60,'12:00'],[14*60,'14:00'],[15*60+30,'15:30'],[17*60,'17:00'],[18*60+30,'18:30'],[20*60,'20:00']]){
-    const b=document.createElement('button');b.className='chip';b.textContent=t;b.setAttribute('aria-pressed',String(v===tSel));
-    b.onclick=()=>{tSel=v;buildTimes();onTimeChange()};el.appendChild(b)}
+    const b=document.createElement('button');b.className='chip';b.textContent=t;b.dataset.v=v==null?'now':v;
+    b.onclick=()=>{stopPlay();tSel=v;markChips();onTimeChange()};el.appendChild(b)}
+  markChips();
 }
+// ---- time slider: drag to see how the situation changes; the play button replays the day ----
+const T0=360,T1=1380;let playT=0,sliderRaf=0;
+const PLAY_SVG='<svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg>',PAUSE_SVG='<svg viewBox="0 0 16 16"><path d="M3.5 2.5h3.2v11H3.5zM9.3 2.5h3.2v11H9.3z"/></svg>';
+function buildSlider(){
+  if(!Z)return;const n=(T1-T0)/15,st=[];
+  for(let i=0;i<n;i++){const t=T0+i*15+7;let best=null;
+    for(const z of Z.zones){if(z.status==='traffic'||!zoneActive(z,t))continue;if(!best||SEV_ORDER[z.status]<SEV_ORDER[best.status])best=z}
+    const col=best?mix(C['--sev-'+best.status],C['--panel'],best.status==='banned'?.3:.7):'transparent';
+    st.push(`${col} ${(i/n*100).toFixed(2)}% ${((i+1)/n*100).toFixed(2)}%`)}
+  $('#tbar').style.backgroundImage=`linear-gradient(90deg,${st.join(',')})`;
+  const n0=nowMin(),tn=$('#tnow');tn.hidden=!(n0>=T0&&n0<=T1);tn.style.left=`calc(13px + (100% - 26px) * ${(n0-T0)/(T1-T0)})`;
+  syncSlider()}
+function syncSlider(){const t=effMin(),r=$('#trange');r.value=Math.min(T1,Math.max(T0,t));r.setAttribute('aria-valuetext',clock(t));
+  $('#tout').innerHTML=clock(t)+(tSel==null?'<small>now</small>':'');
+  const b=$('#tplay');b.innerHTML=playT?PAUSE_SVG:PLAY_SVG;b.setAttribute('aria-label',playT?'Pause':'Replay the day');b.title=b.getAttribute('aria-label')}
+function stopPlay(){if(playT){clearInterval(playT);playT=0;syncSlider()}}
+function startPlay(){let t=effMin();if(tSel==null||t>=T1-10||t<T0)t=T0+60;tSel=t;markChips();onTimeChange();
+  playT=setInterval(()=>{tSel=Math.min(T1,tSel+10);markChips();onTimeChange();if(tSel>=T1)stopPlay()},450);syncSlider()}
+function initSlider(){const r=$('#trange');
+  r.addEventListener('input',()=>{stopPlay();tSel=+r.value;markChips();cancelAnimationFrame(sliderRaf);sliderRaf=requestAnimationFrame(onTimeChange)});
+  $('#tplay').onclick=()=>playT?stopPlay():startPlay()}
 // Before Saturday, "Now" shows nothing active, so open on the afternoon peak.
 (function(){const n=nowMin();tSel=(n<10*60||n>23*60)?15*60+30:null})();
 
@@ -365,7 +416,7 @@ function capsule(a,b,r){const th=Math.atan2(b[1]-a[1],b[0]-a[0]),N=14,pts=[];
   pts.push(pts[0]);return pts}
 function zonesGeoJSON(){
   const t=effMin();const areas=[],lines=[],labels=[],fills=[];const dk=hex2rgb(C['--paper']).reduce((a,b)=>a+b)<300?1.4:1;
-  Z.zones.forEach((z,i)=>{const p={i,status:z.status,on:zoneActive(z,t)?1:0,radius:z.radius,label:z.short||z.title.split(':').pop().split('(')[0].replace('→','to').trim()};
+  Z.zones.forEach((z,i)=>{if(!zoneActive(z,t))return;const p={i,status:z.status,on:1,radius:z.radius,label:z.short||z.title.split(':').pop().split('(')[0].replace('→','to').trim()};
     const fp={col:mix(C['--sev-'+z.status],C['--paper'],p.on?(z.status==='possible'?.24:.32)*dk:.09*dk),k:(p.on?10:0)+5-SEV_ORDER[z.status]};
     if(z.center){const ring=circlePoly(z.center,z.radius);areas.push({type:'Feature',properties:p,geometry:{type:'Polygon',coordinates:[ring]}});fills.push({type:'Feature',properties:fp,geometry:{type:'Polygon',coordinates:[ring]}});labels.push({type:'Feature',properties:p,geometry:{type:'Point',coordinates:LL(...z.center)}})}
     else{for(let k=0;k<z.path.length-1;k++){const a=z.path[k],b=z.path[k+1];if(Math.hypot(b[0]-a[0],b[1]-a[1])>1)fills.push({type:'Feature',properties:fp,geometry:{type:'Polygon',coordinates:[capsule(a,b,z.radius)]}})}
@@ -465,7 +516,7 @@ function placeStatus(p,t=effMin()){
   let best=null,next=null;
   for(let i=0;i<Z.zones.length;i++){const z=Z.zones[i];const d=distToZone(z,p.x,p.y)-z.radius;
     if(zoneActive(z,t)){if(d<=NEAR){const inside=d<=0,rank=SEV_ORDER[z.status];if(!best||(inside&&!best.inside)||(inside===best.inside&&rank<best.rank))best={z,i,d,inside,rank}}}
-    else if(d<=0&&hm(z.start)>t&&z.status!=='traffic'){if(!next||hm(z.start)<hm(next.z.start))next={z,i}}}
+    else if(zoneShown(z)&&d<=0&&hm(z.start)>t&&z.status!=='traffic'){if(!next||hm(z.start)<hm(next.z.start))next={z,i}}}
   return {st:best?(best.inside?'in':'near'):'clear',best,next};
 }
 function recomputePlaces(){
@@ -626,13 +677,15 @@ function stopFollow(){ME.follow=false;$('#loc').setAttribute('aria-pressed','fal
 function fitXY(a,b,c,d,anim=true){if(!map)return;stopFollow();map.fitBounds([LL(a,b),LL(c,d)],{padding:pad(),duration:anim?600:0,maxZoom:16.5})}
 const fitZones=anim=>fitXY(-2200,-700,2600,3800,anim);
 function focusRoute(anim=true){if(!S.res)return;const r=S.res[S.choice]||S.res.fast;if(!r)return;let a=1e9,b=1e9,c=-1e9,d=-1e9;for(const [x,y] of r.pts){a=Math.min(a,x);b=Math.min(b,y);c=Math.max(c,x);d=Math.max(d,y)}fitXY(a-150,b-150,c+150,d+150,anim)}
-function focusZone(i){const bx=zoneBBox(Z.zones[i]);if(snap==='full')setSnap('half');fitXY(bx[0]-200,bx[1]-200,bx[2]+200,bx[3]+200);map.once('moveend',()=>openZonePop(i))}
+function focusZone(i){const z=Z.zones[i],t=effMin();
+  if(zoneShown(z)&&!zoneActive(z,t)){stopPlay();tSel=Math.min(hm(z.end),Math.max(hm(z.start),t));markChips();onTimeChange();toast('Showing '+clock(tSel)+', when this was on the map')}
+  const bx=zoneBBox(z);if(snap==='full')setSnap('half');fitXY(bx[0]-200,bx[1]-200,bx[2]+200,bx[3]+200);map.once('moveend',()=>openZonePop(i))}
 function openPopHTML(html,anchorXY){const p=$('#pop');p.innerHTML=html;p.hidden=false;p._xy=anchorXY;p.querySelector('.x').onclick=closePop;placePop()}
 function closePop(){S.sel=null;const p=$('#pop');p.hidden=true;p._xy=null}
 function placePop(){const p=$('#pop');if(p.hidden||!p._xy||!map)return;const pt=map.project(LL(...p._xy));const w=p.offsetWidth,h=p.offsetHeight;const W=$('#app').clientWidth;
   const x=Math.min(W-w-10,Math.max(10,pt.x-w/2));let y=pt.y-h-18;const top=$('#top').getBoundingClientRect().bottom+8;if(y<top)y=Math.min(pt.y+18,$('#app').clientHeight-curH-h-10);p.style.left=x+'px';p.style.top=Math.max(top,y)+'px'}
 function openZonePop(i){S.sel=i;const z=Z.zones[i];
-  openPopHTML(`<button class="x" aria-label="Close">×</button><div><span class="sev ${z.status}"><i></i>${SEV_LABEL[z.status]}</span> <span class="mono muted">${z.start}–${z.end}</span></div><h3>${esc(z.title)}</h3><p class="note">${esc(z.note)}</p><p class="note">${z.src.map(k=>`<a href="${Z.sources[k].url}" target="_blank" rel="noopener">${esc(Z.sources[k].name)}</a>`).join(' · ')}</p>`,z.center||z.path[Math.floor(z.path.length/2)])}
+  openPopHTML(`<button class="x" aria-label="Close">×</button><div>${sevChip(z)} <span class="mono muted">${z.start}–${z.end}</span></div><div class="note"><b>${OUT_LABEL[z.outcome||'official']}</b>${z.seen?` · last report ${z.seen}`:''}${zoneActive(z,effMin())?'':' · '+esc(zoneWhy(z,effMin()))}</div><h3>${esc(z.title)}</h3><p class="note">${esc(z.note)}</p><p class="note">${z.src.map(k=>`<a href="${Z.sources[k].url}" target="_blank" rel="noopener">${esc(Z.sources[k].name)}</a>`).join(' · ')}</p>`,z.center||z.path[Math.floor(z.path.length/2)])}
 function gmapsPlaceUrl(p){return `https://www.google.com/maps/search/?api=1&query=${p.lat.toFixed(6)},${p.lon.toFixed(6)}`}
 function openPlacePop(id){const p=PL.list.find(x=>x.id===id);if(!p)return;const s=PL.st.get(id)||{st:'clear'};
   openPopHTML(`<button class="x" aria-label="Close">×</button><h3>${esc(p.n)}</h3><div>${placeBadgeHTML(s)}</div><div class="gobtns"><button class="btn pri" id="popRoute">Route here</button><a class="btn sec" target="_blank" rel="noopener" href="${gmapsPlaceUrl(p)}">Open in Google Maps</a></div>`,[p.x,p.y]);
@@ -642,14 +695,14 @@ function openPlacePop(id){const p=PL.list.find(x=>x.id===id);if(!p)return;const 
 const fmtLen=m=>m<1000?Math.round(m/10)*10+' m':(m/1000).toFixed(1)+' km';
 const walkMin=m=>Math.max(1,Math.round(m/80));
 const fmtMin=m=>{const t=walkMin(m);return t<60?t+' min':Math.floor(t/60)+' h '+String(t%60).padStart(2,'0')};
-function activeZones(t=effMin()){return Z.zones.map((z,i)=>({z,i,on:zoneActive(z,t)})).sort((a,b)=>(b.on-a.on)||SEV_ORDER[a.z.status]-SEV_ORDER[b.z.status]||hm(a.z.start)-hm(b.z.start))}
+function activeZones(t=effMin()){return Z.zones.map((z,i)=>({z,i,on:zoneActive(z,t),why:zoneActive(z,t)?'':zoneWhy(z,t)})).sort((a,b)=>(b.on-a.on)||SEV_ORDER[a.z.status]-SEV_ORDER[b.z.status]||hm(a.z.start)-hm(b.z.start))}
 function placeBadgeHTML(s){
   if(s.st==='in')return `<span class="sev ${s.best.z.status}"><i></i>In a zone</span> <span class="note">${esc(s.best.z.title)}</span>`;
   if(s.st==='near')return `<span class="sev ${s.best.z.status}"><i></i>Close</span> <span class="note">${Math.max(10,Math.round(s.best.d/10)*10)} m from ${esc(s.best.z.title)}</span>`;
   if(s.next)return `<span class="sev clear"><i></i>Clear now</span> <span class="note">zone reaches it at ${s.next.z.start}: ${esc(s.next.z.title)}</span>`;
   return `<span class="sev clear"><i></i>Clear</span>`}
 function render(){
-  if(!Z)return;
+  if(!Z)return;buildSlider();
   const t=effMin();const act=Z.zones.filter(z=>zoneActive(z,t)&&z.status!=='traffic');
   const cnt={};act.forEach(z=>cnt[z.status]=(cnt[z.status]||0)+1);
   const aff=[...PL.st.values()].filter(s=>s.st!=='clear').length;
@@ -657,7 +710,7 @@ function render(){
   {const o=SH.peek;computeSnaps();if(snap==='peek'&&SH.peek!==o)setSnap('peek',true)}
   if(S.tab==='today')renderToday();else if(S.tab==='route')renderRoute();else if(S.tab==='places')renderPlaces();
 }
-function zoneRow(zi){const {z,i,on}=zi;return `<button class="zone ${on?'':'off'}" data-i="${i}"><span class="bar" style="background:var(--sev-${z.status})"></span><span><span class="t">${esc(z.title)}</span><span class="m"><span class="sev ${z.status}"><i></i>${SEV_LABEL[z.status]}</span><span class="mono muted">${z.start}–${z.end}</span></span></span></button>`}
+function zoneRow(zi){const {z,i,on,why}=zi;return `<button class="zone ${on?'':'off'}" data-i="${i}"><span class="bar" style="background:var(--sev-${z.status})"></span><span><span class="t">${esc(z.title)}</span><span class="m">${sevChip(z)}${on?`<span class="mono muted">${z.start}–${z.end}</span>`:`<span class="muted">${esc(why)}</span>`}</span></span></button>`}
 function renderToday(){
   const el=$('#pane-today');const zs=activeZones();const on=zs.filter(x=>x.on),off=zs.filter(x=>!x.on);
   const aff=[...PL.st.values()].filter(s=>s.st!=='clear').length,total=PL.list.filter(p=>!p.far).length;
@@ -667,7 +720,7 @@ function renderToday(){
     ${stns.length?`<button class="strip plain" id="goInfo"><span>Métro: ${stOn} of ${stns.length} announced closures in effect ${tSel==null?'now':'at '+clock(tSel)}</span><span class="go">›</span></button>`:''}
     <h3 class="sec">${tSel==null?'Active now':'Active at '+clock(tSel)} · ${on.length}</h3>
     <div class="zl">${on.length?on.map(zoneRow).join(''):'<p class="note">No zones are active at this time. Pick another time above.</p>'}</div>
-    ${off.length?`<details class="more"><summary>Not active at this time (${off.length})</summary><div class="zl">${off.map(zoneRow).join('')}</div></details>`:''}
+    ${off.length?`<details class="more"><summary>Not on the map at this time (${off.length})</summary><div class="zl">${off.map(zoneRow).join('')}</div></details>`:''}
     <div class="legend">${['confirmed','likely','possible','banned','traffic'].map(k=>`<span class="sev ${k}"><i></i>${SEV_LABEL[k]}</span>`).join('')}</div>`;
   el.querySelector('#goPlaces').onclick=()=>tabTo('places');
   const gi=el.querySelector('#goInfo');if(gi)gi.onclick=()=>tabTo('info');
@@ -715,7 +768,8 @@ function stationGroups(){const g={};for(const s of Z.stations)(g[s.from||'']||(g
 function renderInfo(){
   $('#pane-info').innerHTML=`<div class="box"><h3 class="sec">${esc(Z.stationTitle||'Métro stations that may close')}</h3>${stationGroups()}<p class="note">${esc(Z.stationNote)}</p></div>
     <p class="note">${esc(Z.traffic)}</p>
-    <div class="box"><h3 class="sec">How to read the map</h3><p class="note"><b>Confirmed</b> and <b>likely</b> come from organisers' calls and press reports. <b>Possible</b> marks routes the prefecture proposed or organisers asked for that were not agreed. <b>Banned</b> marks routes and sectors where the prefecture has forbidden gatherings; police presence is likely and unauthorised groups may still turn up. Lines are drawn along the most plausible streets; the official route had not been published when this was last updated.</p></div>
+    <div class="box"><h3 class="sec">How to read the map</h3><p class="note"><b>Confirmed</b> and <b>likely</b> come from organisers' calls and press reports. <b>Possible</b> marks routes the prefecture proposed or organisers asked for that were not agreed. <b>Banned</b> marks routes and sectors where the prefecture has forbidden gatherings; police presence is likely and unauthorised groups may still turn up. Lines follow the streets named in press reports; the circles around bans and incidents are approximate.</p></div>
+    <div class="box"><h3 class="sec">What is on the map at a given time</h3><p class="note">Drag the time slider, or press play to replay the day. A zone is drawn only while a prefecture order or a press report says it applies. Events that ended, were cancelled, or that no report confirms are left off and listed under “Not on the map”. If a credible report says an event moved, the new place is drawn instead. Incident circles stay for about an hour after the last report and are extended when newer reports appear. The coloured bar under the slider shows when something was on the map.</p></div>
     <p class="note links">Check before you leave: <a href="https://www.prefecturedepolice.interieur.gouv.fr/" target="_blank" rel="noopener">Préfecture de police</a> (official route), <a href="https://www.ratp.fr/infos-trafic" target="_blank" rel="noopener">RATP traffic info</a>, <a href="https://www.sytadin.fr/" target="_blank" rel="noopener">Sytadin</a> (roads).</p>
     <p class="note links">Sources: ${Object.values(Z.sources).map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join(' · ')}. Map: MapLibre, street data © OpenStreetMap contributors via Overture Maps.</p>`}
 function freshText(){if(!Z)return;const f=d=>d.toLocaleString('en-GB',{weekday:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'});$('#fresh').innerHTML=`Zones updated ${f(new Date(Z.updated))}<br>app checked ${lastFetch?lastFetch.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'}):'—'}`}
@@ -752,7 +806,7 @@ function onMapClick(e){
   let bp=null,bd=tol;for(const p of PL.list){if(p.far)continue;const d=Math.hypot(p.x-x,p.y-y);if(d<bd){bd=d;bp=p}}
   if(bp){openPlacePop(bp.id);return}
   const t=effMin();let best=-1,bs=1e9;
-  Z.zones.forEach((z,i)=>{const d=distToZone(z,x,y)-z.radius;const sc=d+(zoneActive(z,t)?0:200);if(d<tol&&sc<bs){bs=sc;best=i}});
+  Z.zones.forEach((z,i)=>{const d=distToZone(z,x,y)-z.radius;if(!zoneActive(z,t))return;if(d<tol&&d<bs){bs=d;best=i}});
   if(best>=0)openZonePop(best);else closePop()}
 
 // ---------- my location (works in the installed app) ----------
@@ -790,7 +844,7 @@ async function loadZones(){
 setInterval(loadZones,30*60*1000);setInterval(()=>{updateHere();updateZoneLayers();recomputePlaces();render()},5*60*1000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&lastFetch&&Date.now()-lastFetch>10*60*1000)loadZones()});
 async function boot(){
-  buildTimes();computeSnaps();setSnap('half',true);render();
+  buildTimes();initSlider();computeSnaps();setSnap('half',true);render();
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{computeSnaps();setSnap(snap,true)});
   map=new maplibregl.Map({container:'map',style:buildStyle(),center:[2.362,48.862],zoom:12.6,minZoom:10.5,maxZoom:18.5,maxBounds:[[2.15,48.76],[2.55,48.95]],attributionControl:false,dragRotate:false,pitchWithRotate:false,fadeDuration:150});
   map.touchZoomRotate.disableRotation();map.on('click',onMapClick);map.on('dragstart',stopFollow);map.on('move',placePop);

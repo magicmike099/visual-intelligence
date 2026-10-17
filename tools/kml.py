@@ -16,7 +16,7 @@ def ring(z):
     return ' '.join('%.6f,%.6f,0'%LL(x,y) for x,y in poly.exterior.coords)
 def desc(z):
     src=' · '.join(f'<a href="{Z["sources"][k]["url"]}">{escape(Z["sources"][k]["name"])}</a>' for k in z['src'])
-    return f'<![CDATA[<b>{LBL[z["status"]]}</b> · Sat 17 Oct {z["start"]}–{z["end"]}<br><br>{escape(z["note"])}<br><br>Sources: {src}]]>'
+    return f'<![CDATA[<b>{LBL[z["status"]]}</b> · Sat 17 Oct {z["start"]}–{z["end"]}{" · last report "+z["seen"] if z.get("seen") else ""}<br><br>{escape(z["note"])}<br><br>Sources: {src}]]>'
 k=['<?xml version="1.0" encoding="UTF-8"?>','<kml xmlns="http://www.opengis.net/kml/2.2"><Document>',
    f'<name>Paris protests Sat 17 Oct (updated {escape(Z["updated"][5:16].replace("T"," "))})</name>',
    f'<description>{escape(Z["headline"])} Unofficial map built from press reports; check the Préfecture de police and RATP before travelling.</description>']
@@ -24,7 +24,7 @@ for s,c in COL.items():
     k.append(f'<Style id="{s}"><LineStyle><color>ff{c}</color><width>2</width></LineStyle><PolyStyle><color>{"55" if s=="possible" else "70"}{c}</color></PolyStyle></Style>')
 k.append('<Style id="station"><IconStyle><color>ff2c36d4</color><scale>0.9</scale><Icon><href>https://maps.google.com/mapfiles/kml/shapes/rail.png</href></Icon></IconStyle></Style>')
 for name,sts in FOLD:
-    zs=[z for z in Z['zones'] if z['status'] in sts]
+    zs=[z for z in Z['zones'] if z['status'] in sts and z.get('outcome','official') in ('official','observed','planned')]
     if not zs: continue
     k.append(f'<Folder><name>{escape(name)}</name>')
     for z in zs:
@@ -36,4 +36,4 @@ for s in Z['stations']:
     k.append(f'<Placemark><name>Métro {escape(s["name"])} (may close)</name><description>Lines {escape(s["lines"])}. {escape(Z["stationNote"])}</description><styleUrl>#station</styleUrl><Point><coordinates>{lon:.6f},{lat:.6f},0</coordinates></Point></Placemark>')
 k.append('</Folder></Document></kml>')
 open(out,'w').write('\n'.join(k))
-print('wrote',out,len(Z['zones']),'zones')
+print('wrote',out,sum(1 for z in Z['zones'] if z.get('outcome','official') in ('official','observed','planned')),'of',len(Z['zones']),'zones (unconfirmed and cancelled are left out)')
