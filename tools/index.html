@@ -624,7 +624,7 @@ function pad(){const top=$('#top').getBoundingClientRect().bottom+14;const H=$('
 function visOff(){const p=pad();return [(p.left-p.right)/2,(p.top-p.bottom)/2]}
 function stopFollow(){ME.follow=false;$('#loc').setAttribute('aria-pressed','false')}
 function fitXY(a,b,c,d,anim=true){if(!map)return;stopFollow();map.fitBounds([LL(a,b),LL(c,d)],{padding:pad(),duration:anim?600:0,maxZoom:16.5})}
-const fitZones=anim=>fitXY(-900,-400,5200,3900,anim);
+const fitZones=anim=>fitXY(-2200,-700,2600,3800,anim);
 function focusRoute(anim=true){if(!S.res)return;const r=S.res[S.choice]||S.res.fast;if(!r)return;let a=1e9,b=1e9,c=-1e9,d=-1e9;for(const [x,y] of r.pts){a=Math.min(a,x);b=Math.min(b,y);c=Math.max(c,x);d=Math.max(d,y)}fitXY(a-150,b-150,c+150,d+150,anim)}
 function focusZone(i){const bx=zoneBBox(Z.zones[i]);if(snap==='full')setSnap('half');fitXY(bx[0]-200,bx[1]-200,bx[2]+200,bx[3]+200);map.once('moveend',()=>openZonePop(i))}
 function openPopHTML(html,anchorXY){const p=$('#pop');p.innerHTML=html;p.hidden=false;p._xy=anchorXY;p.querySelector('.x').onclick=closePop;placePop()}
