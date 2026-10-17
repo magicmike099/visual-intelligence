@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-17T12:25:00+02:00",
+"updated": "2026-10-17T13:25:00+02:00",
 "day": "2026-10-17",
-"headline": "Route authorised by the prefecture: from République at 14:00 along Boulevard Magenta, Barbès and Boulevard de Clichy to Place de Clichy. A student march towards Nation is also reported but not confirmed. The Bastille rally is banned. 25 métro stations are closed, and undeclared gatherings are banned in central Paris until 22:00.",
+"headline": "Tension and tear gas reported at République before the 14:00 march, with about 40 arrests in Paris. Authorised route: République, Boulevard Magenta, Barbès, Boulevard de Clichy, Place de Clichy. A student march towards Nation is not confirmed. Bastille rally banned; 25 métro stations closed; gatherings banned in central Paris until 22:00.",
 "stations": [
 {
 "name": "Charles de Gaulle–Étoile",
@@ -289,6 +289,18 @@
 "name": "Aladom, gathering calls (updated 16 Oct 10:56)",
 "url": "https://www.aladom.fr/actualites/secteur-service/11364/manifestations-du-17-octobre-2026-ou-sont-prevus-les-rassemblements-a-paris-rennes-lille-grenoble-et-bordeaux/"
 },
+"franceinfo": {
+"name": "franceinfo live, headline: tension and tear gas before the march at République (17 Oct)",
+"url": "https://www.franceinfo.fr/economie/greve/direct-mobilisation-du-17-octobre-lyceens-etudiants-gilets-jaunes-des-milliers-de-manifestants-attendus-dans-toute-la-france_8241022.html"
+},
+"britbrief": {
+"name": "Brit Brief, tear gas and about 40 arrests in Paris (17 Oct, 10:43 UK time)",
+"url": "https://britbrief.co.uk/crime/violence/france-protests-tear-gas-fired-in-paris-as-600-rallies-planned.html"
+},
+"cnn": {
+"name": "CNN live, dozens detained in Paris (17 Oct, headline)",
+"url": "https://www.cnn.com/2026/10/17/world/live-news/france-protests-paris-intl"
+},
 "sap_fr": {
 "name": "Sortiraparis, route update (17 Oct 07:34)",
 "url": "https://www.sortiraparis.com/actualites/a-paris/articles/353967-mobilisation-du-17-octobre-a-paris-quel-parcours-pour-la-manifestation-prevue-ce-samedi"
@@ -334,8 +346,11 @@
 1570
 ],
 "radius": 300,
-"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Authorities expected 20,000 to 40,000 people in Paris (Public Sénat, 15 Oct).",
+"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Tension and tear gas are reported at République before the march left (franceinfo live headline), and around 40 arrests in Paris by about 11:45 (Brit Brief, CNN: dozens detained); exact locations were not given. Authorities expected 20,000 to 40,000 people in Paris (Public Sénat, 15 Oct).",
 "src": [
+"franceinfo",
+"britbrief",
+"cnn",
 "sap_fr",
 "sap_fr2",
 "aff17",
