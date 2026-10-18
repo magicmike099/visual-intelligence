@@ -1,5 +1,5 @@
 {
-"updated": "2026-10-18T08:30:00+02:00",
+"updated": "2026-10-18T10:30:00+02:00",
 "day": "2026-10-17",
 "headline": "Saturday recap: clashes in central Paris into the early evening. A crowd was dispersed at Concorde around 17:48, a barricade burned near Réaumur-Sébastopol, and wild marches formed near La Madeleine and Place Vendôme, with looting at the Galeries Lafayette on Boulevard Haussmann at about 17:53. Interior Minister Nuñez counted 110,000 people in Paris and 550,000 across France. The prefecture counted 191 arrests in Paris by 18:00, and CNews and franceinfo headlines later gave about 1,200 arrests nationwide. The mayor of Paris said whole streets were heavily damaged. Twenty-five métro stations were closed on Saturday and I found no report of when they reopened. Central Paris gatherings were banned until 22:00. I found no incident report with a location after about 18:00.",
 "days": [
@@ -440,6 +440,10 @@
 "franceinfo_pm": {
 "name": "franceinfo live headline: 1,200 arrested, says the Prime Minister (17 Oct)",
 "url": "https://www.franceinfo.fr/economie/greve/direct-mobilisation-du-17-octobre-1-200-personnes-ont-ete-interpellees-selon-le-premier-ministre-qui-pointe-des-degres-de-violence-inacceptables_8242435.html"
+},
+"europe1_calm": {
+"name": "Europe 1, casseurs sèment le chaos, manifestants défilent dans le calme (17 Oct 19:03, updated 19:21)",
+"url": "https://www.europe1.fr/societe/mobilisation-du-17-octobre-a-paris-les-casseurs-sement-le-chaos-les-manifestants-defilent-dans-le-calme-1157727"
 },
 "ici": {
 "name": "ICI (France Bleu) headline: more than 160 arrests in Paris (17 Oct)",
@@ -1156,11 +1160,12 @@
 ]
 ],
 "radius": 150,
-"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. franceinfo says the procession started from République despite tensions with police and later that the protesters arrived at Place de Clichy; BFMTV says it left late (Titres de presse feed, about 14:20). I found no crowd figure or progress report along the route. Interior Minister Nuñez put the Paris crowd at 110,000 and the national total at 550,000, and organisers claim more (Europe 1 live blog, 19:51). AFP at 19:07 says thousands of people marched calmly despite the violence elsewhere in Paris (summary only; the article body was not readable). A reaction quoted at 18:48 said Place de Clichy could not hold the crowd (Morandini live). Shown until about 19:45, an hour after that, since I found no report of where the crowd was later.",
+"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. franceinfo says the procession started from République despite tensions with police and later that the protesters arrived at Place de Clichy; BFMTV says it left late (Titres de presse feed, about 14:20). I found no crowd figure or progress report along the route. Europe 1 (published 19:03, updated 19:21) says the head of the procession reached Place de Clichy shortly before 16:00 and that tens of thousands were still arriving in the late afternoon, with hooded people at the front but no clashes, and it reports no incident after 18:00. Interior Minister Nuñez put the Paris crowd at 110,000 and the national total at 550,000, and organisers claim more (Europe 1 live blog, 19:51). AFP at 19:07 says thousands of people marched calmly despite the violence elsewhere in Paris (summary only; the article body was not readable). A reaction quoted at 18:48 said Place de Clichy could not hold the crowd (Morandini live). Shown until about 19:45, an hour after that, since I found no report of where the crowd was later.",
 "src": [
 "franceinfo",
 "afp_bours",
 "europe1_live",
+"europe1_calm",
 "morandini_live",
 "titres2",
 "sap_fr",
