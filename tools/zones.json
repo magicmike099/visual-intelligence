@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-18T18:20:00+02:00",
+"updated": "2026-10-18T20:45:00+02:00",
 "day": "2026-10-17",
-"headline": "Saturday recap: clashes in central Paris into the evening. The prefecture's 08:00 Sunday report counts 855 arrests in Paris on Saturday, a record, with 13 police and gendarmes and two firefighters injured and violent groups of 500 to over 1,000 people (Europe 1, 09:18). Interior Minister Nuñez counted 110,000 people in Paris and 550,000 across France. About 1,800 people were arrested nationwide, and a franceinfo headline gives more than 2,000. A protester died after a cardiac arrest during the Paris march, on Boulevard Magenta according to BFMTV. A crowd was dispersed at Concorde around 17:48, a barricade burned near Réaumur-Sébastopol, wild marches formed near La Madeleine and Place Vendôme, and the Galeries Lafayette on Boulevard Haussmann was looted at about 17:53. At 22:57 Europe 1 reported about thirty people firing mortars at La Santé prison, with four arrests. The mayor of Paris said whole streets were heavily damaged. Twenty-five métro stations were closed on Saturday and I found no report of when they reopened. Gathering bans ran until 22:00. Reports say police fought into the night, but apart from La Santé I found no incident with a location after about 18:00.",
+"headline": "Saturday recap: clashes in central Paris into the evening. The prefecture's 08:00 Sunday report counts 855 arrests in Paris on Saturday, a record, with 13 police and gendarmes and two firefighters injured and violent groups of 500 to over 1,000 people (Europe 1, 09:18). Interior Minister Nuñez counted 110,000 people in Paris and 550,000 across France. More than 2,000 people were arrested nationwide and more than 600 police, gendarmes and firefighters were injured, both provisional figures from the Interior Minister (Le Tribunal du Net, 18:00). A protester died after a cardiac arrest during the Paris march, on Boulevard Magenta according to BFMTV. A crowd was dispersed at Concorde around 17:48, a barricade burned near Réaumur-Sébastopol, wild marches formed near La Madeleine and Place Vendôme, and the Galeries Lafayette on Boulevard Haussmann was looted at about 17:53. At 22:57 Europe 1 reported about thirty people firing mortars at La Santé prison, with four arrests. The mayor of Paris said whole streets were heavily damaged. Twenty-five métro stations were closed on Saturday and I found no report of when they reopened. Gathering bans ran until 22:00. Reports say police fought into the night, but apart from La Santé I found no incident with a location after about 18:00.",
 "days": [
 {
 "day": "2026-10-17",
@@ -20,7 +20,6 @@
 "day": "2026-10-18",
 "label": "Sun 18",
 "chips": [
-"10:00",
 "12:00",
 "14:00",
 "15:30",
@@ -30,6 +29,9 @@
 ],
 "focus": "17:00",
 "src": [
+"tp_live2",
+"tdn_rep",
+"entrevue_macron",
 "afp_rep",
 "orange_rep",
 "tp_rep",
@@ -42,8 +44,8 @@
 "ap_wreck",
 "gj_site"
 ],
-"headline": "Clashes at Place de la République on Sunday afternoon and evening. The prefecture says an undeclared rally was called for 14:00; police used tear gas, stun grenades and a water cannon, made several arrests, and clashes resumed at about 17:23 with CRS8 sent as reinforcement and protesters blocking Rue Beaurepaire in the 10th and burning bikes and scooters (AFP, Morandini live). Crowd estimates run from several dozen to several hundred, and I found no arrest count and nothing after 18:11. Avoid République and the streets around it, and expect police near the Élysée. President Macron addresses the French on TF1 and LCI at 20:00, followed by the Interior Minister. Other disruption today: métro line 6 is closed all day, and the République stop of line 8 and the Saint-Michel stop of line 4 are not served because of long works. I found no gathering ban or station closure for Sunday evening.",
-"traffic": "No strike is announced for Sunday. Expect police lines, tear gas and burning bins or scooters around Place de la République and Rue Beaurepaire. Check RATP before leaving: line 6 has no service on the whole line, with replacement buses.",
+"headline": "Clashes around Place de la République on Sunday afternoon and evening. An undeclared rally was called for 14:00; police used tear gas, stun grenades and a water cannon and made several arrests, and clashes resumed at about 17:23 with CRS8 sent as reinforcement. Protesters blocked Rue Beaurepaire, and at 19:26 a live feed reported a burning barricade on Rue du Château-d'Eau and young groups of a few dozen being dispersed (AFP, Morandini, Titres de presse). I found no arrest count and nothing after 19:26, so I cannot say whether it has calmed, and the map shows it until 20:30 only because that is an hour after the last report. In his 20:00 address Macron said prefects, with mayors, can ban some gatherings when circumstances justify it, and that the Prime Minister will convene parties, unions and student representatives in the coming days; I found no ban for Paris yet (Entrevue, 20:11). Avoid République, Rue Beaurepaire and Rue du Château-d'Eau, and expect police near the Élysée. Other disruption today: métro line 6 is closed all day, and the République stop of line 8 and the Saint-Michel stop of line 4 are not served because of long works. I found no station closure for Sunday evening.",
+"traffic": "No strike is announced for Sunday. Expect police lines, tear gas and street fires around Place de la République, Rue Beaurepaire and Rue du Château-d'Eau. Prefects may now ban some gatherings, and I found no Paris ban yet. Check RATP before leaving: line 6 has no service on the whole line, with replacement buses.",
 "transit": [
 {
 "t": "Métro line 6: no service on the whole line all day, with replacement buses (RATP's own traffic page confirmed this at 08:13). Line 1 serves Charles de Gaulle-Étoile and Nation directly.",
@@ -520,6 +522,18 @@
 "orange_rep": {
 "name": "L'Express via Orange, tensions at République after a call to continue the movement (18 Oct 15:54, updated 16:16)",
 "url": "https://actu.orange.fr/france/manifestations-a-paris-de-nouvelles-tensions-place-de-la-republique-apres-un-appel-a-poursuivre-le-mouvement-l-express-via-6medias-CNT000002t6bEQ.html"
+},
+"tp_live2": {
+"name": "Titres de presse live: burning barricade on Rue du Château-d'Eau, young groups dispersed around the square (18 Oct 19:26)",
+"url": "https://www.titrespresse.com/25662322603/direct-paris-marseille"
+},
+"tdn_rep": {
+"name": "Le Tribunal du Net, new clashes and looting at République, CRS8 in reinforcement (18 Oct 18:00)",
+"url": "https://www.letribunaldunet.fr/actualites/republique-nouveaux-affrontements-lendemain-17-octobre.html"
+},
+"entrevue_macron": {
+"name": "Entrevue, Macron address: prefects may ban some gatherings, dialogue meetings this week (18 Oct 20:11)",
+"url": "https://entrevue.fr/entrevue/violences-du-17-octobre-macron-promet-detre-intraitable-avec-les-casseurs/"
 }
 },
 "zones": [
@@ -3775,20 +3789,22 @@
 "id": "rep_sun",
 "day": "2026-10-18",
 "outcome": "observed",
-"seen": "18:11",
-"title": "Place de la République: clashes, tear gas, water cannon, arrests",
+"seen": "19:26",
+"title": "République area: clashes, tear gas, burning barricade on Rue du Château-d'Eau",
 "short": "République clashes",
 "kind": "incident",
 "status": "confirmed",
 "start": "14:00",
-"end": "19:15",
+"end": "20:30",
 "center": [
-1040,
-1670
+930,
+1780
 ],
-"radius": 420,
-"note": "An undeclared rally was called for 14:00 at Place de la République (Paris police prefecture, via AFP). Police checked people for over an hour, used tear gas from about 15:15 and moved in to disperse and arrest, and tensions then returned (AFP, L'Express). AFP says several hundred people, many dressed in black and some masked, gathered around the statue; police used tear gas and stun grenades, charged, a water cannon truck advanced, projectiles were thrown at police and several arrests were made. The prefecture says an attempt to build a barricade was immediately contained and that declared demonstrations were taking place in parallel. Crowd estimates vary: L'Express says several dozen early on, and a police source told CNews about 1,000 at 15:39. At 17:23 the Morandini live blog says clashes resumed, CRS8 was sent as reinforcement, protesters blocked Rue Beaurepaire in the 10th arrondissement and burned bikes and scooters, CRS charged several times and firefighters intervened. I found no arrest count and nothing after 18:11, and the circle is approximate. Shown until about an hour after the last report. Métro line 8 does not serve République today because of long works, and I found no closure of the other lines.",
+"radius": 520,
+"note": "An undeclared rally was called for 14:00 at Place de la République (Paris police prefecture, via AFP). Police checked people for over an hour, used tear gas from about 15:15 and moved in to disperse and arrest, and tensions then returned (AFP, L'Express). AFP says several hundred people, many dressed in black and some masked, gathered around the statue; police used tear gas and stun grenades, charged, a water cannon truck advanced, projectiles were thrown at police and several arrests were made. The prefecture says an attempt to build a barricade was immediately contained and that declared demonstrations were taking place in parallel. Crowd estimates vary: L'Express says several dozen early on, and a police source told CNews about 1,000 at 15:39. At 17:23 the Morandini live blog and Le Tribunal du Net (18:00) say clashes resumed, CRS8 was sent as reinforcement, protesters blocked Rue Beaurepaire in the 10th arrondissement and burned bikes and scooters, CRS charged several times and firefighters intervened. The Titres de presse live (19:26) reports fires lit in Paris streets at 18:31 by people it calls casseurs, a burning barricade on Rue du Château-d'Eau, and groups of a few dozen young protesters being dispersed around the square. The Morandini headline also mentions looting in Paris, but I found no place or shop. I found no arrest count and nothing after 19:26, so the circle ends at 20:30; that is an hour after the last report, not a sign that it is over. The circle is approximate. Métro line 8 does not serve République today because of long works, and I found no closure of the other lines.",
 "src": [
+"tp_live2",
+"tdn_rep",
 "afp_rep",
 "orange_rep",
 "morandini_rep",
