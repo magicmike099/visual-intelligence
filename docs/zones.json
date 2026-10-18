@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-18T12:30:00+02:00",
+"updated": "2026-10-18T15:55:00+02:00",
 "day": "2026-10-17",
-"headline": "Saturday recap: clashes in central Paris into the early evening. A crowd was dispersed at Concorde around 17:48, a barricade burned near Réaumur-Sébastopol, and wild marches formed near La Madeleine and Place Vendôme, with looting at the Galeries Lafayette on Boulevard Haussmann at about 17:53. Interior Minister Nuñez counted 110,000 people in Paris and 550,000 across France. The prefecture counted 191 arrests in Paris by 18:00, an ICI headline later gave 195, and CNews and franceinfo headlines gave about 1,200 arrests nationwide. The mayor of Paris said whole streets were heavily damaged. Twenty-five métro stations were closed on Saturday and I found no report of when they reopened. Central Paris gatherings were banned until 22:00. I found no incident report with a location after about 18:00.",
+"headline": "Saturday recap: clashes in central Paris into the evening. The prefecture's 08:00 Sunday report counts 855 arrests in Paris on Saturday, a record, with 13 police and gendarmes and two firefighters injured and violent groups of 500 to over 1,000 people (Europe 1, 09:18). Interior Minister Nuñez counted 110,000 people in Paris and 550,000 across France. About 1,800 people were arrested nationwide, and a franceinfo headline gives more than 2,000. A protester died after a cardiac arrest during the Paris march, on Boulevard Magenta according to BFMTV. A crowd was dispersed at Concorde around 17:48, a barricade burned near Réaumur-Sébastopol, wild marches formed near La Madeleine and Place Vendôme, and the Galeries Lafayette on Boulevard Haussmann was looted at about 17:53. At 22:57 Europe 1 reported about thirty people firing mortars at La Santé prison, with four arrests. The mayor of Paris said whole streets were heavily damaged. Twenty-five métro stations were closed on Saturday and I found no report of when they reopened. Gathering bans ran until 22:00. Reports say police fought into the night, but apart from La Santé I found no incident with a location after about 18:00.",
 "days": [
 {
 "day": "2026-10-17",
@@ -20,18 +20,24 @@
 "day": "2026-10-18",
 "label": "Sun 18",
 "chips": [
-"08:00",
 "10:00",
 "12:00",
 "14:00",
-"18:00"
+"15:30",
+"17:00",
+"20:00"
 ],
-"focus": "10:00",
+"focus": "15:30",
 "src": [
+"tp_rep",
+"cnews_rep",
+"fi_rep",
+"tp_macron",
+"ap_wreck",
 "gj_site"
 ],
-"headline": "No protest is announced in Paris for Sunday 18 October: I found no call on the Gilets Jaunes calendar, in the Lyon and Paris reports, or in the prefecture orders I could read. What is planned is transport and road disruption. Métro line 6 is closed all day, the Vincennes half marathon closes forest roads from 08:30 to noon, and the République stop of line 8 and the Saint-Michel stop of line 4 are not served because of long works. Saturday's closed stations and gathering bans were set for Saturday, and I found no announcement extending them. Any new call will be added here.",
-"traffic": "No protest, strike or gathering ban is announced for Sunday. Check RATP before leaving: line 6 has no service on the whole line, with replacement buses.",
+"headline": "Unannounced gathering at Place de la République on Sunday afternoon: at 15:34 about 1,000 people were there after a new call, and police used tear gas and grenades (Titres de presse and CNews headlines). I found no organiser, route or prefecture order for it, and nothing after 15:34, so expect police around République. President Macron will address the French on TF1 and LCI at 20:00. Other disruption today is transport and roads: métro line 6 is closed all day, the Vincennes half marathon closes forest roads from 08:30 to noon, and the République stop of line 8 and the Saint-Michel stop of line 4 are not served because of long works. I found no new gathering ban or station closure for Sunday.",
+"traffic": "No strike is announced for Sunday. Expect police lines and possible tear gas around Place de la République. Check RATP before leaving: line 6 has no service on the whole line, with replacement buses.",
 "transit": [
 {
 "t": "Métro line 6: no service on the whole line all day, with replacement buses (RATP's own traffic page confirmed this at 08:13). Line 1 serves Charles de Gaulle-Étoile and Nation directly.",
@@ -426,7 +432,7 @@
 "url": "https://manifestationgiletsjaunesparis.fr/"
 },
 "europe1_live": {
-"name": "Europe 1 live blog, updated 20:10 (items 17:53, 18:42, 19:35, 19:51)",
+"name": "Europe 1 live blog, updated 23:00 (items 17:53, 18:42, 19:35, 19:51, 22:57)",
 "url": "https://www.europe1.fr/societe/en-direct-mobilisation-du-17-octobre-800000-participants-selon-les-organisateurs-550000-selon-laurent-nunez-1156250"
 },
 "ratp_l6": {
@@ -460,6 +466,34 @@
 "sap_fr2": {
 "name": "Sortiraparis, what to expect (17 Oct)",
 "url": "https://www.sortiraparis.com/actualites/a-paris/articles/353907-greve-du-17-octobre-2026-manif-gilets-jaunes-lyceens-transports-a-quoi-s-attendre-a-paris"
+},
+"e1_855": {
+"name": "Europe 1, 855 arrests in Paris on Saturday, a record (18 Oct 09:18)",
+"url": "https://www.europe1.fr/police-justice/mobilisation-du-17-octobre-855-personnes-interpellees-a-paris-un-chiffre-record-selon-la-prefecture-de-police-1159461"
+},
+"orange_bilan": {
+"name": "L'Express via Orange, toll of 17 October (18 Oct 08:19)",
+"url": "https://actu.orange.fr/france/plus-de-550-000-manifestants-1-800-interpellations-un-mort-et-des-dizaines-de-blesses-batiments-brules-le-bilan-de-la-mobilisation-du-17-octobre-l-express-via-6medias-CNT000002t2q2C.html"
+},
+"ap_wreck": {
+"name": "AP via 10News, France wakes up to wreckage (18 Oct 13:37 UTC)",
+"url": "https://www.10news.com/world/europe/france-wakes-up-to-wreckage-of-a-night-of-rioting-after-protests-turned-violent"
+},
+"tp_macron": {
+"name": "Titres de presse, Macron addresses the French Sunday at 20:00 on TF1 and LCI (18 Oct 13:28)",
+"url": "https://www.titrespresse.com/25632422603/emmanuel-macron-octobre"
+},
+"tp_rep": {
+"name": "Titres de presse headline, new tensions at République, about a thousand people (18 Oct 15:34)",
+"url": "https://www.titrespresse.com/25640892603/place-paris-emmanuel"
+},
+"cnews_rep": {
+"name": "CNews live headline: new tensions at Place de la République (18 Oct)",
+"url": "https://www.cnews.fr/france/2026-10-18/mobilisation-du-17-octobre-de-nouvelles-tensions-en-cours-sur-la-place-de-la"
+},
+"fi_rep": {
+"name": "franceinfo live headline: police deployed at République after a call on social networks",
+"url": "https://www.franceinfo.fr/economie/greve/direct-mobilisation-du-17-octobre-1-200-personnes-ont-ete-interpellees-selon-le-premier-ministre-qui-pointe-des-degres-de-violence-inacceptables_8242435.html"
 }
 },
 "zones": [
@@ -501,8 +535,10 @@
 1570
 ],
 "radius": 300,
-"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). The prefecture counted 133 arrests in Paris at 14:00 (Humanité), and ICI later put it above 160. The prefecture counted 191 arrests in Paris by 18:00, 90% of them adults (Europe 1 live blog, 18:42; CNews headline). An ICI headline later gave 195 arrests in Paris, and CNews and franceinfo headlines gave about 1,200 nationwide. Al Jazeera reports police using stun grenades and tear gas here and trapping protesters between police lines. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read. The march left the square around 14:45 (BFMTV, via Titres de presse), so this entry stops there. Clashes on the square continue under the separate clash entry.",
+"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). The prefecture counted 133 arrests in Paris at 14:00 (Humanité), and ICI later put it above 160. The prefecture counted 191 arrests in Paris by 18:00, 90% of them adults (Europe 1 live blog, 18:42; CNews headline). An ICI headline later gave 195 arrests in Paris, and CNews and franceinfo headlines gave about 1,200 nationwide. The prefecture's 08:00 Sunday report then gave 855 arrests in Paris for the whole of Saturday, a record, and about 1,800 were counted nationwide (Europe 1, 09:18; L'Express via Orange). Al Jazeera reports police using stun grenades and tear gas here and trapping protesters between police lines. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read. The march left the square around 14:45 (BFMTV, via Titres de presse), so this entry stops there. Clashes on the square continue under the separate clash entry.",
 "src": [
+"e1_855",
+"orange_bilan",
 "tribunal",
 "titrespresse",
 "franceinfo",
@@ -1160,8 +1196,10 @@
 ]
 ],
 "radius": 150,
-"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. franceinfo says the procession started from République despite tensions with police and later that the protesters arrived at Place de Clichy; BFMTV says it left late (Titres de presse feed, about 14:20). I found no crowd figure or progress report along the route. Europe 1 (published 19:03, updated 19:21) says the head of the procession reached Place de Clichy shortly before 16:00 and that tens of thousands were still arriving in the late afternoon, with hooded people at the front but no clashes, and it reports no incident after 18:00. Interior Minister Nuñez put the Paris crowd at 110,000 and the national total at 550,000, and organisers claim more (Europe 1 live blog, 19:51). AFP at 19:07 says thousands of people marched calmly despite the violence elsewhere in Paris (summary only; the article body was not readable). A reaction quoted at 18:48 said Place de Clichy could not hold the crowd (Morandini live). Shown until about 19:45, an hour after that, since I found no report of where the crowd was later.",
+"note": "Reported route: from République at 14:00 up Boulevard Magenta, past Barbès-Rochechouart, Anvers and Pigalle along Boulevard de Clichy to Place de Clichy. Sortiraparis, Affiches Parisiennes (09:53) and Paris Rouge (16 Oct, evening) all report this route as the one the prefecture authorised after talks failed; the Barbès, Anvers, Pigalle and Blanche stations close from 12:00. franceinfo says the procession started from République despite tensions with police and later that the protesters arrived at Place de Clichy; BFMTV says it left late (Titres de presse feed, about 14:20). I found no crowd figure or progress report along the route. Europe 1 (published 19:03, updated 19:21) says the head of the procession reached Place de Clichy shortly before 16:00 and that tens of thousands were still arriving in the late afternoon, with hooded people at the front but no clashes, and it reports no incident after 18:00. Interior Minister Nuñez put the Paris crowd at 110,000 and the national total at 550,000, and organisers claim more (Europe 1 live blog, 19:51). AFP at 19:07 says thousands of people marched calmly despite the violence elsewhere in Paris (summary only; the article body was not readable). A reaction quoted at 18:48 said Place de Clichy could not hold the crowd (Morandini live). Shown until about 19:45, an hour after that, since I found no report of where the crowd was later. A protester died during the march: BFMTV, via L'Express (08:19), says he collapsed on Boulevard Magenta, was carried to the Château d'Eau fire station and did not survive, and the prefecture confirmed a death after a cardiorespiratory arrest. AP places it just north of Paris without naming a place, so I follow the BFMTV location. No time was given.",
 "src": [
+"orange_bilan",
+"ap_wreck",
 "franceinfo",
 "afp_bours",
 "europe1_live",
@@ -3685,6 +3723,49 @@
 "src": [
 "sap2",
 "local"
+]
+},
+{
+"id": "lasante",
+"outcome": "observed",
+"seen": "22:57",
+"title": "La Santé prison: mortars fired by about thirty people",
+"short": "Attack: La Santé prison",
+"kind": "incident",
+"status": "confirmed",
+"start": "22:15",
+"end": "23:57",
+"center": [
+-645,
+-2167
+],
+"radius": 300,
+"note": "At 22:57 Europe 1 reported that about thirty ultra-left individuals tried to storm La Santé prison (14th arrondissement) on Saturday evening, firing mortars at the building, at passers-by and at homes. Four people were arrested. The time of the attempt is not given, so the window is an estimate, and the circle is approximate. I found nothing later at this location.",
+"src": [
+"europe1_live"
+]
+},
+{
+"id": "rep_sun",
+"day": "2026-10-18",
+"outcome": "observed",
+"seen": "15:34",
+"title": "Place de la République: about 1,000 people, tear gas and grenades",
+"short": "République gathering",
+"kind": "incident",
+"status": "confirmed",
+"start": "15:00",
+"end": "16:35",
+"center": [
+1033,
+1570
+],
+"radius": 300,
+"note": "On Sunday afternoon about a thousand people gathered at Place de la République after a new call to assemble, and police used tear gas and grenades to disperse a group of protesters (Titres de presse headline at 15:34, citing a CLPRESS post). CNews has a live headline saying new tensions are in progress on the square. A franceinfo live headline says police were deployed there after a call spread on social networks; it carries no time, so I treat it as the same call. I could not read the articles, so I have no organiser, start time, route, arrest count or prefecture order, and 15:00 is an estimate. Shown until about an hour after the 15:34 report; I found nothing later. Métro line 8 does not serve République today because of long works, and I found no closure of the other lines.",
+"src": [
+"tp_rep",
+"cnews_rep",
+"fi_rep"
 ]
 },
 {
