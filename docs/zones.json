@@ -1,5 +1,5 @@
 {
-"updated": "2026-10-18T15:55:00+02:00",
+"updated": "2026-10-18T16:20:00+02:00",
 "day": "2026-10-17",
 "headline": "Saturday recap: clashes in central Paris into the evening. The prefecture's 08:00 Sunday report counts 855 arrests in Paris on Saturday, a record, with 13 police and gendarmes and two firefighters injured and violent groups of 500 to over 1,000 people (Europe 1, 09:18). Interior Minister Nuñez counted 110,000 people in Paris and 550,000 across France. About 1,800 people were arrested nationwide, and a franceinfo headline gives more than 2,000. A protester died after a cardiac arrest during the Paris march, on Boulevard Magenta according to BFMTV. A crowd was dispersed at Concorde around 17:48, a barricade burned near Réaumur-Sébastopol, wild marches formed near La Madeleine and Place Vendôme, and the Galeries Lafayette on Boulevard Haussmann was looted at about 17:53. At 22:57 Europe 1 reported about thirty people firing mortars at La Santé prison, with four arrests. The mayor of Paris said whole streets were heavily damaged. Twenty-five métro stations were closed on Saturday and I found no report of when they reopened. Gathering bans ran until 22:00. Reports say police fought into the night, but apart from La Santé I found no incident with a location after about 18:00.",
 "days": [
@@ -30,13 +30,16 @@
 "focus": "15:30",
 "src": [
 "tp_rep",
+"morandini_rep",
+"rtbf_rep",
 "cnews_rep",
 "fi_rep",
 "tp_macron",
+"dh_macron",
 "ap_wreck",
 "gj_site"
 ],
-"headline": "Unannounced gathering at Place de la République on Sunday afternoon: at 15:34 about 1,000 people were there after a new call, and police used tear gas and grenades (Titres de presse and CNews headlines). I found no organiser, route or prefecture order for it, and nothing after 15:34, so expect police around République. President Macron will address the French on TF1 and LCI at 20:00. Other disruption today is transport and roads: métro line 6 is closed all day, the Vincennes half marathon closes forest roads from 08:30 to noon, and the République stop of line 8 and the Saint-Michel stop of line 4 are not served because of long works. I found no new gathering ban or station closure for Sunday.",
+"headline": "Undeclared gathering at Place de la République on Sunday afternoon: police used tear gas at about 15:34, and the prefecture calls the gathering undeclared. Crowd estimates range from dozens to about 1,000 (a police source to CNews), I found no arrest count, and nothing after 15:39, so expect police around République and the Élysée. President Macron holds a crisis meeting at 17:30 and addresses the French on TF1 and LCI at 20:00. Other disruption today is transport and roads: métro line 6 is closed all day, the Vincennes half marathon closed forest roads from 08:30 to noon, and the République stop of line 8 and the Saint-Michel stop of line 4 are not served because of long works. I found no new gathering ban or station closure for Sunday.",
 "traffic": "No strike is announced for Sunday. Expect police lines and possible tear gas around Place de la République. Check RATP before leaving: line 6 has no service on the whole line, with replacement buses.",
 "transit": [
 {
@@ -494,6 +497,18 @@
 "fi_rep": {
 "name": "franceinfo live headline: police deployed at République after a call on social networks",
 "url": "https://www.franceinfo.fr/economie/greve/direct-mobilisation-du-17-octobre-1-200-personnes-ont-ete-interpellees-selon-le-premier-ministre-qui-pointe-des-degres-de-violence-inacceptables_8242435.html"
+},
+"morandini_rep": {
+"name": "Morandini live, République tear gas at 15:34 and tensions at 15:39 (18 Oct)",
+"url": "https://www.jeanmarcmorandini.com/article-655055-urgent-nouvelles-tensions-en-cours-place-de-la-republique-a-paris-ou-un-millier-de-personnes-sont-reunies-emmanuel-macron-s-adressera-aux-francais-a-20-heures.html"
+},
+"rtbf_rep": {
+"name": "RTBF, Paris on a high-security Sunday (18 Oct)",
+"url": "https://www.rtbf.be/article/vie-chere-violences-tensions-paris-au-c-ur-d-un-dimanche-sous-haute-surveillance-11802173"
+},
+"dh_macron": {
+"name": "La DH, Macron speaks at 20:00 after a crisis meeting at the Élysée at 17:30 (18 Oct 13:45)",
+"url": "https://www.dhnet.be/actu/monde/2026/10/18/manifestations-en-france-emmanuel-macron-prendra-la-parole-a-20h00-apres-une-reunion-de-crise-a-lelysee-BJUPQAIYPBCBDCN4TPRHMO5ZDM/"
 }
 },
 "zones": [
@@ -3749,21 +3764,23 @@
 "id": "rep_sun",
 "day": "2026-10-18",
 "outcome": "observed",
-"seen": "15:34",
-"title": "Place de la République: about 1,000 people, tear gas and grenades",
+"seen": "15:39",
+"title": "Place de la République: undeclared gathering, tear gas",
 "short": "République gathering",
 "kind": "incident",
 "status": "confirmed",
-"start": "15:00",
-"end": "16:35",
+"start": "14:30",
+"end": "16:40",
 "center": [
 1033,
 1570
 ],
 "radius": 300,
-"note": "On Sunday afternoon about a thousand people gathered at Place de la République after a new call to assemble, and police used tear gas and grenades to disperse a group of protesters (Titres de presse headline at 15:34, citing a CLPRESS post). CNews has a live headline saying new tensions are in progress on the square. A franceinfo live headline says police were deployed there after a call spread on social networks; it carries no time, so I treat it as the same call. I could not read the articles, so I have no organiser, start time, route, arrest count or prefecture order, and 15:00 is an estimate. Shown until about an hour after the 15:34 report; I found nothing later. Métro line 8 does not serve République today because of long works, and I found no closure of the other lines.",
+"note": "On Sunday afternoon people gathered at Place de la République after a new call on social networks, and police used tear gas near the statue to disperse a group (Titres de presse headline at 15:34, citing a CLPRESS post; Morandini live, with a 15:39 entry saying tensions were building). A police source told CNews about 1,000 people were on site and more were still arriving, while another entry in the same blog says dozens; I cannot reconcile the two. RTBF says the prefecture calls it an undeclared gathering, that police moved in to disperse and arrest people, and that around 15:15 the situation was under control after brief tear gas. A large police presence is also reported around the Élysée. I found no arrest count and no report after 15:39, and the start of 14:30 is an estimate. Shown until about an hour after the last report. Métro line 8 does not serve République today because of long works, and I found no closure of the other lines.",
 "src": [
 "tp_rep",
+"morandini_rep",
+"rtbf_rep",
 "cnews_rep",
 "fi_rep"
 ]
