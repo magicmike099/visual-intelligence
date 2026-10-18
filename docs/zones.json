@@ -1,7 +1,7 @@
 {
-"updated": "2026-10-18T10:30:00+02:00",
+"updated": "2026-10-18T12:30:00+02:00",
 "day": "2026-10-17",
-"headline": "Saturday recap: clashes in central Paris into the early evening. A crowd was dispersed at Concorde around 17:48, a barricade burned near Réaumur-Sébastopol, and wild marches formed near La Madeleine and Place Vendôme, with looting at the Galeries Lafayette on Boulevard Haussmann at about 17:53. Interior Minister Nuñez counted 110,000 people in Paris and 550,000 across France. The prefecture counted 191 arrests in Paris by 18:00, and CNews and franceinfo headlines later gave about 1,200 arrests nationwide. The mayor of Paris said whole streets were heavily damaged. Twenty-five métro stations were closed on Saturday and I found no report of when they reopened. Central Paris gatherings were banned until 22:00. I found no incident report with a location after about 18:00.",
+"headline": "Saturday recap: clashes in central Paris into the early evening. A crowd was dispersed at Concorde around 17:48, a barricade burned near Réaumur-Sébastopol, and wild marches formed near La Madeleine and Place Vendôme, with looting at the Galeries Lafayette on Boulevard Haussmann at about 17:53. Interior Minister Nuñez counted 110,000 people in Paris and 550,000 across France. The prefecture counted 191 arrests in Paris by 18:00, an ICI headline later gave 195, and CNews and franceinfo headlines gave about 1,200 arrests nationwide. The mayor of Paris said whole streets were heavily damaged. Twenty-five métro stations were closed on Saturday and I found no report of when they reopened. Central Paris gatherings were banned until 22:00. I found no incident report with a location after about 18:00.",
 "days": [
 {
 "day": "2026-10-17",
@@ -446,7 +446,7 @@
 "url": "https://www.europe1.fr/societe/mobilisation-du-17-octobre-a-paris-les-casseurs-sement-le-chaos-les-manifestants-defilent-dans-le-calme-1157727"
 },
 "ici": {
-"name": "ICI (France Bleu) headline: more than 160 arrests in Paris (17 Oct)",
+"name": "ICI (France Bleu) headline: 110,000 marchers in Paris, 195 arrests (updated after the 17 Oct evening; earlier version said more than 160)",
 "url": "https://www.ici.fr/ile-de-france/paris-75/paris/mobilisation-du-17-octobre-des-tensions-avant-le-depart-de-la-manifestation-place-de-la-republique-a-paris-8202537"
 },
 "aljaz": {
@@ -501,7 +501,7 @@
 1570
 ],
 "radius": 300,
-"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). The prefecture counted 133 arrests in Paris at 14:00 (Humanité), and ICI later put it above 160. The prefecture counted 191 arrests in Paris by 18:00, 90% of them adults (Europe 1 live blog, 18:42; CNews headline). CNews and franceinfo headlines later gave about 1,200 arrests nationwide. Al Jazeera reports police using stun grenades and tear gas here and trapping protesters between police lines. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read. The march left the square around 14:45 (BFMTV, via Titres de presse), so this entry stops there. Clashes on the square continue under the separate clash entry.",
+"note": "Sortiraparis (citing Le Parisien), Affiches Parisiennes (09:53) and Paris Rouge all report the Gilets Jaunes and union march leaving République at 14:00, which matches the Gilets Jaunes call (Aladom). Student and high-school groups also gather here. Police used tear gas at République around 12:38 with several hundred people already gathered (BFMTV, via Titres de presse), and groups heading here put up barricades from street barriers around 12:30 (Le Tribunal du Net). The prefecture counted 133 arrests in Paris at 14:00 (Humanité), and ICI later put it above 160. The prefecture counted 191 arrests in Paris by 18:00, 90% of them adults (Europe 1 live blog, 18:42; CNews headline). An ICI headline later gave 195 arrests in Paris, and CNews and franceinfo headlines gave about 1,200 nationwide. Al Jazeera reports police using stun grenades and tear gas here and trapping protesters between police lines. Authorities expected 30,000 to 60,000 people in Paris (Anadolu). The march then started from here despite tensions with police (franceinfo live headline). Clashes and wild processions in Paris are also reported (Epoch Times FR headline), without locations I could read. The march left the square around 14:45 (BFMTV, via Titres de presse), so this entry stops there. Clashes on the square continue under the separate clash entry.",
 "src": [
 "tribunal",
 "titrespresse",
