@@ -1,5 +1,5 @@
 {
-"updated": "2026-10-18T16:20:00+02:00",
+"updated": "2026-10-18T18:20:00+02:00",
 "day": "2026-10-17",
 "headline": "Saturday recap: clashes in central Paris into the evening. The prefecture's 08:00 Sunday report counts 855 arrests in Paris on Saturday, a record, with 13 police and gendarmes and two firefighters injured and violent groups of 500 to over 1,000 people (Europe 1, 09:18). Interior Minister Nuñez counted 110,000 people in Paris and 550,000 across France. About 1,800 people were arrested nationwide, and a franceinfo headline gives more than 2,000. A protester died after a cardiac arrest during the Paris march, on Boulevard Magenta according to BFMTV. A crowd was dispersed at Concorde around 17:48, a barricade burned near Réaumur-Sébastopol, wild marches formed near La Madeleine and Place Vendôme, and the Galeries Lafayette on Boulevard Haussmann was looted at about 17:53. At 22:57 Europe 1 reported about thirty people firing mortars at La Santé prison, with four arrests. The mayor of Paris said whole streets were heavily damaged. Twenty-five métro stations were closed on Saturday and I found no report of when they reopened. Gathering bans ran until 22:00. Reports say police fought into the night, but apart from La Santé I found no incident with a location after about 18:00.",
 "days": [
@@ -25,10 +25,13 @@
 "14:00",
 "15:30",
 "17:00",
+"18:30",
 "20:00"
 ],
-"focus": "15:30",
+"focus": "17:00",
 "src": [
+"afp_rep",
+"orange_rep",
 "tp_rep",
 "morandini_rep",
 "rtbf_rep",
@@ -39,8 +42,8 @@
 "ap_wreck",
 "gj_site"
 ],
-"headline": "Undeclared gathering at Place de la République on Sunday afternoon: police used tear gas at about 15:34, and the prefecture calls the gathering undeclared. Crowd estimates range from dozens to about 1,000 (a police source to CNews), I found no arrest count, and nothing after 15:39, so expect police around République and the Élysée. President Macron holds a crisis meeting at 17:30 and addresses the French on TF1 and LCI at 20:00. Other disruption today is transport and roads: métro line 6 is closed all day, the Vincennes half marathon closed forest roads from 08:30 to noon, and the République stop of line 8 and the Saint-Michel stop of line 4 are not served because of long works. I found no new gathering ban or station closure for Sunday.",
-"traffic": "No strike is announced for Sunday. Expect police lines and possible tear gas around Place de la République. Check RATP before leaving: line 6 has no service on the whole line, with replacement buses.",
+"headline": "Clashes at Place de la République on Sunday afternoon and evening. The prefecture says an undeclared rally was called for 14:00; police used tear gas, stun grenades and a water cannon, made several arrests, and clashes resumed at about 17:23 with CRS8 sent as reinforcement and protesters blocking Rue Beaurepaire in the 10th and burning bikes and scooters (AFP, Morandini live). Crowd estimates run from several dozen to several hundred, and I found no arrest count and nothing after 18:11. Avoid République and the streets around it, and expect police near the Élysée. President Macron addresses the French on TF1 and LCI at 20:00, followed by the Interior Minister. Other disruption today: métro line 6 is closed all day, and the République stop of line 8 and the Saint-Michel stop of line 4 are not served because of long works. I found no gathering ban or station closure for Sunday evening.",
+"traffic": "No strike is announced for Sunday. Expect police lines, tear gas and burning bins or scooters around Place de la République and Rue Beaurepaire. Check RATP before leaving: line 6 has no service on the whole line, with replacement buses.",
 "transit": [
 {
 "t": "Métro line 6: no service on the whole line all day, with replacement buses (RATP's own traffic page confirmed this at 08:13). Line 1 serves Charles de Gaulle-Étoile and Nation directly.",
@@ -499,7 +502,7 @@
 "url": "https://www.franceinfo.fr/economie/greve/direct-mobilisation-du-17-octobre-1-200-personnes-ont-ete-interpellees-selon-le-premier-ministre-qui-pointe-des-degres-de-violence-inacceptables_8242435.html"
 },
 "morandini_rep": {
-"name": "Morandini live, République tear gas at 15:34 and tensions at 15:39 (18 Oct)",
+"name": "Morandini live, République: tear gas 15:34, clashes resumed and CRS8 sent in at 17:23 (18 Oct)",
 "url": "https://www.jeanmarcmorandini.com/article-655055-urgent-nouvelles-tensions-en-cours-place-de-la-republique-a-paris-ou-un-millier-de-personnes-sont-reunies-emmanuel-macron-s-adressera-aux-francais-a-20-heures.html"
 },
 "rtbf_rep": {
@@ -509,6 +512,14 @@
 "dh_macron": {
 "name": "La DH, Macron speaks at 20:00 after a crisis meeting at the Élysée at 17:30 (18 Oct 13:45)",
 "url": "https://www.dhnet.be/actu/monde/2026/10/18/manifestations-en-france-emmanuel-macron-prendra-la-parole-a-20h00-apres-une-reunion-de-crise-a-lelysee-BJUPQAIYPBCBDCN4TPRHMO5ZDM/"
+},
+"afp_rep": {
+"name": "AFP via Seneweb, new tensions at République (18 Oct, updated 16:11 UTC, 18:11 Paris)",
+"url": "https://www.seneweb.com/fr/news/International/paris-nouvelles-tensions-place-de-la-republique_n_999001045.html"
+},
+"orange_rep": {
+"name": "L'Express via Orange, tensions at République after a call to continue the movement (18 Oct 15:54, updated 16:16)",
+"url": "https://actu.orange.fr/france/manifestations-a-paris-de-nouvelles-tensions-place-de-la-republique-apres-un-appel-a-poursuivre-le-mouvement-l-express-via-6medias-CNT000002t6bEQ.html"
 }
 },
 "zones": [
@@ -3764,22 +3775,24 @@
 "id": "rep_sun",
 "day": "2026-10-18",
 "outcome": "observed",
-"seen": "15:39",
-"title": "Place de la République: undeclared gathering, tear gas",
-"short": "République gathering",
+"seen": "18:11",
+"title": "Place de la République: clashes, tear gas, water cannon, arrests",
+"short": "République clashes",
 "kind": "incident",
 "status": "confirmed",
-"start": "14:30",
-"end": "16:40",
+"start": "14:00",
+"end": "19:15",
 "center": [
-1033,
-1570
+1040,
+1670
 ],
-"radius": 300,
-"note": "On Sunday afternoon people gathered at Place de la République after a new call on social networks, and police used tear gas near the statue to disperse a group (Titres de presse headline at 15:34, citing a CLPRESS post; Morandini live, with a 15:39 entry saying tensions were building). A police source told CNews about 1,000 people were on site and more were still arriving, while another entry in the same blog says dozens; I cannot reconcile the two. RTBF says the prefecture calls it an undeclared gathering, that police moved in to disperse and arrest people, and that around 15:15 the situation was under control after brief tear gas. A large police presence is also reported around the Élysée. I found no arrest count and no report after 15:39, and the start of 14:30 is an estimate. Shown until about an hour after the last report. Métro line 8 does not serve République today because of long works, and I found no closure of the other lines.",
+"radius": 420,
+"note": "An undeclared rally was called for 14:00 at Place de la République (Paris police prefecture, via AFP). Police checked people for over an hour, used tear gas from about 15:15 and moved in to disperse and arrest, and tensions then returned (AFP, L'Express). AFP says several hundred people, many dressed in black and some masked, gathered around the statue; police used tear gas and stun grenades, charged, a water cannon truck advanced, projectiles were thrown at police and several arrests were made. The prefecture says an attempt to build a barricade was immediately contained and that declared demonstrations were taking place in parallel. Crowd estimates vary: L'Express says several dozen early on, and a police source told CNews about 1,000 at 15:39. At 17:23 the Morandini live blog says clashes resumed, CRS8 was sent as reinforcement, protesters blocked Rue Beaurepaire in the 10th arrondissement and burned bikes and scooters, CRS charged several times and firefighters intervened. I found no arrest count and nothing after 18:11, and the circle is approximate. Shown until about an hour after the last report. Métro line 8 does not serve République today because of long works, and I found no closure of the other lines.",
 "src": [
-"tp_rep",
+"afp_rep",
+"orange_rep",
 "morandini_rep",
+"tp_rep",
 "rtbf_rep",
 "cnews_rep",
 "fi_rep"
